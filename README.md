@@ -24,7 +24,7 @@ This project is a part of SOFTWARE DEVELOPMENT TOOLS AND ENVIRONMENTS 2/2564
 
 TABLE !!!
 ## Branch strategy
-Git Flow Branch Strategy
+#### Git Flow Branch Strategy
 * Main
 * Develop
 * Feature
