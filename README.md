@@ -21,8 +21,20 @@ This project is a part of SOFTWARE DEVELOPMENT TOOLS AND ENVIRONMENTS 2/2564
 * style: Changes that do not affect the meaning of the code (white-space, formatting, missing semi-colons, etc)
 * test: Adding missing tests or correcting existing tests
 
-
 TABLE !!!
+|commit message|ความหมาย|
+|:------------:|:------:|
+|``build``     |        |
+|``ci``        |        |
+|``docs``      |        |
+|``feat``      |        |
+|``fix``       |        |
+|``perf``      |        |
+|``refactor``  |        |
+|``style``     |        |
+|``test``      |        |
+
+
 ## Branch strategy
 #### Git Flow Branch Strategy
 * Main
