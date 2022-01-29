@@ -20,7 +20,7 @@ This project is a part of SOFTWARE DEVELOPMENT TOOLS AND ENVIRONMENTS 2/2564
 |``fix``       |แก้ไข Bug|
 |``perf``      |ปรับเปลี่ยน Code เพื่อเพิ่มประสิทธิภาพ|
 |``refactor``  |การ Refactoring Code|
-|``style``     |แก้ไขการเขียน Code เช่น การจัดช่องว่าง การจัดรูปแบบ เครื่องหมายอัฒภาคที่หายไป (semi-colons) ฯลฯ|
+|``style``     |แก้ไขการเขียน Code เช่น white-space, formatting, missing semi-colons, etc.|
 |``test``      |การทดสอบ หรือการแก้ไขการทดสอบที่มีอยู่|
 
 Reference : [commit message](https://github.com/angular/angular/blob/22b96b9/CONTRIBUTING.md#type)
