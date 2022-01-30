@@ -37,4 +37,10 @@ Reference : [commit message](https://github.com/angular/angular/blob/22b96b9/CON
 
 
 ## หลักการทำงานร่วมกันในทีมของเรา
-ทีมของพวกเราเลือกใช้ Pull Request ในการ Merge Branch
+ทีมของพวกเราเลือกใช้ Pull Request ในการ Merge Branch เข้าด้วยกัน<Br/>
+โดยหลักการ Pull Request ของทีมเราคือ
+- ทำการเปิด PR ทุกครั้งที่ต้องการ Merge Branch ใดๆ
+- การเปิด PR ให้เพิ่ม Reviewer **ที่มีส่วนเกี่ยวข้องกับการ Code ส่วนนั้น**ให้มา Approve PR ให้ **อย่างน้อย 1 คน**
+- ผู้ที่เป็น Reviewer ต้องตรวจสอบ Source Code ให้คำแนะนำ หรือ จุดต้องปรับแก้ ให้แก่ผู้ที่ต้องการ PR
+- เมื่อผู้ที่เป็น Reviewer ตรวจสอบเสร็จแล้ว ต้องอมุมัติให้ผู้ขอ PR สามารถ Merge เข้าสู่ Branch ได้
+- Branch ``Main`` ได้มีการปกป้อง เพื่อไม่ให้มีการเผลอ Merge ได้ มีกฎจำเป็นต้องมี Reviewer **ตั้งแต่ 2 คนขึ้นไป**
