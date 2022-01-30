@@ -27,11 +27,14 @@ Reference : [commit message](https://github.com/angular/angular/blob/22b96b9/CON
 
 ## Branch strategy
 #### Git Flow Branch Strategy
-* Main
-* Develop
-* Feature
-* Release
-* Hotfix
+|Branch name |   วิธีใช้        |
+|:----------:|-------------|
+|``Main``        |เป็น Branch หลักของโปรเจคใช้สำหรับเมื่อโปรเจคเสร็จแล้วเรียบร้อยแล้ว|
+|``Dev``        |เป็น Branch ที่ใช้สำหรับการพัฒนาของโปรเจค เมื่อมี Feature  ใดที่ทำเสร็จแล้ว จะทำการ Merge Branch ``Feature`` นั้นด้วยวิธีการ PR เข้า Branch ``Dev`` นี้|
+|``Feature``        |เป็น Branch ที่แยกออกมาพัฒนาจาก ``Dev`` เพื่อแบ่ง Feature ในการพัฒนาส่วนต่างๆ |
+|``Release``        |เป็น Branch ที่ใช้สำหรับการปล่อยให้โปรเจคออกมาให้พร้อมใช้งานเป็นระยะๆ|
+|``Hotfix``        |เป็น Branch ไว้สำหรับการแก้ไขปัญหาที่เร่งด่วน จำเป็นต้องแก้ไขทันที|
 
 
 ## หลักการทำงานร่วมกันในทีมของเรา
+ทีมของพวกเราเลือกใช้ Pull Request ในการ Merge Branch
