@@ -12,6 +12,10 @@ This project is a part of SOFTWARE DEVELOPMENT TOOLS AND ENVIRONMENTS 2/2564
 ## Development
 
 ### Front-end
-
+```
+- cd/frountend
+- npm install
+- npm run dev
+```
 
 ### Back-end
