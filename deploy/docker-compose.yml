@@ -8,11 +8,13 @@ services:
       volumes:
       - ../html/:/usr/share/nginx/html
   app:
-    image: golang:1.16-alpine
-    container_name: microservices
+    build:
+      context: .
+      dockerfile: .
+    container_name: worker-go
     volumes:
-      - './:/app'
+    - '../backend:/app'
     working_dir: /app
     ports:
-      - 8181:8181
+    - 3000:3000
     command: go run main.go
