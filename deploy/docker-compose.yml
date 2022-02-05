@@ -13,8 +13,8 @@ services:
       dockerfile: .
     container_name: worker-go
     volumes:
-    - '../go/:/app'
+    - '../backend:/app'
     working_dir: /app
     ports:
-    - 8181:8181
+    - 3000:3000
     command: go run main.go

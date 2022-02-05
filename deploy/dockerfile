@@ -1,6 +1,7 @@
 FROM golang-1.15-buster:1.16-alpine
 RUN mkdir /app
-ADD ../go /app/
+ADD ../backend /app/
 WORKDIR /app
 RUN go get -v github.com/cosmtrek/air
+CMD go mod tidy
 ENTRYPOINT ["air"]
