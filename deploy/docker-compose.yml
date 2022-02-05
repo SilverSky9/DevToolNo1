@@ -7,3 +7,12 @@ services:
       - "80:80"
       volumes:
       - ../html/:/usr/share/nginx/html
+  app:
+    image: golang:1.16-alpine
+    container_name: microservices
+    volumes:
+      - './:/app'
+    working_dir: /app
+    ports:
+      - 8181:8181
+    command: go run main.go
