@@ -7,6 +7,8 @@ services:
       - "80:80"
       volumes:
       - ../html/:/usr/share/nginx/html
+      links:
+      - app
   app:
     build:
       context: .
