@@ -13,7 +13,7 @@ This project is a part of SOFTWARE DEVELOPMENT TOOLS AND ENVIRONMENTS 2/2564
 
 ### Front end
 ```
-1. cd frountend
+1. cd frontend
 2. npm install
 3. npm run dev
 ```
