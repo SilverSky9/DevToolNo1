@@ -1,5 +1,5 @@
 {
-  "name": "frountend",
+  "name": "frontend",
   "private": true,
   "scripts": {
     "dev": "next dev",
