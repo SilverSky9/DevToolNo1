@@ -1,14 +1,16 @@
 version: '2.0'
 services:
   web:
-      image: nginx:1.21.6-alpine
-      container_name: worker-nginx
-      ports:
-      - "80:80"
-      volumes:
-      - ../html/:/usr/share/nginx/html
-      links:
-      - app
+    image: nginx:1.21.6-alpine
+    container_name: worker-nginx
+    ports:
+    - "80:80"
+    volumes:
+    - ../html/:/usr/share/nginx/html
+    links:
+    - app
+    networks:
+      - fullstack
   app:
     build:
       context: .
@@ -20,8 +22,8 @@ services:
     ports:
     - 3000:3000
     command: go run main.go
-    links:
-    - db
+    networks:
+      - fullstack
   db:
     image: postgres
     container_name: worker-db
@@ -31,3 +33,8 @@ services:
     - 5432:5432
     volumes:
       - ../db:/var/lib/postgresql/data/
+    networks:
+      - fullstack
+networks:
+  fullstack:
+    driver: bridge
