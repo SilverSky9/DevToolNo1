@@ -7,6 +7,8 @@ services:
       - "80:80"
       volumes:
       - ../html/:/usr/share/nginx/html
+      links:
+      - app
   app:
     build:
       context: .
@@ -18,3 +20,14 @@ services:
     ports:
     - 3000:3000
     command: go run main.go
+    links:
+    - db
+  db:
+    image: postgres
+    container_name: worker-db
+    env_file:
+      - db.env
+    ports:
+    - 5432:5432
+    volumes:
+      - ../db:/var/lib/postgresql/data/
