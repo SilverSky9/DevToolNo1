@@ -16,5 +16,10 @@ func Route(app *fiber.App) {
 		msg, _ := services.GetHealthCheck()
 		return c.Status(200).JSON(msg)
 	})
+	app.Get("/post", func(c *fiber.Ctx) error {
+		msg := services.GetPost()
+		// a, _ := json.Marshal(msg)
+		return c.Status(200).JSON(msg)
+	})
 
 }
