@@ -1,6 +1,6 @@
-FROM golang-1.15-buster:1.16-alpine
+FROM golang:1.17-alpine
 RUN mkdir /app
-ADD ../backend /app/
+COPY ./backend/ /app/
 WORKDIR /app
 RUN go get -v github.com/cosmtrek/air
 CMD go mod tidy
