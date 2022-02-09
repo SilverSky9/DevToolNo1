@@ -49,9 +49,15 @@ func GetHealthCheck() (string, error) {
 
 func GetAllPost() ([]Post, error) {
 	sqlStatement := `SELECT * FROM post`
+	//Query all rows in table post
 	rows, err := db.Query(sqlStatement)
+
+	//Create postList slice's for store post row form rows
 	postList := make([]Post, 0)
+
+	// release connection resource when finish this function
 	defer rows.Close()
+	//loop for scan and push row to slice for return to API
 	for rows.Next() {
 		var onePost Post
 		if err := rows.Scan(&onePost.ID, &onePost.Title, &onePost.Details,
@@ -67,20 +73,22 @@ func GetAllPost() ([]Post, error) {
 	fmt.Println(postList)
 	return postList, nil
 }
-func GetUser() ([]User, error) {
+func GetAllUser() ([]User, error) {
 	sqlStatement := "SELECT * FROM users;"
+	//Query all rows in table users
 	rows, err := db.Query(sqlStatement)
 	if err != nil {
 		return nil, err
 	}
+	// release connection resource when finish this function
 	defer rows.Close()
-
+	//Create list slice's for store post row form rows
 	list := make([]User, 0)
+	//loop for scan and push row to slice for return to API
 	for rows.Next() {
 		var oneUser User
 		if err := rows.Scan(&oneUser.ID, &oneUser.Age, &oneUser.FirstName, &oneUser.LastName, &oneUser.Email); err != nil {
 			log.Fatal(err)
-
 		}
 		list = append(list, oneUser)
 	}
@@ -91,9 +99,11 @@ func GetUser() ([]User, error) {
 }
 
 func GetPostById(id string) Post {
+	// pase id datatype string to int
 	post_id, _ := strconv.Atoi(id)
 	sqlStatement := `SELECT * FROM post Where id=$1`
 	var post Post
+	//Query one row from DB
 	row := db.QueryRow(sqlStatement, post_id)
 	err := row.Scan(&post.ID, &post.Title, &post.Details,
 		&post.Tag, &post.PostType)
@@ -111,15 +121,15 @@ func GetPostById(id string) Post {
 }
 
 func Connect_DB() *sql.DB {
+	//Create psql Info for connect your Postgres DB
 	psqlInfo := fmt.Sprintf("host=%s port=%d user=%s "+
 		"password=%s dbname=%s sslmode=disable",
 		host, port, os.Getenv("POSTGRES_USER"), os.Getenv("POSTGRES_PASSWORD"), os.Getenv("dbname"))
 	db, err := sql.Open("postgres", psqlInfo)
-
+	// ^ This is request db.env to assign value 
 	if err != nil {
 		panic(err)
 	}
-	// defer db.Close()
 	err = db.Ping()
 	if err != nil {
 		panic(err)
@@ -128,8 +138,3 @@ func Connect_DB() *sql.DB {
 	fmt.Println("Successfully connected!")
 	return db
 }
-
-// func Disconnect_DB() {
-// 	db.Close()
-// 	fmt.Println("Disconnected!")
-// }

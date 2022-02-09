@@ -26,7 +26,7 @@ func Route(app *fiber.App) {
 		return c.Status(200).JSON(msg)
 	})
 	app.Get("/user", func(c *fiber.Ctx) error {
-		msg, _ := services.GetUser()
+		msg, _ := services.GetAllUser()
 		fmt.Println(msg, "From controller")
 		return c.Status(200).JSON(msg)
 	})
