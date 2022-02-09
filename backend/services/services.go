@@ -6,6 +6,7 @@ import (
 	"fmt"
 	"log"
 	"os"
+	"strconv"
 
 	_ "github.com/lib/pq"
 )
@@ -48,20 +49,9 @@ func GetHealthCheck() (string, error) {
 
 func GetAllPost() ([]Post, error) {
 	sqlStatement := `SELECT * FROM post`
-	// var post Post
 	rows, err := db.Query(sqlStatement)
-	// var postList []Post
 	postList := make([]Post, 0)
 	defer rows.Close()
-
-	// switch err {
-	// case sql.ErrNoRows:
-	// 	fmt.Println("No rows were returned!")
-	// case nil:
-	// 	fmt.Println(post)
-	// default:
-	// 	panic(err)
-	// }
 	for rows.Next() {
 		var onePost Post
 		if err := rows.Scan(&onePost.ID, &onePost.Title, &onePost.Details,
@@ -80,32 +70,19 @@ func GetAllPost() ([]Post, error) {
 func GetUser() ([]User, error) {
 	sqlStatement := "SELECT * FROM users;"
 	rows, err := db.Query(sqlStatement)
-	// err := rows.Scan(&user.ID, &user.Age, &user.FirstName,
-	// 	&user.LastName, &user.Email)
 	if err != nil {
 		return nil, err
 	}
 	defer rows.Close()
 
 	list := make([]User, 0)
-	// switch err {
-	// case sql.ErrNoRows:
-	// 	fmt.Println("No rows were returned!")
-	// case nil:
-	// 	fmt.Println(user)
-	// 	// userList = append(userList, user)
-	// default:
-	// 	panic(err)
-	// }
 	for rows.Next() {
 		var oneUser User
 		if err := rows.Scan(&oneUser.ID, &oneUser.Age, &oneUser.FirstName, &oneUser.LastName, &oneUser.Email); err != nil {
 			log.Fatal(err)
 
 		}
-		fmt.Println(oneUser)
 		list = append(list, oneUser)
-		// fmt.Print(userList)
 	}
 	if err = rows.Err(); err != nil {
 		log.Fatal(err)
@@ -113,24 +90,25 @@ func GetUser() ([]User, error) {
 	return list, nil
 }
 
-// func GetPostById(id string) Post {
-// 	sqlStatement := `SELECT * FROM post`
-// 	var post Post
-// 	row := db.QueryRow(sqlStatement)
-// 	err := row.Scan(&post.ID, &post.Title, &post.Details,
-// 		&post.Tag, &post.PostType)
-// 	switch err {
-// 	case sql.ErrNoRows:
-// 		fmt.Println("No rows were returned!")
-// 	case nil:
-// 		fmt.Println(post)
-// 	default:
-// 		panic(err)
-// 	}
+func GetPostById(id string) Post {
+	post_id, _ := strconv.Atoi(id)
+	sqlStatement := `SELECT * FROM post Where id=$1`
+	var post Post
+	row := db.QueryRow(sqlStatement, post_id)
+	err := row.Scan(&post.ID, &post.Title, &post.Details,
+		&post.Tag, &post.PostType)
+	switch err {
+	case sql.ErrNoRows:
+		fmt.Println("No rows were returned!")
+	case nil:
+		fmt.Println(post)
+	default:
+		panic(err)
+	}
 
-// 	fmt.Println(post)
-// 	return post
-// }
+	fmt.Println(post)
+	return post
+}
 
 func Connect_DB() *sql.DB {
 	psqlInfo := fmt.Sprintf("host=%s port=%d user=%s "+
