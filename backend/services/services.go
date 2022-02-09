@@ -3,24 +3,23 @@ package services
 import (
 	"database/sql"
 	"fmt"
-	"models"
 	"os"
 
 	_ "github.com/lib/pq"
 )
 
+type User struct {
+	ID        int
+	Age       int
+	FirstName string
+	LastName  string
+	Email     string
+}
+
 const (
 	host = "db"
 	port = 5432
 )
-
-// type User struct {
-// 	ID        int
-// 	Age       int
-// 	FirstName string
-// 	LastName  string
-// 	Email     string
-// }
 
 var db *sql.DB = Connect_DB()
 
@@ -34,11 +33,11 @@ func GetHealthCheck() (string, error) {
 func CloseConnect_DB() {
 	db.Close()
 }
-func GetAllPost() ([]models.User, error) {
+func GetAllPost() ([]User, error) {
 	sqlStatement := `SELECT * FROM users`
-	var user models.User
+	var user User
 	rows, err := db.Query(sqlStatement)
-	var userList []models.User
+	var userList []User
 
 	switch err {
 	case sql.ErrNoRows:
@@ -49,7 +48,7 @@ func GetAllPost() ([]models.User, error) {
 		panic(err)
 	}
 	for rows.Next() {
-		var oneUser models.User
+		var oneUser User
 		if err := rows.Scan(&user.ID, &user.Age, &user.FirstName, &user.LastName, &user.Email); err != nil {
 			return userList, err
 		}
