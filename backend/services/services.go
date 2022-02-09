@@ -15,12 +15,20 @@ type User struct {
 	LastName  string
 	Email     string
 }
+// type Post struct {
+// 	ID       int
+// 	Title    string
+// 	Details  string
+// 	Tag      string
+// 	PostType string
+// }
 
 const (
 	host = "db"
 	port = 5432
 )
 
+var user User
 var db *sql.DB = Connect_DB()
 
 func GetMessage() (string, error) {
@@ -30,37 +38,88 @@ func GetMessage() (string, error) {
 func GetHealthCheck() (string, error) {
 	return "Go fiber is good!", nil
 }
-func CloseConnect_DB() {
-	db.Close()
-}
-func GetAllPost() ([]User, error) {
-	Connect_DB()
-	defer Disconnect_DB()
-	sqlStatement := `SELECT * FROM users`
-	var user User
-	rows, err := db.Query(sqlStatement)
-	var userList []User
+// func GetAllPost() ([]Post, error) {
+// 	sqlStatement := `SELECT * FROM post`
+// 	var post Post
+// 	rows, err := db.Query(sqlStatement)
+// 	var postList []Post
 
-	switch err {
-	case sql.ErrNoRows:
-		fmt.Println("No rows were returned!")
-	case nil:
-		fmt.Println(user)
-	default:
-		panic(err)
+// 	switch err {
+// 	case sql.ErrNoRows:
+// 		fmt.Println("No rows were returned!")
+// 	case nil:
+// 		fmt.Println(post)
+// 	default:
+// 		panic(err)
+// 	}
+// 	for rows.Next() {
+// 		var onePost Post
+// 		if err := rows.Scan(&post.ID, &post.Title, &post.Details,
+// 			&post.Tag, &post.PostType); err != nil {
+// 			return postList, err
+// 		}
+// 		fmt.Println(err)
+// 		postList = append(postList, onePost)
+// 	}
+// 	if err = rows.Err(); err != nil {
+// 		return postList, err
+// 	}
+// 	fmt.Println(postList)
+// 	return postList, nil
+// }
+func GetUser() ([]User, error) {
+	// sqlStatement := "SELECT * FROM users"
+	rows, err := db.Query("SELECT * FROM users")
+	// err := rows.Scan(&user.ID, &user.Age, &user.FirstName,
+	// 	&user.LastName, &user.Email)
+	if err != nil {
+		return nil, err
 	}
+	defer rows.Close()
+
+	var list []User
+	// switch err {
+	// case sql.ErrNoRows:
+	// 	fmt.Println("No rows were returned!")
+	// case nil:
+	// 	fmt.Println(user)
+	// 	// userList = append(userList, user)
+	// default:
+	// 	panic(err)
+	// }
 	for rows.Next() {
 		var oneUser User
-		if err := rows.Scan(&user.ID, &user.Age, &user.FirstName, &user.LastName, &user.Email); err != nil {
-			return userList, err
+		if err := rows.Scan(&oneUser.ID, &oneUser.Age, &oneUser.FirstName, &oneUser.LastName, &oneUser.Email); err != nil {
+			return list, err
+
 		}
-		userList = append(userList, oneUser)
+		fmt.Println(oneUser)
+		list = append(list, user)
+		// fmt.Print(userList)
 	}
 	if err = rows.Err(); err != nil {
-		return userList, err
+		return list, err
 	}
-	return userList, nil
+	return list, nil
 }
+// func GetPostById(id string) Post {
+// 	sqlStatement := `SELECT * FROM post`
+// 	var post Post
+// 	row := db.QueryRow(sqlStatement)
+// 	err := row.Scan(&post.ID, &post.Title, &post.Details,
+// 		&post.Tag, &post.PostType)
+// 	switch err {
+// 	case sql.ErrNoRows:
+// 		fmt.Println("No rows were returned!")
+// 	case nil:
+// 		fmt.Println(post)
+// 	default:
+// 		panic(err)
+// 	}
+
+// 	fmt.Println(post)
+// 	return post
+// }
 
 func Connect_DB() *sql.DB {
 	psqlInfo := fmt.Sprintf("host=%s port=%d user=%s "+
@@ -80,7 +139,8 @@ func Connect_DB() *sql.DB {
 	fmt.Println("Successfully connected!")
 	return db
 }
-func Disconnect_DB() {
-	db.Close()
-	fmt.Println("Disconnected!")
-}
+
+// func Disconnect_DB() {
+// 	db.Close()
+// 	fmt.Println("Disconnected!")
+// }
