@@ -1,5 +1,5 @@
 package model
 
-type User struct {
-	Name string `json:"name", bson:"name"`
-}
+// type User struct {
+// 	Name string `json:"name", bson:"name"`
+// }

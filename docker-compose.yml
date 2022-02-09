@@ -1,0 +1,54 @@
+version: '2.0'
+services:
+  web:
+    image: nginx:1.21.6-alpine
+    container_name: nginx_container
+    ports:
+    - "80:80"
+    volumes:
+    - ../html/:/usr/share/nginx/html
+    networks:
+      - fullstack
+  app:
+    build: .
+    container_name: go_container
+    volumes:
+    - './backend:/app'
+    working_dir: /app
+    env_file:
+      - db.env
+    ports:
+    - 3000:3000
+    command: go run main.go
+    depends_on:
+      - db
+    networks:
+      - fullstack
+  db:
+    image: postgres
+    container_name: postgres_container
+    env_file:
+      - db.env
+    ports:
+    - 5432:5432
+    volumes:
+      - ../db:/var/lib/postgresql/data/
+    networks:
+      - fullstack
+  pgadmin:
+    image: dpage/pgadmin4
+    container_name: pgadmin_container
+    environment:
+      PGADMIN_DEFAULT_EMAIL: nopphadon.phanwong@gmail.com
+      PGADMIN_DEFAULT_PASSWORD: 12345
+    depends_on:
+      - db
+    ports:
+      - "5050:80"
+    networks:
+      - fullstack
+    restart: unless-stopped
+
+networks:
+  fullstack:
+    driver: bridge

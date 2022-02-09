@@ -21,3 +21,4 @@ PG_VERSION
 postgresql.auto.conf
 postgresql.conf
 postmaster.opts
+postmaster.pid
