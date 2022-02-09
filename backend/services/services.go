@@ -34,6 +34,8 @@ func CloseConnect_DB() {
 	db.Close()
 }
 func GetAllPost() ([]User, error) {
+	Connect_DB()
+	defer Disconnect_DB()
 	sqlStatement := `SELECT * FROM users`
 	var user User
 	rows, err := db.Query(sqlStatement)
@@ -77,4 +79,8 @@ func Connect_DB() *sql.DB {
 
 	fmt.Println("Successfully connected!")
 	return db
+}
+func Disconnect_DB() {
+	db.Close()
+	fmt.Println("Disconnected!")
 }

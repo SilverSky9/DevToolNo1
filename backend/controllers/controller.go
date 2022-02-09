@@ -19,7 +19,10 @@ func Route(app *fiber.App) {
 	app.Get("/post", func(c *fiber.Ctx) error {
 		msg, _ := services.GetAllPost()
 		return c.Status(200).JSON(msg)
-
+	})
+	app.Get("/post/:id", func(c *fiber.Ctx) error {
+		return c.SendString(c.Params("id"))
+		
 	})
 
 }
