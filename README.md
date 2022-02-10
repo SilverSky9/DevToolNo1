@@ -22,6 +22,7 @@ This project is a part of SOFTWARE DEVELOPMENT TOOLS AND ENVIRONMENTS 2/2564
 |``refactor``  |การ Refactoring Code|
 |``style``     |แก้ไขการเขียน Code เช่น white-space, formatting, missing semi-colons, etc.|
 |``test``      |การทดสอบ หรือการแก้ไขการทดสอบที่มีอยู่|
+|``add``       |เป็นการเพิ่มหรือสร้างไฟล์ในโปรเจค
 
 Reference : [commit message](https://github.com/angular/angular/blob/22b96b9/CONTRIBUTING.md#type)
 
@@ -33,6 +34,7 @@ Reference : [commit message](https://github.com/angular/angular/blob/22b96b9/CON
 |``Dev``        |เป็น Branch ที่ใช้สำหรับการพัฒนาของโปรเจค เมื่อมี Feature  ใดที่ทำเสร็จแล้ว จะทำการ Merge Branch ``Feature`` นั้นด้วยวิธีการ PR เข้า Branch ``Dev`` นี้|
 |``Feature``        |เป็น Branch ที่แยกออกมาพัฒนาจาก ``Dev`` เพื่อแบ่ง Feature ในการพัฒนาส่วนต่างๆ |
 |``Release``        |เป็น Branch ที่ใช้สำหรับการปล่อยให้โปรเจคออกมาให้พร้อมใช้งานเป็นระยะๆ|
+| ``Test``          | เป็น Branch ที่ใช้สำหรับการทำ Testing ต่างๆ
 |``Hotfix``        |เป็น Branch ไว้สำหรับการแก้ไขปัญหาที่เร่งด่วน จำเป็นต้องแก้ไขทันที|
 
 
