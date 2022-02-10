@@ -21,8 +21,12 @@ func Route(app *fiber.App) {
 		msg, _ := services.GetAllPost()
 		return c.Status(200).JSON(msg)
 	})
-	app.Get("/post/:id", func(c *fiber.Ctx) error {
+	app.Get("/post/id/:id", func(c *fiber.Ctx) error {
 		msg := services.GetPostById(c.Params("id"))
+		return c.Status(200).JSON(msg)
+	})
+	app.Get("/post/tag/:tag1/:tag2", func(c *fiber.Ctx) error {
+		msg, _ := services.GetPostByTag(c.Params("tag1"), c.Params("tag2"))
 		return c.Status(200).JSON(msg)
 	})
 	app.Get("/user", func(c *fiber.Ctx) error {
