@@ -2,6 +2,7 @@ package controllers
 
 import (
 	"daeng-market/services"
+	"fmt"
 
 	"github.com/gofiber/fiber/v2"
 )
@@ -17,8 +18,16 @@ func Route(app *fiber.App) {
 		return c.Status(200).JSON(msg)
 	})
 	app.Get("/post", func(c *fiber.Ctx) error {
-		msg := services.GetPost()
-		// a, _ := json.Marshal(msg)
+		msg, _ := services.GetAllPost()
+		return c.Status(200).JSON(msg)
+	})
+	app.Get("/post/:id", func(c *fiber.Ctx) error {
+		msg := services.GetPostById(c.Params("id"))
+		return c.Status(200).JSON(msg)
+	})
+	app.Get("/user", func(c *fiber.Ctx) error {
+		msg, _ := services.GetAllUser()
+		fmt.Println(msg, "From controller")
 		return c.Status(200).JSON(msg)
 	})
 

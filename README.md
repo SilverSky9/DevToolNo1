@@ -32,6 +32,6 @@ This project is a part of SOFTWARE DEVELOPMENT TOOLS AND ENVIRONMENTS 2/2564
 
 ```
 สำหรับ Command line
-- cd deploy
+- docker compose build
 - docker compose up
 ```
