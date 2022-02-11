@@ -15,7 +15,6 @@ func CreatePin(pin string, user_id int) (int, error) {
 	if err != nil {
 		return -1, err
 	}
-
 	return pin_id, nil
 }
 
