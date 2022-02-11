@@ -5,6 +5,7 @@ import (
 	model "daeng-market/models"
 	"database/sql"
 	"fmt"
+	"os"
 
 	_ "github.com/lib/pq"
 )
@@ -14,7 +15,8 @@ func TestDB() {
 }
 
 const (
-	host = "localhost"
+	host = "db"
+	//host = "localhost"
 	port = 5432
 )
 
@@ -33,8 +35,8 @@ func Connect_DB() *sql.DB {
 	//Create psql Info for connect your Postgres DB
 	psqlInfo := fmt.Sprintf("host=%s port=%d user=%s "+
 		"password=%s dbname=%s sslmode=disable",
-		host, port, "postgres", "1234", "Market")
-	// host, port, os.Getenv("POSTGRES_USER"), os.Getenv("POSTGRES_PASSWORD"), os.Getenv("dbname"))
+		// host, port, "postgres", "1234", "Market")
+		host, port, os.Getenv("POSTGRES_USER"), os.Getenv("POSTGRES_PASSWORD"), os.Getenv("dbname"))
 	db, err := sql.Open("postgres", psqlInfo)
 	// ^ This is request db.env to assign value
 	if err != nil {

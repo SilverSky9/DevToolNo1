@@ -3,7 +3,6 @@ package controllers
 import (
 	model "daeng-market/models"
 	"daeng-market/services"
-
 	"github.com/gofiber/fiber/v2"
 )
 

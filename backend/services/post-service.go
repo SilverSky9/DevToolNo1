@@ -78,7 +78,7 @@ func GetPostByTag(tag1, tag2 string) ([]model.Post, error) {
 	for rows.Next() {
 		var onePost model.Post
 		if err := rows.Scan(&onePost.PostId, &onePost.ProductName, &onePost.PostDate,
-			&onePost.ProductOption, &onePost.Price, &onePost.Amount, &onePost.PinId, &onePost, &onePost.TagId) err != nil {
+			&onePost.ProductOption, &onePost.Price, &onePost.Amount, &onePost.PinId, &onePost, &onePost.TagId); err != nil {
 			log.Fatal(err)
 		}
 		fmt.Println(onePost)
@@ -90,30 +90,7 @@ func GetPostByTag(tag1, tag2 string) ([]model.Post, error) {
 	fmt.Println(list)
 	return list, nil
 }
-func GetAllUser() ([]model.User, error) {
-	sqlStatement := "SELECT * FROM users;"
-	//Query all rows in table users
-	rows, err := dbasd.Query(sqlStatement)
-	if err != nil {
-		return nil, err
-	}
-	// release connection resource when finish this function
-	defer rows.Close()
-	//Create list slice's for store post row form rows
-	list := make([]model.User, 0)
-	//loop for scan and push row to slice for return to API
-	for rows.Next() {
-		var oneUser model.User
-		if err := rows.Scan(&oneUser.ID, &oneUser.Age, &oneUser.FirstName, &oneUser.LastName, &oneUser.Email); err != nil {
-			log.Fatal(err)
-		}
-		list = append(list, oneUser)
-	}
-	if err = rows.Err(); err != nil {
-		log.Fatal(err)
-	}
-	return list, nil
-}
+
 func GetPostById(id string) model.Post {
 	// pase id datatype string to int
 	post_id, _ := strconv.Atoi(id)
@@ -121,8 +98,8 @@ func GetPostById(id string) model.Post {
 	var post model.Post
 	//Query one row from dbasd
 	row := dbasd.QueryRow(sqlStatement, post_id)
-	err := row.Scan(&post.ID, &post.Title, &post.Details,
-		&post.Tag, &post.PostType)
+	err := row.Scan(&post.PostId, &post.ProductName, &post.PostDate,
+		&post.ProductOption, &post.Price, &post.Amount, &post.PinId, &post, &post.TagId)
 	switch err {
 	case sql.ErrNoRows:
 		fmt.Println("No rows were returned!")
