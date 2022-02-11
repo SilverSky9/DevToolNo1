@@ -1,15 +1,11 @@
 package services
 
 import (
-	"context"
-	model "daeng-market/models"
+	database "daeng-market/databases"
 	"database/sql"
 	"fmt"
 	"log"
-	"os"
 	"strconv"
-
-	_ "github.com/lib/pq"
 )
 
 const (
@@ -23,10 +19,27 @@ var (
 	ctx  context.Context
 )
 var db *sql.DB = Connect_DB()
+type User struct {
+	ID        int
+	Age       int
+	FirstName string
+	LastName  string
+	Email     string
+}
+
+type Post struct {
+	ID       int
+	Title    string
+	Details  string
+	Tag      string
+	PostType string
+}
+
+var dbasd = database.GetDB()
 
 func GetMessage() (string, error) {
 	//test
-	return "Hello World", nil
+	return "Hello WorDogld", nil
 }
 func GetHealthCheck() (string, error) {
 	return "Go fiber is good!", nil
@@ -35,7 +48,7 @@ func GetHealthCheck() (string, error) {
 func GetAllPost() ([]model.Post, error) {
 	sqlStatement := `SELECT * FROM post`
 	//Query all rows in table post
-	rows, err := db.Query(sqlStatement)
+	rows, err := dbasd.Query(sqlStatement)
 
 	//Create postList slice's for store post row form rows
 	postList := make([]model.Post, 0)
@@ -58,27 +71,27 @@ func GetAllPost() ([]model.Post, error) {
 	fmt.Println(postList)
 	return postList, nil
 }
-func GetPostById(id string) model.Post {
-	// pase id datatype string to int
-	post_id, _ := strconv.Atoi(id)
-	sqlStatement := `SELECT * FROM post Where id=$1`
-	var post model.Post
-	//Query one row from DB
-	row := db.QueryRow(sqlStatement, post_id)
-	err := row.Scan(&post.ID, &post.Title, &post.Details,
-		&post.Tag, &post.PostType)
-	switch err {
-	case sql.ErrNoRows:
-		fmt.Println("No rows were returned!")
-	case nil:
-		fmt.Println(post)
-	default:
-		panic(err)
-	}
+// func GetPostById(id string) model.Post {
+// 	// pase id datatype string to int
+// 	post_id, _ := strconv.Atoi(id)
+// 	sqlStatement := `SELECT * FROM post Where id=$1`
+// 	var post model.Post
+// 	//Query one row from DB
+// 	row := db.QueryRow(sqlStatement, post_id)
+// 	err := row.Scan(&post.ID, &post.Title, &post.Details,
+// 		&post.Tag, &post.PostType)
+// 	switch err {
+// 	case sql.ErrNoRows:
+// 		fmt.Println("No rows were returned!")
+// 	case nil:
+// 		fmt.Println(post)
+// 	default:
+// 		panic(err)
+// 	}
 
-	fmt.Println(post)
-	return post
-}
+// 	fmt.Println(post)
+// 	return post
+// }
 func GetPostByTag(tag1, tag2 string) ([]model.Post, error) {
 	sqlStatement := `SELECT * FROM post Where tag=$1 OR tag=$2`
 
@@ -109,7 +122,7 @@ func GetPostByTag(tag1, tag2 string) ([]model.Post, error) {
 func GetAllUser() ([]model.User, error) {
 	sqlStatement := "SELECT * FROM users;"
 	//Query all rows in table users
-	rows, err := db.Query(sqlStatement)
+	rows, err := dbasd.Query(sqlStatement)
 	if err != nil {
 		return nil, err
 	}
@@ -131,21 +144,24 @@ func GetAllUser() ([]model.User, error) {
 	return list, nil
 }
 
-func Connect_DB() *sql.DB {
-	//Create psql Info for connect your Postgres DB
-	psqlInfo := fmt.Sprintf("host=%s port=%d user=%s "+
-		"password=%s dbname=%s sslmode=disable",
-		host, port, os.Getenv("POSTGRES_USER"), os.Getenv("POSTGRES_PASSWORD"), os.Getenv("dbname"))
-	db, err := sql.Open("postgres", psqlInfo)
-	// ^ This is request db.env to assign value
-	if err != nil {
-		panic(err)
-	}
-	err = db.Ping()
-	if err != nil {
+func GetPostById(id string) Post {
+	// pase id datatype string to int
+	post_id, _ := strconv.Atoi(id)
+	sqlStatement := `SELECT * FROM post Where id=$1`
+	var post Post
+	//Query one row from dbasd
+	row := dbasd.QueryRow(sqlStatement, post_id)
+	err := row.Scan(&post.ID, &post.Title, &post.Details,
+		&post.Tag, &post.PostType)
+	switch err {
+	case sql.ErrNoRows:
+		fmt.Println("No rows were returned!")
+	case nil:
+		fmt.Println(post)
+	default:
 		panic(err)
 	}
 
-	fmt.Println("Successfully connected!")
-	return db
+	fmt.Println(post)
+	return post
 }
