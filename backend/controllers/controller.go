@@ -16,14 +16,14 @@ func Route(app *fiber.App) {
 		msg, _ := services.GetHealthCheck()
 		return c.Status(200).JSON(msg)
 	})
-	// app.Get("/post", func(c *fiber.Ctx) error {
-	// 	msg, _ := services.GetAllPost()
-	// 	return c.Status(200).JSON(msg)
-	// })
+	app.Get("/post", func(c *fiber.Ctx) error {
+		msg, _ := services.GetAllPost()
+		return c.Status(200).JSON(msg)
+	})
 
 	//make post entry point
-	post_entry_point := app.Group("/post")
-	PostRoute(post_entry_point)
+	// post_entry_point := app.Group("/post")
+	// PostRoute(post_entry_point)
 	//make user entry point
 	user_entry_point := app.Group("/user")
 	UserRoute(user_entry_point)
