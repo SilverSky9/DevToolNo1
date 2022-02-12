@@ -16,7 +16,7 @@ func TestDB() {
 
 const (
 	host = "db"
-	//host = "localhost"
+	// host = "localhost"
 	port = 5432
 )
 
@@ -46,7 +46,6 @@ func Connect_DB() *sql.DB {
 	if err != nil {
 		panic(err)
 	}
-
 	fmt.Println("Successfully connected!")
 	return db
 }

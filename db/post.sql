@@ -9,4 +9,4 @@ CREATE TABLE post (
   TagId INT
 );
 INSERT INTO post (PostId, ProductName, PostDate, ProductOption, Price, Amount, PinId, TagId)
-VALUES (1, 'อยากได้ค้อนครับ','2022-02-12','ต้องการ', 123, 1 , 1234, 1346)
+VALUES (1, 'อยากได้ค้อนครับ','00:00:00.0000000','ต้องการ', 123, 1 , 1234, 1346)
