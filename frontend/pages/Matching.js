@@ -3,6 +3,52 @@ import Image from 'next/image'
 import styles from '../styles/Matching.module.css'
 import shopping_cart from '../public/shopping-cart.png' 
 
+
+var data1 = [
+    {
+        tag_id : 1,
+        tag_name : "เครื่องใช้"
+    },
+    {
+        tag_id : 2,
+        tag_name : "เครื่องเขียน"
+    },
+    {
+        tag_id : 3,
+        tag_name : "เครื่องดนตรี"
+    },
+    {
+        tag_id : 4,
+        tag_name : "เครื่องดื่ม"
+    },
+    {
+        tag_id : 5,
+        tag_name : "วิศวกรรมศาสตร์"
+    },
+    {
+        tag_id : 6,
+        tag_name : "IT"
+    },
+    {
+        tag_id : 7,
+        tag_name : "วิทยาศาสตร์"
+    },
+    {
+        tag_id : 8,
+        tag_name : "สัตว์เลี้ยง"
+    },{
+        tag_id : 9,
+        tag_name : "งานอดิเรก"
+    },{
+        tag_id : 10,
+        tag_name : "เครื่องนอน"
+    },{
+        tag_id : 11,
+        tag_name : "ยานยนต์"
+    },
+]
+
+
 export default function Matching() {
   return (
     <div className={styles.container}>
@@ -14,36 +60,16 @@ export default function Matching() {
           </h1>
       </div>
       <main className={styles.main}>
-        <div>
-          <button className={styles.button}>เครื่องครัว</button>
-          <button className={styles.button}>เครื่องใช้</button>
-          <button className={styles.button}>เครื่องเขียน</button>
-          <button className={styles.button}>ต้นไม้</button>
-          <button className={styles.button}>เครื่องดนตรี</button>
-          <button className={styles.button}>อาหาร</button>
-        </div>
-        <div>
-          <button className={styles.button}>เครื่องดื่ม</button>
-          <button className={styles.button}>วิศวกรรมศาสตร์</button>
-          <button className={styles.button}>IT</button>
-          <button className={styles.button}>สถาปัตยกรรม</button>
-          <button className={styles.button}>วิทยาศาสตร์</button>
-        </div>
-        <div>
-          <button className={styles.button}>Male</button>
-          <button className={styles.button}>Female</button>
-          <button className={styles.button}>สัตว์เลี้ยง</button>
-          <button className={styles.button}>งานอดิเรก</button>
-          <button className={styles.button}>เครื่องนอน</button>
-          <button className={styles.button}>ยานยนต์</button>
-        </div>
+      <ul>
+      {data1.map(tag => (
+        <button className={styles.button}>{tag.tag_name}</button> 
+      ))}
+    </ul>
       </main>
-      
       <div className={styles.next}>
         <button className={styles.nextt}>Next</button>
         <Image src="/next_icon.svg" alt="Vercel Logo" width={62} height={16} />
       </div>
-
     </div>
   )
 }
