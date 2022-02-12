@@ -22,20 +22,12 @@ func Route(app *fiber.App) {
 	})
 
 	//make post entry point
-	// post_entry_point := app.Group("/post")
-	// PostRoute(post_entry_point)
+	post_entry_point := app.Group("/post")
+	PostRoute(post_entry_point)
 	//make user entry point
 	user_entry_point := app.Group("/user")
 	UserRoute(user_entry_point)
 
-	// app.Get("/post/:id", func(c *fiber.Ctx) error {
-	// 	msg := post.GetPostById(c.Params("id"))
-	// 	return c.Status(200).JSON(msg)
-	// })
-	// app.Get("/post/tag/:tag1/:tag2", func(c *fiber.Ctx) error {
-	// 	msg, _ := post.GetPostByTag(c.Params("tag1"), c.Params("tag2"))
-	// 	return c.Status(200).JSON(msg)
-	// })
 	// app.Get("/user", func(c *fiber.Ctx) error {
 	// 	msg, _ := post.GetAllUser()
 	// 	fmt.Println(msg, "From controller")

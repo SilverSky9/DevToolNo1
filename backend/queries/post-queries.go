@@ -1,10 +1,13 @@
 package queries
 
 import (
+	database "daeng-market/databases"
 	model "daeng-market/models"
 	"fmt"
 	"time"
 )
+
+var dbasd = database.GetDB()
 
 func CreatePostQueries(post model.Post) error {
 	entryStm := `INSERT INTO post `

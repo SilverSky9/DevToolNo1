@@ -40,4 +40,12 @@ func PostRoute(r fiber.Router) {
 
 		return c.Status(201).JSON("Create post success!")
 	})
+	r.Get("/post/:id", func(c *fiber.Ctx) error {
+		msg := services.GetPostById(c.Params("id"))
+		return c.Status(200).JSON(msg)
+	})
+	r.Get("/post/tag/:tag1/:tag2", func(c *fiber.Ctx) error {
+		msg, _ := services.GetPostByTag(c.Params("tag1"), c.Params("tag2"))
+		return c.Status(200).JSON(msg)
+	})
 }
