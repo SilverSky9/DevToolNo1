@@ -6,7 +6,7 @@ services:
     ports:
     - "80:80"
     volumes:
-    - ../html/:/usr/share/nginx/html
+    - ./html/:/usr/share/nginx/html
     networks:
       - fullstack
   app:

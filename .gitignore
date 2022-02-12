@@ -22,3 +22,4 @@ postgresql.auto.conf
 postgresql.conf
 postmaster.opts
 postmaster.pid
+backend/tmp/main
