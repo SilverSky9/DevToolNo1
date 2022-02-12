@@ -1,26 +1,26 @@
 package controllers
 
 import (
+	model "daeng-market/models"
 	services "daeng-market/services"
-	"time"
 
 	"github.com/gofiber/fiber/v2"
 )
 
 // User object
-type Post struct {
-	PostId        int       `json:"post_id"`
-	ProductName   string    `json:"product_name"`
-	PostDate      time.Time `json:"post_date"`
-	ProductOption string    `json:"product_option"`
-	Price         float64   `json:"price"`
-	Amount        int       `json:"amount"`
-	PinId         int       `json:"pin_id"`
-	TagId         int       `json:"tag_id"`
-}
+// type Post struct {
+// 	PostId        int       `json:"post_id"`
+// 	ProductName   string    `json:"product_name"`
+// 	PostDate      time.Time `json:"post_date"`
+// 	ProductOption string    `json:"product_option"`
+// 	Price         float64   `json:"price"`
+// 	Amount        int       `json:"amount"`
+// 	PinId         int       `json:"pin_id"`
+// 	TagId         int       `json:"tag_id"`
+// }
 
 // Users collection
-type PostList []Post
+type PostList []model.Post
 
 func Route(app *fiber.App) {
 
