@@ -3,7 +3,7 @@ import Image from 'next/image'
 import styles from '../styles/Matching.module.css'
 import shopping_cart from '../public/shopping-cart.png' 
 
-
+const tag_want = []
 var data1 = [
     {
         tag_id : 1,
@@ -47,6 +47,35 @@ var data1 = [
         tag_name : "ยานยนต์"
     },
 ]
+const isActive = false
+const handleChange = (e) => {
+    if(!tag_want.includes(e))
+    {
+        tag_want.push(e)
+        alert(tag_want)
+        isActive = true
+        alert(isActive)
+    }
+    else {
+        isActive = false
+        alert(isActive)
+       tag_want =  tag_want.filter(function(ele){ 
+            return ele != e; 
+        })
+        alert(tag_want)
+    }
+}
+// const isActive = (r) => {
+//     // alert(r)
+
+//     if (tag_want.includes(r)) {
+//         alert("incluse")
+//         return 1
+//     }
+//     else return 0
+// }
+
+
 
 
 export default function Matching() {
@@ -62,7 +91,11 @@ export default function Matching() {
       <main className={styles.main}>
       <ul>
       {data1.map(tag => (
-        <button className={styles.button}>{tag.tag_name}</button> 
+          
+      
+        // <button  onClick={() => handleChange(tag.tag_id)} className={ isActive(tag.tag_id) ? styles.button1 : styles.button2}>{tag.tag_name}</button> 
+        <button  onClick={() => handleChange(tag.tag_id)} className={isActive ? styles.button1 : styles.button2}>{tag.tag_name}</button> 
+
       ))}
     </ul>
       </main>
