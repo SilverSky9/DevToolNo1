@@ -43,7 +43,7 @@ func GetAllPost() ([]model.Post, error) {
 	for rows.Next() {
 		var onePost model.Post
 		if err := rows.Scan(&onePost.PostId, &onePost.ProductName, &onePost.PostDate,
-			&onePost.ProductOption, &onePost.Price, &onePost.Amount, &onePost.PinId,  &onePost.TagId); err != nil {
+			&onePost.ProductOption, &onePost.Price, &onePost.Amount, &onePost.PinId, &onePost.TagId); err != nil {
 			log.Fatal(err)
 		}
 		fmt.Println(onePost)
@@ -70,7 +70,7 @@ func GetPostByTag(tag1, tag2 string) ([]model.Post, error) {
 	for rows.Next() {
 		var onePost model.Post
 		if err := rows.Scan(&onePost.PostId, &onePost.ProductName, &onePost.PostDate,
-			&onePost.ProductOption, &onePost.Price, &onePost.Amount, &onePost.PinId, &onePost, &onePost.TagId); err != nil {
+			&onePost.ProductOption, &onePost.Price, &onePost.Amount, &onePost.PinId, &onePost.TagId); err != nil {
 			log.Fatal(err)
 		}
 		fmt.Println(onePost)
@@ -91,7 +91,7 @@ func GetPostById(id string) model.Post {
 	//Query one row from dbasd
 	row := dbasd.QueryRow(sqlStatement, post_id)
 	err := row.Scan(&post.PostId, &post.ProductName, &post.PostDate,
-		&post.ProductOption, &post.Price, &post.Amount, &post.PinId, &post, &post.TagId)
+		&post.ProductOption, &post.Price, &post.Amount, &post.PinId, &post.TagId)
 	switch err {
 	case sql.ErrNoRows:
 		fmt.Println("No rows were returned!")
