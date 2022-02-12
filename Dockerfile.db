@@ -1,2 +1,0 @@
-FROM postgres
-ADD daengmarket-test.sql /docker-entrypoint-initdb.d

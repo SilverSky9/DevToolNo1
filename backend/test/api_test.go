@@ -1,9 +1,13 @@
 package test
 
 import (
-	database "daeng-market/databases"
+	"daeng-market/controllers"
 	"daeng-market/services"
+	"net/http/httptest"
 	"testing"
+
+	"github.com/gofiber/fiber/v2"
+	utils "github.com/gofiber/utils"
 )
 
 func Test_api_GetHealthChecking(t *testing.T) {
@@ -22,17 +26,26 @@ func Test_api_home(t *testing.T) {
 		t.Errorf("got %q, wanted %q", got, want)
 	}
 }
-// func TestHTTPGetPost(t *testing.T) {
-// 	t.Run("it should return httpCode 200", func(t *testing.T) {
-// 		req, err := http.NewRequest(http.MethodGet, "http://localhost:3000/post", nil)
-// 		if err != nil {
-// 			t.Error(err)
-// 		}
-// 		resp := httptest.NewRecorder()
-// 		handler := http.HandlerFunc(controllers.PostHandler)
-// 		handler.ServeHTTP(resp, req)
-// 		if status := resp.Code; status != http.StatusOK {
-// 			t.Errorf("wrong code: got %v want %v", status, http.StatusOK)
-// 		}
-// 	})
+
+// func Test_api_Post(t *testing.T) {
+// 	want := {
+// 					PostId:        1,
+// 					ProductName:   "อยากได้ค้อนครับ",
+// 					PostDate:      time.Now(),
+// 					ProductOption: "ต้องการ",
+// 					Price:         123,
+// 					Amount:        1,
+// 					PinId:         1234,
+// 					TagId:         1346,
+// 				},
 // }
+func Test_Post_StatSuccess(t *testing.T) {
+	app := fiber.New()
+
+	controllers.Route(app)
+
+	resp, err := app.Test(httptest.NewRequest("GET", "/post", nil))
+	utils.AssertEqual(t, nil, err, "app.Test")
+	utils.AssertEqual(t, 200, resp.StatusCode, "Status code")
+
+}
