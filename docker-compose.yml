@@ -6,7 +6,7 @@ services:
     ports:
     - "80:80"
     volumes:
-    - ../html/:/usr/share/nginx/html
+    - ./html/:/usr/share/nginx/html
     networks:
       - fullstack
   app:
@@ -32,7 +32,8 @@ services:
     ports:
     - 5432:5432
     volumes:
-      - ../db:/var/lib/postgresql/data/
+      - ./db/:/var/lib/postgresql/data/
+      - ./db.sql:/docker-entrypoint-initdb.d/db.sql
     networks:
       - fullstack
   pgadmin:
