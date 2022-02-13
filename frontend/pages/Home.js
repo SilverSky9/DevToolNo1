@@ -1,5 +1,4 @@
 import Head from 'next/head'
-import Image from 'next/image'
 import styles from '../styles/Home.module.css'
 import shopping_cart from '../public/shopping-cart.png'
 import axios from 'axios'
@@ -142,7 +141,7 @@ export default function Matching() {
     return (
         <div className={styles.container}>
             <div>
-                <div className={styles.logo} > <Image width={71} height={68} src={shopping_cart} alt="shopping_cart" /> Mar<span style={{ color: '#197DFF' }}>ket</span></div>
+                <div className={styles.logo} > Mar<span style={{ color: '#197DFF' }}>ket</span></div>
                 <input className={styles.search} onChange={e => setSearchVal(e.target.value)}></input>
                 <button className={styles.btn} onClick={() => GetPostBySearch()}>Search</button>
             </div>
