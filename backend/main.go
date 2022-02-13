@@ -9,6 +9,7 @@ import (
 
 func main() {
 	app := fiber.New()
+
 	app.Use(cors.New(cors.Config{
 		AllowOrigins:     "*",
 		AllowHeaders:     "Origin, Content-Type, Accept, Authorization",
@@ -16,8 +17,8 @@ func main() {
 		AllowMethods:     "GET, POST, PUT, DELETE",
 	}))
 
-	controllers.Route(app)
 
+	controllers.Route(app)
 	app.Listen(":3000")
 
 }
