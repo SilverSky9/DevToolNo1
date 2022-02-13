@@ -75,7 +75,6 @@ func GetPostByTagQueries(tag_1 string, tag_2 string) ([]model.Post, error) {
 	tag1_int, _ := strconv.Atoi(tag_1)
 	tag2_int, _ := strconv.Atoi(tag_2)
 
-<<<<<<< HEAD
 	rows, err := db.Query(sqlStatement, tag1_int, tag2_int)
 
 	if err != nil {
@@ -107,9 +106,7 @@ func GetPostByNameQueries(post_name string) ([]model.Post, error) {
 	sqlStatement := `SELECT * FROM post WHERE LOWER(product_name) LIKE '%'||$1||'%'`
 
 	rows, err := db.Query(sqlStatement, post_name)
-=======
-	rows, err := dbasd.Query(sqlStatement, tag1_int, tag2_int)
->>>>>>> dev
+	// rows, err := dbasd.Query(sqlStatement, tag1_int, tag2_int)
 
 	if err != nil {
 		return nil, err
