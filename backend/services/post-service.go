@@ -50,8 +50,8 @@ func GetAllPost() ([]model.Post, error) {
 	//loop for scan and push row to slice for return to API
 	for rows.Next() {
 		var onePost model.Post
-		if err := rows.Scan(&onePost.PostId, &onePost.ProductName, &onePost.PostDate,
-			&onePost.ProductOption, &onePost.Price, &onePost.Amount, &onePost.PinId, &onePost.TagId); err != nil {
+		if err := rows.Scan(&onePost.PostId, &onePost.PinId, &onePost.ProductName, &onePost.PostDate,
+			&onePost.ProductOption, &onePost.Price, &onePost.Amount, &onePost.TagId); err != nil {
 			log.Fatal(err)
 		}
 		fmt.Println(onePost)

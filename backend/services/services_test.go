@@ -1,29 +1,25 @@
 package services
 
-import (
-	model "daeng-market/models"
-	"reflect"
-	"testing"
-)
+import "testing"
 
-func TestGetAllPost(t *testing.T) {
+func TestGetHealthCheck(t *testing.T) {
 	tests := []struct {
 		name    string
-		want    []model.Post
+		want    string
 		wantErr bool
 	}{
 		// TODO: Add test cases.
-
+		{name: "test", want: "test", wantErr: false},
 	}
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
-			got, err := GetAllPost()
+			got, err := GetHealthCheck()
 			if (err != nil) != tt.wantErr {
-				t.Errorf("GetAllPost() error = %v, wantErr %v", err, tt.wantErr)
+				t.Errorf("GetHealthCheck() error = %v, wantErr %v", err, tt.wantErr)
 				return
 			}
-			if !reflect.DeepEqual(got, tt.want) {
-				t.Errorf("GetAllPost() = %v, want %v", got, tt.want)
+			if got != tt.want {
+				t.Errorf("GetHealthCheck() = %v, want %v", got, tt.want)
 			}
 		})
 	}
