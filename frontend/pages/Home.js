@@ -119,15 +119,23 @@ export default function Matching() {
       
       {data1.map(content => (
         <div key={content.post_id} className={styles.card} >
-            <div style={{color: "red", display: 'inline'}}>
+           
+
+            
+            <div  style={{ color: '#197DFF', fontSize: '50px' , textAlign: 'center'}} >
                 {/* <div className={styles.logo} > <Image width={171} height={168} src={shopping_cart} alt="shopping_cart" /> {content.product_name}</div> */}
-                 
+             {content.product_name} <br></br>
             </div>
-            {content.product_name} <br></br>
+            <div >
+                
             ราคา : {content.price} / ชิ้น <br></br>
             จำนวน : {content.amount} ชิ้น
+            </div>
+                {/* <div className={styles.logo} > <Image width={171} height={168} src={shopping_cart} alt="shopping_cart" /> {content.product_name}</div> */}
+
+           
+            </div>
             
-            </div> 
 
       ))}
     

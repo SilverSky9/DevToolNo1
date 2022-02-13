@@ -83,7 +83,7 @@
   /* border: 1px solid #000000; */
   border-radius: 10px;
   transition: color 0.15s ease, border-color 0.15s ease;
-  width: 70%;
+  width: 60%;
 }
 
 .card:hover,
@@ -161,6 +161,17 @@
 .btn:active {
   color: #0070f3;
   border-color: #0070f3;
+}
+
+.item1 {
+    flex: 1;
+}
+.item2 {
+    flex: 1;
+}
+.home {
+    flex-direction: row;
+    flex: 1;
 }
 
 
