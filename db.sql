@@ -4,7 +4,7 @@
 -- https://tableplus.com/
 --
 -- Database: Market
--- Generation Time: 2022-02-13 4:25:51.9010 PM
+-- Generation Time: 2022-02-14 12:59:04.8240 AM
 -- -------------------------------------------------------------
 
 
@@ -38,7 +38,7 @@ CREATE TABLE "public"."pin" (
 -- Sequence and defined type
 CREATE SEQUENCE IF NOT EXISTS post_post_id_seq;
 DROP TYPE IF EXISTS "public"."option_product";
-CREATE TYPE "public"."option_product" AS ENUM ('sell', 'buy');
+CREATE TYPE "public"."option_product" AS ENUM ('buy', 'sell');
 
 -- Table Definition
 CREATE TABLE "public"."post" (
@@ -81,16 +81,19 @@ CREATE TABLE "public"."user1" (
 );
 
 INSERT INTO "public"."pin" ("user_id", "pin_id", "pin") VALUES
+(1, 1, '$2a$14$0AcCPReUHV7jj70qrydRrOKBg1C87M0.BczJmzFaN4tsnlMmNj3hK'),
 (2, 2, '$2a$14$BZ6KsYwiHOS/W62KG1UEveQNvubOXWlL8DFXKb1xlQ2X4goZky6wm'),
 (3, 3, '$2a$14$8n.qzdlZqBonJK3.GCbZnuHywcQLNeT8pT9.0erPcTxJm0aYe2WFS'),
 (4, 4, '$2a$14$4n9.3hsKlqpCFG584af4ruCbmQcJsTWXYiASgS/MZMoGFixGHUCG6');
 
 INSERT INTO "public"."post" ("post_id", "pin_id", "product_name", "post_date", "product_option", "price", "amount", "tag_id") VALUES
+(1, 1, 'ขายเร้าเตอร์ต่อครับ', '2022-02-13', 'sell', 400, 1, 1),
 (2, 2, 'อยากขายน้ำลำไย', '2022-02-13', 'sell', 20, 10, 6),
 (3, 3, 'ขายต่อกรงกระต่าย', '2022-02-13', 'sell', 150, 1, 7),
 (4, 4, 'ขายต่อเก้าอี้คอม', '2022-02-13', 'sell', 900, 1, 8);
 
 INSERT INTO "public"."tag" ("tag_id", "tag_name") VALUES
+(1, 'it'),
 (2, 'food'),
 (3, 'food'),
 (4, 'food'),
@@ -100,6 +103,7 @@ INSERT INTO "public"."tag" ("tag_id", "tag_name") VALUES
 (8, 'com');
 
 INSERT INTO "public"."user1" ("user_id", "name", "address", "contact", "phone_number") VALUES
+(1, 'mark', 'jinda', 'markza', '0926894589'),
 (2, 'milk', 'rnp', 'milktest', '12123'),
 (3, 'fah', 'k1', 'fahfah1234', '0926897975'),
 (4, 'mark', 'jinda', 'markza', '0926894589');
