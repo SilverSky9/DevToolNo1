@@ -49,49 +49,33 @@ var data1 = [
 ]
 
 
-
-// const handleChange = (e) => {
-
-//     const [isAvtive,setIsAvtive]=useState(0);
-
-//     if(!tag_want.incldes(e))
-//     {
-//         tag_want.push(e)
-//         alert(tag_want)
-//         setIsAvtive(1)
-       
-//     }
-//     else {
-//         setIsAvtive(0)
-        
-//        tag_want =  tag_want.filter(function(ele){ 
-//             return ele != e; 
-//         })
-//         alert(tag_want)
-//     }
-// }
-
-
-
-
 export default function Matching() {
-    // var tag_want = []
-    // const [isAvtive,setIsAvtive] = useState(false);
+  
     const [tag_want,setTag_want] = useState([]);
-function handleChange(e){
+    const [tag_id,setTag_id] = useState([]);
+function handleChange(e, id){
     
     if(!tag_want.includes(e))
     {
        setTag_want(oray => [...oray, e]) 
+       setTag_id(ids =>[...ids, id])
     }
 
     else {
         setTag_want(
             tag_want.filter((ele) =>
              ele != e
-        )
-        ) 
-    }
+        )) 
+
+        setTag_id(
+            tag_id.filter((ids) =>
+             ids != id
+        )) 
+    } 
+}
+
+function check() {
+    console.log(tag_id)
 }
 
   return (
@@ -106,9 +90,11 @@ function handleChange(e){
       <main className={styles.main}>
       <ul>
       {data1.map(tag => (
-         <button key={tag.tag_id}  onClick={() => handleChange(tag.tag_name)} className={styles.button }>{tag.tag_name}</button> 
+         <button key={tag.tag_id}  onClick={() => handleChange(tag.tag_name, tag.tag_id)} className={styles.button }>{tag.tag_name}</button> 
+         
       ))}
     </ul>
+
     <hr></hr>
     <ul>
       {tag_want.map(tag => (
@@ -122,7 +108,7 @@ function handleChange(e){
      
       </main>
       <div className={styles.next}>
-        <button className={styles.nextt}>Next</button>
+        <button className={styles.nextt } onClick={() => check()}>Next</button>
         <Image src="/next_icon.svg" alt="Vercel Logo" width={62} height={16} />
       </div>
     </div>
