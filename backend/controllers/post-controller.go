@@ -58,7 +58,7 @@ func PostRoute(r fiber.Router) {
 
 	r.Get("/getbytag/:tag1/:tag2", func(c *fiber.Ctx) error {
 		tag_1 := c.Params("tag1")
-		tag_2 := c.Params("tag1")
+		tag_2 := c.Params("tag2")
 
 		msg, err := services.GetPostByTag(tag_1, tag_2)
 		if err != nil {

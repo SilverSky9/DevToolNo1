@@ -24,3 +24,5 @@ postmaster.opts
 postmaster.pid
 backend/tmp/main
 backend/tmp/build-errors.log
+*.log
+backend/tmp/main

@@ -21,3 +21,28 @@ func CreateUserQueries(user model.User) (int, error) {
 	fmt.Println("User ID:", user_id)
 	return user_id, nil
 }
+
+func GetAllUserQueries() ([]model.User, error) {
+	sqlStatement := "SELECT * FROM users;"
+	//Query all rows in table users
+	rows, err := db.Query(sqlStatement)
+	if err != nil {
+		return nil, err
+	}
+	// release connection resource when finish this function
+	defer rows.Close()
+	//Create list slice's for store post row form rows
+	list := make([]model.User, 0)
+	//loop for scan and push row to slice for return to API
+	for rows.Next() {
+		var oneUser model.User
+		if err := rows.Scan(&oneUser.UserId, &oneUser.Name, &oneUser.Address, &oneUser.Contact, &oneUser.PhoneNumber); err != nil {
+			return []model.User{}, err
+		}
+		list = append(list, oneUser)
+	}
+	if err = rows.Err(); err != nil {
+		return []model.User{}, err
+	}
+	return list, nil
+}

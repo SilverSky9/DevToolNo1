@@ -1,13 +1,10 @@
 package services
 
 import (
-	database "daeng-market/databases"
 	model "daeng-market/models"
 	"daeng-market/queries"
 	"strconv"
 )
-
-var dbasd = database.GetDB()
 
 func CreatePost(post model.Post, tag model.Tag, user model.User, pin model.Pin) error {
 	resp_tag, err := queries.GetTagByNameQueries(tag.TagName)
