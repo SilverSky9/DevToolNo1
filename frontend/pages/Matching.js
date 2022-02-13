@@ -1,9 +1,10 @@
 import Head from 'next/head'
 import styles from '../styles/Matching.module.css'
+import home_styles from '../styles/Home.module.css'
 import shopping_cart from '../public/shopping-cart.png'
 import { useState, useEffect } from "react";
 import axios from 'axios'
-import Link from 'next/link'
+
 
 var data1 = [
     {
@@ -50,11 +51,24 @@ var data1 = [
 ]
 
 
+
 export default function Matching() {
 
     const [tag_want, setTag_want] = useState([]);
     const [tag_id, setTag_id] = useState([]);
     const [tag, setTag] = useState([])
+    const [toHome, setToHome] = useState(false)
+    const [post, setPost] = useState([{
+        post_id: 1,
+        pin: 123,
+        product_name: "cat",
+        post_date: "12-3-63",
+        product_option: "buy",
+        price: 520,
+        amount: 5,
+        tag_id: 5
+    }])
+    const [tag_want_filter, set_tag_want_filter] = useState('')
 
     useEffect(() => {
         GetTag()
@@ -82,6 +96,27 @@ export default function Matching() {
                     ids != id
                 ))
         }
+        FilterTagWantToAxios()
+
+    }
+
+    const FilterTagWantToAxios = async () => {
+        var temp = ''
+        tag_id.forEach(x => {
+            temp += x + ','
+        })
+        set_tag_want_filter(temp)
+        // console.log(tag_want_filter)
+    }
+
+    const GetPostFromTag = async () => {
+
+
+        await axios.get("http://localhost:3000/post/geybymultitag/" + tag_want_filter)
+            .then(res => {
+                setPost(res.data)
+                setToHome(true)
+            })
     }
 
     function check() {
@@ -93,39 +128,95 @@ export default function Matching() {
         await axios.get("http://34.126.190.231:3000/tag/getall")
             .then(res => {
                 setTag(res.data)
+
             })
     }
 
-    return (
-        <div className={styles.container}>
-            <div>
-                <h1 className={styles.title}><a style={{ color: '#F49A35' }}>IN</a> <a style={{ color: '#197DFF' }}>this</a></h1>
-                <h1 className={styles.title}>
-                    <a style={{ color: '#197DFF' }}>What</a> do you <a style={{ color: '#F49A35' }}>want</a> <a style={{ color: '#197DFF' }}>?</a>
-                </h1>
-            </div>
-            <main className={styles.main}>
-                <ul>
-                    {tag.map(tag => (
-                        <button key={tag.tag_id} onClick={() => handleChange(tag.tag_name, tag.tag_id)} className={styles.button}>{tag.tag_name}</button>
+    const HomeComp = () => {
+        return (
 
-                    ))}
-                </ul>
+            <main className={home_styles.main}>
 
-                <hr></hr>
-                <ul>
-                    {tag_want.map(tag => (
-                        <button className={styles.button1} key="test">{tag}</button>
-                    ))}
-                </ul>
+
+                {post.map(content => (
+                    <div key={content.post_id} className={home_styles.card} >
+
+
+
+                        <div style={{ color: '#197DFF', fontSize: '50px', textAlign: 'center' }} >
+                            {/* <div className={styles.logo} > <Image width={171} height={168} src={shopping_cart} alt="shopping_cart" /> {content.product_name}</div> */}
+                            {content.product_name} <br></br>
+                        </div>
+                        <div >
+
+                            ราคา : {content.price} / ชิ้น <br></br>
+                            จำนวน : {content.amount} ชิ้น
+                        </div>
+                        {/* <div className={styles.logo} > <Image width={171} height={168} src={shopping_cart} alt="shopping_cart" /> {content.product_name}</div> */}
+
+
+                    </div>
+
+
+                ))}
+
             </main>
-             <Link href="http://34.126.190.231/Home.html">       
-            <div className={styles.next}>
-                <button className={styles.nextt}>Next</button>
+
+
+
+        )
+    }
+
+    const MatchingComp = () => {
+        return (
+
+            <div className={styles.container}>
+
+                <div>
+                    <h1 className={styles.title}><a style={{ color: '#F49A35' }}>IN</a> <a style={{ color: '#197DFF' }}>this</a></h1>
+                    <h1 className={styles.title}>
+                        <a style={{ color: '#197DFF' }}>What</a> do you <a style={{ color: '#F49A35' }}>want</a> <a style={{ color: '#197DFF' }}>?</a>
+                    </h1>
+                </div>
+                <main className={styles.main}>
+
+                    <ul>
+                        {tag.map(tag => (
+                            <button key={tag.tag_id} onClick={() => handleChange(tag.tag_name, tag.tag_id)} className={styles.button}>{tag.tag_name}</button>
+
+                        ))}
+                    </ul>
+
+                    <hr>
+
+                    </hr>
+                    <ul>
+                        {tag_want.map((tag, i) => (
+                            <button className={styles.button1} key={i}>{tag}</button>
+                        ))}
+                    </ul>
+
+                </main>
+                <div className={styles.next}>
+                    <button className={styles.nextt} onClick={() => GetPostFromTag()}>Next</button>
+                </div>
+
+
+
             </div>
-            </Link> 
-        </div>
-    )
+
+
+        )
+    }
+    if (toHome) {
+        return HomeComp()
+    }
+    else {
+        return MatchingComp()
+    }
+
+
+
 }
 
 
