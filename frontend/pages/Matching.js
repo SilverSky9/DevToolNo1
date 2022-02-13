@@ -112,7 +112,7 @@ export default function Matching() {
     const GetPostFromTag = async () => {
 
 
-        await axios.get("http://localhost:3000/post/geybymultitag/" + tag_want_filter)
+        await axios.get("http://34.126.190.231:3000/post/geybymultitag/" + tag_want_filter)
             .then(res => {
                 setPost(res.data)
                 setToHome(true)
