@@ -39,13 +39,46 @@ func Test_api_home(t *testing.T) {
 // 					TagId:         1346,
 // 				},
 // }
-func Test_Post_StatSuccess(t *testing.T) {
+// func Test_Create_Post_StatSuccess(t *testing.T) {
+// 	app := fiber.New()
+
+// 	controllers.Route(app)
+
+// 	resp, err := app.Test(httptest.NewRequest("POST", "/post/create", nil))
+// 	utils.AssertEqual(t, nil, err, "app.Test")
+// 	utils.AssertEqual(t, 200, resp.StatusCode, "Status code")
+// }
+func Test_GetAllPost(t *testing.T) {
 	app := fiber.New()
 
 	controllers.Route(app)
 
-	resp, err := app.Test(httptest.NewRequest("GET", "/post", nil))
+	res, err := app.Test(httptest.NewRequest("GET", "/post/all", nil))
 	utils.AssertEqual(t, nil, err, "app.Test")
-	utils.AssertEqual(t, 200, resp.StatusCode, "Status code")
-
+	utils.AssertEqual(t, 200, res.StatusCode, "Status code")
 }
+func Test_GetPostById(t *testing.T) {
+	app := fiber.New()
+
+	controllers.Route(app)
+	res, err := app.Test(httptest.NewRequest("GET", "/post/getbyid/2", nil))
+	utils.AssertEqual(t, nil, err, "app.Test")
+	utils.AssertEqual(t, 200, res.StatusCode, "Status code")
+}
+func Test_GetPostByTag(t *testing.T) {
+	app := fiber.New()
+
+	controllers.Route(app)
+	res, err := app.Test(httptest.NewRequest("GET", "/post/getbytag/6/7", nil))
+	utils.AssertEqual(t, nil, err, "app.Test")
+	utils.AssertEqual(t, 200, res.StatusCode, "Status code")
+}
+
+// func Test_CreatePost(t *testing.T) {
+// 	app := fiber.New()
+
+// 	controllers.Route(app)
+// 	res, err := app.Test(httptest.NewRequest("POST", "/post/create", nil))
+// 	utils.AssertEqual(t, nil, err, "app.Test")
+// 	utils.AssertEqual(t, 200, res.StatusCode, "Status code")
+// }

@@ -38,7 +38,7 @@ func Connect_DB() *sql.DB {
 		// host, port, "postgres", "1234", "Market")
 		host, port, os.Getenv("POSTGRES_USER"), os.Getenv("POSTGRES_PASSWORD"), os.Getenv("POSTGRES_DB"))
 	db, err := sql.Open("postgres", psqlInfo)
-	// db, err := sql.Open("postgres", "postgres:magical@tcp(127.0.0.1:5432)/Market?parseTime=true")
+
 	// ^ This is request db.env to assign value
 	if err != nil {
 		panic(err)
