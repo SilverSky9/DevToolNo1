@@ -3,6 +3,7 @@ package services
 import (
 	model "daeng-market/models"
 	"daeng-market/queries"
+	"fmt"
 	"strconv"
 )
 
@@ -78,4 +79,38 @@ func GetPostByName(post_name string) ([]model.Post, error) {
 		return []model.Post{}, err
 	}
 	return resp, nil
+}
+
+func GetPostByMultiTag(tags string) ([]model.Post, error) {
+	fmt.Println(tags)
+
+	tag_list := MultiTagToArray(tags)
+	fmt.Println(tag_list)
+
+	resp, err := queries.GetPostByMultiTagQueries(tag_list)
+	if err != nil {
+		return []model.Post{}, nil
+	}
+
+	return resp, nil
+}
+
+func MultiTagToArray(tags string) []int {
+	// var x string = "1-20-32-402"
+	var list []int
+	temp := ""
+	for i := 0; i < len(tags); i++ {
+		num := string(tags[i])
+		if num != "," {
+			temp += num
+		}
+		if num == "," {
+			to_num, _ := strconv.Atoi(temp)
+			list = append(list, to_num)
+
+			temp = ""
+		}
+	}
+
+	return list
 }
