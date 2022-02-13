@@ -185,10 +185,10 @@ export default function Matching() {
                 ))}
 
             </main>
-            {/* <div className={styles.next}>
+            <div className={styles.next}>
         <button className={styles.nextt}>Next</button>
         <Image src="/next_icon.svg" alt="Vercel Logo" width={62} height={16} />
-      </div> */}
+      </div>
         </div>
     )
 }
