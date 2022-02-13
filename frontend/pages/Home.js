@@ -119,7 +119,6 @@ export default function Matching() {
     const GetTag = async () => {
         await axios.get("http://34.126.190.231:3000/tag/getall")
             .then(res => {
-
                 setTag(res.data)
             })
     }
@@ -190,7 +189,7 @@ export default function Matching() {
           
             <button className={styles.nextt}>Next</button>
           
-        <Image src="/next_icon.svg" alt="Vercel Logo" width={62} height={16} />
+        {/* <Image src="/next_icon.svg" alt="Vercel Logo" width={62} height={16} /> */}
         
       </div>
         </div>
