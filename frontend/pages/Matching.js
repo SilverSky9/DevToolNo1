@@ -101,11 +101,6 @@ function check() {
          <button  className={styles.button1}>{tag}</button> 
       ))}
     </ul>
-
-       
-   
-
-     
       </main>
       <div className={styles.next}>
         <button className={styles.nextt } onClick={() => check()}>Next</button>

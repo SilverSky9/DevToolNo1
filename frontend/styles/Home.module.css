@@ -104,6 +104,26 @@
   line-height: 1.5;
 }
 
+.tag:hover,
+.tag:focus,
+.tag:active {
+  color: #0070f3;
+  border-color: #0070f3;
+}
+.tag {
+   
+    margin: 10px;
+    padding:10px;
+    text-align: center;
+    color: inherit;
+    text-decoration: none;
+    border: 1px solid #eaeaea;
+    /* border: 1px solid #000000; */
+    border-radius: 10px;
+    transition: color 0.15s ease, border-color 0.15s ease;
+    display: inline-block;
+  }
+
 .logo {
     font-style: normal;
     font-weight: 600;
@@ -111,6 +131,38 @@
     line-height: 8  0px;
     padding-top: 10px;
 }
+
+.search {
+    width: 70%;
+    height: 45px;
+    border-radius: 10px;
+    border-color: rgb(183, 184, 184);
+    border-style: groove;
+    border-width: 1px;
+    margin: 20px;
+    padding: 15px;
+    font-size: medium;
+    
+}
+
+.btn {
+    color:rgb(54, 56, 56);
+    border-color: rgb(183, 184, 184);
+    border-width: 1px;
+    background-color: #fafafa;
+    width: 10%;
+    height: 45px;
+    border-radius: 10px;
+
+}
+
+.btn:hover,
+.btn:focus,
+.btn:active {
+  color: #0070f3;
+  border-color: #0070f3;
+}
+
 
 
 
