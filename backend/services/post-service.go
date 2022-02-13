@@ -83,9 +83,7 @@ func GetPostByName(post_name string) ([]model.Post, error) {
 
 func GetPostByMultiTag(tags string) ([]model.Post, error) {
 	fmt.Println(tags)
-
 	tag_list := MultiTagToArray(tags)
-	fmt.Println(tag_list)
 
 	resp, err := queries.GetPostByMultiTagQueries(tag_list)
 	if err != nil {

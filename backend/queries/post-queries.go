@@ -133,40 +133,32 @@ func GetPostByNameQueries(post_name string) ([]model.Post, error) {
 }
 
 func GetPostByMultiTagQueries(tags []int) ([]model.Post, error) {
-	columnStm := "WHERE"
-
-	for i := 0; i < len(tags)+1; i++ {
-		// tags_i_str := strconv.Itoa(tags[i])
-
-		columnStm += " tag_id = $" + strconv.Itoa(i+1)
-		if i != len(tags) {
-			columnStm += " OR"
-		}
-	}
-	fmt.Println(columnStm)
-	sqlStatement := `SELECT * FROM post ` + columnStm
-
-	rows, err := db.Query(sqlStatement, tags)
-	if err != nil {
-		return []model.Post{}, err
-	}
-
-	defer rows.Close()
 
 	list := make([]model.Post, 0)
 
-	for rows.Next() {
-		var onePost model.Post
-		err := rows.Scan(&onePost.PostId, &onePost.PinId, &onePost.ProductName, &onePost.PostDate,
-			&onePost.ProductOption, &onePost.Price, &onePost.Amount, &onePost.TagId)
+	for i := 0; i < len(tags); i++ {
+		sqlStatement := `SELECT * FROM post WHERE tag_id = $1`
+		rows, err := db.Query(sqlStatement, tags[i])
 		if err != nil {
 			return []model.Post{}, err
 		}
 
-		list = append(list, onePost)
-	}
-	if err = rows.Err(); err != nil {
-		return []model.Post{}, err
+		defer rows.Close()
+
+		for rows.Next() {
+			var onePost model.Post
+			err := rows.Scan(&onePost.PostId, &onePost.PinId, &onePost.ProductName, &onePost.PostDate,
+				&onePost.ProductOption, &onePost.Price, &onePost.Amount, &onePost.TagId)
+			if err != nil {
+				return []model.Post{}, err
+			}
+
+			list = append(list, onePost)
+		}
+		if err = rows.Err(); err != nil {
+			return []model.Post{}, err
+		}
+
 	}
 
 	return list, nil
