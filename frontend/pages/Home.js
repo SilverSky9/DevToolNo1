@@ -109,7 +109,7 @@ export default function Matching() {
     }, [])
 
     const GetPost = async () => {
-        await axios.get("http://localhost:3000/post/all")
+        await axios.get("http://34.126.190.231:3000/post/all")
             .then(res => {
 
                 setPost(res.data)
@@ -117,7 +117,7 @@ export default function Matching() {
     }
 
     const GetTag = async () => {
-        await axios.get("http://localhost:3000/tag/getall")
+        await axios.get("http://34.126.190.231:3000/tag/getall")
             .then(res => {
 
                 setTag(res.data)
@@ -125,7 +125,7 @@ export default function Matching() {
     }
 
     const GetPostBySearch = async () => {
-        await axios.get("http://localhost:3000/post/searchbyname/" + searchVal)
+        await axios.get("http://34.126.190.231:3000/post/searchbyname/" + searchVal)
             .then(res => {
 
                 setPost(res.data)
@@ -133,7 +133,7 @@ export default function Matching() {
     }
 
     const GetPostByTag = async (tag_name) => {
-        await axios.get("http://localhost:3000/post/getbytag/" + tag_name + "/null")
+        await axios.get("http://34.126.190.231:3000/post/getbytag/" + tag_name + "/null")
             .then(res => {
                 setPost(res.data)
             })

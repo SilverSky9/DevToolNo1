@@ -90,7 +90,7 @@ export default function Matching() {
 
 
     const GetTag = async () => {
-        await axios.get("http://localhost:3000/tag/getall")
+        await axios.get("http://34.126.190.231:3000/tag/getall")
             .then(res => {
                 setTag(res.data)
             })
