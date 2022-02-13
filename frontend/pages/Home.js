@@ -3,6 +3,7 @@ import styles from '../styles/Home.module.css'
 import shopping_cart from '../public/shopping-cart.png'
 import axios from 'axios'
 import { useEffect, useState } from 'react'
+import Link from 'next/link'
 const tag_want = []
 var data1 = [
     {
@@ -186,8 +187,11 @@ export default function Matching() {
 
             </main>
             <div className={styles.next}>
-        <button className={styles.nextt}>Next</button>
+          
+            <button className={styles.nextt}>Next</button>
+          
         <Image src="/next_icon.svg" alt="Vercel Logo" width={62} height={16} />
+        
       </div>
         </div>
     )

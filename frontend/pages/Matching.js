@@ -3,6 +3,7 @@ import styles from '../styles/Matching.module.css'
 import shopping_cart from '../public/shopping-cart.png'
 import { useState, useEffect } from "react";
 import axios from 'axios'
+import Link from 'next/link'
 
 var data1 = [
     {
@@ -118,9 +119,11 @@ export default function Matching() {
                     ))}
                 </ul>
             </main>
+             <Link href="http://34.126.190.231/Home.html">       
             <div className={styles.next}>
                 <button className={styles.nextt}>Next</button>
             </div>
+            </Link> 
         </div>
     )
 }
