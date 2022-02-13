@@ -1,4 +1,4 @@
 
-module.exports = withOptimizedImages ({
+module.exports = {
   reactStrictMode: true,
-})
+}
