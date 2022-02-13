@@ -1,5 +1,4 @@
 import Head from 'next/head'
-import Image from 'next/image'
 import styles from '../styles/Matching.module.css'
 import shopping_cart from '../public/shopping-cart.png' 
 import { useState } from "react";
@@ -98,7 +97,6 @@ function handleChange(e){
     <div className={styles.container}>
       <div>
           <h1 className={styles.title}><a style={{ color: '#F49A35' }}>IN</a> <a style={{ color: '#197DFF' }}>this</a></h1>
-          <div className={styles.logo} > <Image width={71} height={68} src={shopping_cart} alt="shopping_cart" /> Market</div>
           <h1 className={styles.title}>
             <a style={{ color: '#197DFF' }}>What</a> do you <a style={{ color: '#F49A35' }}>want</a> <a style={{ color: '#197DFF' }}>?</a>
           </h1>
@@ -112,7 +110,7 @@ function handleChange(e){
     <hr></hr>
     <ul>
       {tag_want.map(tag => (
-         <button  className={styles.button1}>{tag}</button> 
+         <button  className={styles.button1} key = "test">{tag}</button> 
       ))}
     </ul>
 
@@ -123,7 +121,6 @@ function handleChange(e){
       </main>
       <div className={styles.next}>
         <button className={styles.nextt}>Next</button>
-        <Image src="/next_icon.svg" alt="Vercel Logo" width={62} height={16} />
       </div>
     </div>
   )

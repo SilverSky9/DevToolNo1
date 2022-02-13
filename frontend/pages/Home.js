@@ -66,7 +66,7 @@ export default function Matching() {
   return (
     <div className={styles.container}>
       <div>
-          <div className={styles.logo} > <Image width={71} height={68} src={shopping_cart} alt="shopping_cart" /> Market</div>
+          <div className={styles.logo} > Market</div>
           <input  placeholder='Search ?'></input>
           <button>Search</button>
       </div>
@@ -75,9 +75,9 @@ export default function Matching() {
       {data1.map(content => (
           
        
-        <div className={styles.card}>
+        <div className={styles.card} key="test">
             <div style={{color: "red", display: 'inline'}}>
-                <div className={styles.logo} > <Image width={171} height={168} src={shopping_cart} alt="shopping_cart" /> {content.product_name}</div>
+                <div className={styles.logo} > {content.product_name}</div>
                  
             </div>
             
