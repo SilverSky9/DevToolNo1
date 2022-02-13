@@ -3,6 +3,7 @@ import styles from '../styles/Home.module.css'
 import shopping_cart from '../public/shopping-cart.png'
 import axios from 'axios'
 import { useEffect, useState } from 'react'
+import Link from 'next/link'
 const tag_want = []
 var data1 = [
     {
@@ -108,7 +109,7 @@ export default function Matching() {
     }, [])
 
     const GetPost = async () => {
-        await axios.get("http://localhost:3000/post/all")
+        await axios.get("http://34.126.190.231:3000/post/all")
             .then(res => {
 
                 setPost(res.data)
@@ -116,7 +117,7 @@ export default function Matching() {
     }
 
     const GetTag = async () => {
-        await axios.get("http://localhost:3000/tag/getall")
+        await axios.get("http://34.126.190.231:3000/tag/getall")
             .then(res => {
 
                 setTag(res.data)
@@ -124,7 +125,7 @@ export default function Matching() {
     }
 
     const GetPostBySearch = async () => {
-        await axios.get("http://localhost:3000/post/searchbyname/" + searchVal)
+        await axios.get("http://34.126.190.231:3000/post/searchbyname/" + searchVal)
             .then(res => {
 
                 setPost(res.data)
@@ -132,7 +133,7 @@ export default function Matching() {
     }
 
     const GetPostByTag = async (tag_name) => {
-        await axios.get("http://localhost:3000/post/getbytag/" + tag_name + "/null")
+        await axios.get("http://34.126.190.231:3000/post/getbytag/" + tag_name + "/null")
             .then(res => {
                 setPost(res.data)
             })
@@ -185,10 +186,13 @@ export default function Matching() {
                 ))}
 
             </main>
-            {/* <div className={styles.next}>
-        <button className={styles.nextt}>Next</button>
+            <div className={styles.next}>
+          
+            <button className={styles.nextt}>Next</button>
+          
         <Image src="/next_icon.svg" alt="Vercel Logo" width={62} height={16} />
-      </div> */}
+        
+      </div>
         </div>
     )
 }

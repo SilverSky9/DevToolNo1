@@ -1,7 +1,9 @@
 import Head from 'next/head'
 import styles from '../styles/Matching.module.css'
 import shopping_cart from '../public/shopping-cart.png'
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import axios from 'axios'
+import Link from 'next/link'
 
 var data1 = [
     {
@@ -52,6 +54,16 @@ export default function Matching() {
 
     const [tag_want, setTag_want] = useState([]);
     const [tag_id, setTag_id] = useState([]);
+    const [tag, setTag] = useState([])
+
+    useEffect(() => {
+        GetTag()
+
+        return () => {
+
+        }
+    }, [])
+
     function handleChange(e, id) {
 
         if (!tag_want.includes(e)) {
@@ -76,6 +88,14 @@ export default function Matching() {
         console.log(tag_id)
     }
 
+
+    const GetTag = async () => {
+        await axios.get("http://34.126.190.231:3000/tag/getall")
+            .then(res => {
+                setTag(res.data)
+            })
+    }
+
     return (
         <div className={styles.container}>
             <div>
@@ -86,7 +106,7 @@ export default function Matching() {
             </div>
             <main className={styles.main}>
                 <ul>
-                    {data1.map(tag => (
+                    {tag.map(tag => (
                         <button key={tag.tag_id} onClick={() => handleChange(tag.tag_name, tag.tag_id)} className={styles.button}>{tag.tag_name}</button>
 
                     ))}
@@ -99,9 +119,11 @@ export default function Matching() {
                     ))}
                 </ul>
             </main>
+             <Link href="http://34.126.190.231/Home.html">       
             <div className={styles.next}>
                 <button className={styles.nextt}>Next</button>
             </div>
+            </Link> 
         </div>
     )
 }
