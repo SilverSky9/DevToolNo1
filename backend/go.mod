@@ -4,6 +4,7 @@ go 1.17
 
 require (
 	github.com/gofiber/fiber/v2 v2.26.0
+	github.com/gofiber/utils v0.1.2
 	github.com/lib/pq v1.10.4
 	golang.org/x/crypto v0.0.0-20220210151621-f4118a5b28e2
 )

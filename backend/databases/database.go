@@ -14,6 +14,7 @@ func TestDB() {
 }
 
 const (
+	// host = "db"
 	host = "localhost"
 	port = 5432
 )
@@ -34,8 +35,9 @@ func Connect_DB() *sql.DB {
 	psqlInfo := fmt.Sprintf("host=%s port=%d user=%s "+
 		"password=%s dbname=%s sslmode=disable",
 		host, port, "postgres", "1234", "Market")
-	// host, port, os.Getenv("POSTGRES_USER"), os.Getenv("POSTGRES_PASSWORD"), os.Getenv("dbname"))
+	// host, port, os.Getenv("POSTGRES_USER"), os.Getenv("POSTGRES_PASSWORD"), os.Getenv("POSTGRES_DB"))
 	db, err := sql.Open("postgres", psqlInfo)
+	// db, err := sql.Open("postgres", "postgres:magical@tcp(127.0.0.1:5432)/Market?parseTime=true")
 	// ^ This is request db.env to assign value
 	if err != nil {
 		panic(err)
@@ -44,7 +46,6 @@ func Connect_DB() *sql.DB {
 	if err != nil {
 		panic(err)
 	}
-
 	fmt.Println("Successfully connected!")
 	return db
 }
