@@ -4,7 +4,7 @@ import home_styles from '../styles/Home.module.css'
 import shopping_cart from '../public/shopping-cart.png'
 import { useState, useEffect } from "react";
 import axios from 'axios'
-import Home from './Home'
+
 
 var data1 = [
     {
@@ -125,7 +125,7 @@ export default function Matching() {
 
 
     const GetTag = async () => {
-        await axios.get("http://localhost:3000/tag/getall")
+        await axios.get("http://34.126.190.231:3000/tag/getall")
             .then(res => {
                 setTag(res.data)
 
@@ -161,6 +161,7 @@ export default function Matching() {
                 ))}
 
             </main>
+
 
 
         )
@@ -213,6 +214,7 @@ export default function Matching() {
     else {
         return MatchingComp()
     }
+
 
 
 }
