@@ -87,4 +87,14 @@ func PostRoute(r fiber.Router) {
 		return c.Status(200).JSON(msg)
 	})
 
+	r.Get("/geybymultitag/:tags", func(c *fiber.Ctx) error {
+		tag_list := c.Params("tags")
+		resp, err := services.GetPostByMultiTag(tag_list)
+		if err != nil {
+			return c.Status(500).JSON(err.Error())
+		}
+
+		return c.Status(200).JSON(resp)
+	})
+
 }
