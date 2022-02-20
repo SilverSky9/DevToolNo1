@@ -1,9 +1,9 @@
-import Head from 'next/head'
+// import Head from 'next/head'
 import styles from '../styles/Home.module.css'
 import shopping_cart from '../public/shopping-cart.png'
 import axios from 'axios'
 import { useEffect, useState } from 'react'
-import Link from 'next/link'
+
 const tag_want = []
 var data1 = [
     {
@@ -139,22 +139,17 @@ export default function Matching() {
     }
 
     return (
-        <div className={styles.container}>
-            <div>
-                <div className={styles.logo} > Mar<span style={{ color: '#197DFF' }}>ket</span></div>
-                <input className={styles.search} onChange={e => setSearchVal(e.target.value)}></input>
-                <button className={styles.btn} onClick={() => GetPostBySearch()}>Search</button>
+        <div className='row'>
+            <div className='col-10 px-5'>
+            <div className='row mt-4'>
+                <div className='col-10 '>
+                <input className='w-100 mt-2 p-2 form-control' onChange={e => setSearchVal(e.target.value)}></input>
+                </div>
+                <div className='col-2'>
+                <button className='btn btn-primary mt-2 w-100' onClick={() => GetPostBySearch()}>Search</button>
+                </div>
             </div>
-            <div style={{ color: 'rgb(75, 75, 75)' }}>
-                {tag.map(tag => (
-                    <div key={tag.tag_id} className={styles.tag} onClick={() => {
-                        GetPostByTag(tag.tag_id)
-                    }}  >
-                        <div > {tag.tag_name}
-                        </div>
-                    </div>
-                ))}
-            </div>
+           
 
 
 
@@ -185,12 +180,26 @@ export default function Matching() {
                 ))}
 
             </main>
-            <div className={styles.next}>
+            <div className=''>
           
-            <button className={styles.nextt}>Next</button>
-          
-        {/* <Image src="/next_icon.svg" alt="Vercel Logo" width={62} height={16} /> */}
+            <button className='btn btn-primary'>Next</button>
+        {/* <Image src="../public/next_icon.svg" alt="Vercel Logo" width={62} height={16} /> */}
         
+      </div>
+      </div>
+      <div className='col-2 bg-light'>
+          <div className='row mt-4'>
+      <div style={{ color: 'rgb(75, 75, 75)' }}>
+                {tag.map(tag => (
+                    <div key={tag.tag_id} className={styles.tag} onClick={() => {
+                        GetPostByTag(tag.tag_id)
+                    }}  >
+                        <div > {tag.tag_name}
+                        </div>
+                    </div>
+                ))}
+            </div>
+            </div>
       </div>
         </div>
     )

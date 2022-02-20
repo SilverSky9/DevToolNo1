@@ -1,15 +1,17 @@
+@import url('https://fonts.googleapis.com/css2?family=Kanit:wght@200;400;500&family=Raleway&display=swap');
+
+
 .container {
   padding: 0 2rem;
 }
 
 .main {
-  min-height: 100vh;
   padding: 4rem 0;
   flex: 1;
   display: flex;
   flex-direction: column;
-  justify-content: center;
   align-items: center;
+
 }
 
 .footer {
@@ -127,9 +129,9 @@
 .logo {
     font-style: normal;
     font-weight: 600;
-    font-size: 60px;
+    font-size: 60rem;
     line-height: 8  0px;
-    padding-top: 10px;
+    
 }
 
 .search {
@@ -139,9 +141,11 @@
     border-color: rgb(183, 184, 184);
     border-style: groove;
     border-width: 1px;
-    margin: 20px;
+    margin: 30px;
     padding: 15px;
     font-size: medium;
+  font-family: 'Raleway', sans-serif;
+
     
 }
 
