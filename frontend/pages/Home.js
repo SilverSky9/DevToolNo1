@@ -139,7 +139,7 @@ export default function Matching() {
     }
 
     return (
-        <div className='row'>
+        <div className='row '>
             <div className='col-10 px-5'>
             <div className='row mt-4'>
                 <div className='col-10 '>
@@ -189,7 +189,7 @@ export default function Matching() {
       </div>
       <div className='col-2 bg-light'>
           <div className='row mt-4'>
-      <div style={{ color: 'rgb(75, 75, 75)' }}>
+      <div  style={{ color: 'rgb(75, 75, 75)' }}>
                 {tag.map(tag => (
                     <div key={tag.tag_id} className={styles.tag} onClick={() => {
                         GetPostByTag(tag.tag_id)
