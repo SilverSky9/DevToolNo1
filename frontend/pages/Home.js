@@ -140,67 +140,68 @@ export default function Matching() {
 
     return (
         <div className='row '>
+
             <div className='col-10 px-5'>
-            <div className='row mt-4'>
-                <div className='col-10 '>
-                <input className='w-100 mt-2 p-2 form-control' onChange={e => setSearchVal(e.target.value)}></input>
+                <div className='row mt-4'>
+                    <div className='col-10 '>
+                        <input className='w-100 mt-2 p-2 form-control' onChange={e => setSearchVal(e.target.value)}></input>
+                    </div>
+                    <div className='col-2'>
+                        <button className='btn btn-primary mt-2 w-100' onClick={() => GetPostBySearch()}>Search</button>
+                    </div>
                 </div>
-                <div className='col-2'>
-                <button className='btn btn-primary mt-2 w-100' onClick={() => GetPostBySearch()}>Search</button>
-                </div>
-            </div>
-           
 
 
 
 
-            <main className={styles.main}>
+
+                <main className={styles.main}>
 
 
-                {post.map(content => (
-                    <div key={content.post_id} className={styles.card} >
+                    {post.map(content => (
+                        <div key={content.post_id} className={styles.card} >
 
 
 
-                        <div style={{ color: '#197DFF', fontSize: '50px', textAlign: 'center' }} >
+                            <div style={{ color: '#197DFF', fontSize: '50px', textAlign: 'center' }} >
+                                {/* <div className={styles.logo} > <Image width={171} height={168} src={shopping_cart} alt="shopping_cart" /> {content.product_name}</div> */}
+                                {content.product_name} <br></br>
+                            </div>
+                            <div >
+
+                                ราคา : {content.price} / ชิ้น <br></br>
+                                จำนวน : {content.amount} ชิ้น
+                            </div>
                             {/* <div className={styles.logo} > <Image width={171} height={168} src={shopping_cart} alt="shopping_cart" /> {content.product_name}</div> */}
-                            {content.product_name} <br></br>
+
+
                         </div>
-                        <div >
-
-                            ราคา : {content.price} / ชิ้น <br></br>
-                            จำนวน : {content.amount} ชิ้น
-                        </div>
-                        {/* <div className={styles.logo} > <Image width={171} height={168} src={shopping_cart} alt="shopping_cart" /> {content.product_name}</div> */}
 
 
-                    </div>
+                    ))}
 
+                </main>
+                <div className=''>
 
-                ))}
+                    <button className='btn btn-primary'>Next</button>
+                    {/* <Image src="../public/next_icon.svg" alt="Vercel Logo" width={62} height={16} /> */}
 
-            </main>
-            <div className=''>
-          
-            <button className='btn btn-primary'>Next</button>
-        {/* <Image src="../public/next_icon.svg" alt="Vercel Logo" width={62} height={16} /> */}
-        
-      </div>
-      </div>
-      <div className='col-2 bg-light'>
-          <div className='row mt-4'>
-      <div  style={{ color: 'rgb(75, 75, 75)' }}>
-                {tag.map(tag => (
-                    <div key={tag.tag_id} className={styles.tag} onClick={() => {
-                        GetPostByTag(tag.tag_id)
-                    }}  >
-                        <div > {tag.tag_name}
-                        </div>
-                    </div>
-                ))}
+                </div>
             </div>
+            <div className='col-2 bg-light'>
+                <div className='row mt-4'>
+                    <div style={{ color: 'rgb(75, 75, 75)' }}>
+                        {tag.map(tag => (
+                            <div key={tag.tag_id} className={styles.tag} onClick={() => {
+                                GetPostByTag(tag.tag_id)
+                            }}  >
+                                <div > {tag.tag_name}
+                                </div>
+                            </div>
+                        ))}
+                    </div>
+                </div>
             </div>
-      </div>
         </div>
     )
 }
