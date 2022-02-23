@@ -19,7 +19,7 @@ services:
       - db.env
     ports:
     - 3000:3000
-    command: go run main.go
+    # command: go run main.go
     depends_on:
       - db
     networks:
