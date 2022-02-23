@@ -143,7 +143,7 @@ export default function Matching() {
     return (
         <div className='row '>
 
-            {console.log(router.query.tag)}
+            {/* {router.query.tag.map(tag => <h1>{tag}<h1 /> )} */}
             <div className='col-10 px-5'>
                 <div className='row mt-4'>
                     <div className='col-10 '>

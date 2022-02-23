@@ -52,10 +52,19 @@ var data1 = [
     },
 ]
 
+export const getStaticProps = async () => {
+    const res = await fetch('http://34.126.190.231:3000/tag/getall')
+    const tag = await res.json()
+
+    console.log(tag);
+    return {
+        props: { allTag: tag }
+    }
+}
 
 
-export default function Matching() {
-
+const Matching = ({ allTag }) => {
+    // console.log(allTag);
     const [tag_want, setTag_want] = useState([]);
     const [tag_id, setTag_id] = useState([]);
     const [tag, setTag] = useState([])
@@ -72,13 +81,13 @@ export default function Matching() {
     }])
     const [tag_want_filter, set_tag_want_filter] = useState('')
 
-    useEffect(() => {
-        GetTag()
+    // useEffect(() => {
+    //     GetTag()
 
-        return () => {
+    //     return () => {
 
-        }
-    }, [])
+    //     }
+    // }, [])
 
     function handleChange(e, id) {
 
@@ -111,28 +120,30 @@ export default function Matching() {
         // console.log(tag_want_filter)
     }
 
-    const GetPostFromTag = async () => {
+    // const GetPostFromTag = async () => {
 
 
-        await axios.get("http://34.126.190.231:3000/post/geybymultitag/" + tag_want_filter)
-            .then(res => {
-                setPost(res.data)
-                setToHome(true)
-            })
-    }
+    //     await axios.get("http://34.126.190.231:3000/post/geybymultitag/" + tag_want_filter)
+    //         .then(res => {
+    //             setPost(res.data)
+    //             setToHome(true)
+    //         })
+    // }
 
-    function check() {
-        console.log(tag_id)
-    }
+    // function check() {
+    //     console.log(tag_id)
+    // }
 
 
-    const GetTag = async () => {
-        await axios.get("http://34.126.190.231:3000/tag/getall")
-            .then(res => {
-                setTag(res.data)
+    // const GetTag = async () => {
+    //     await axios.get("http://34.126.190.231:3000/tag/getall")
+    //         .then(res => {
+    //             setTag(res.data)
 
-            })
-    }
+    //         })
+    // }
+
+
 
     const HomeComp = () => {
         return (
@@ -183,7 +194,8 @@ export default function Matching() {
                 <main className={styles.main}>
 
                     <ul>
-                        {tag.map(tag => (
+                        {/* {console.log(allTag)} */}
+                        {allTag.map(tag => (
                             <button key={tag.tag_id} onClick={() => handleChange(tag.tag_name, tag.tag_id)} className={styles.button}>{tag.tag_name}</button>
 
                         ))}
@@ -194,21 +206,24 @@ export default function Matching() {
                     </hr>
                     <ul>
                         {tag_want.map((tag, i) => (
-                            <span className={styles.button1} key={i}>{tag}</span>
+                            <span className={styles.button1} key={i}>{tag} </span>
                         ))}
                     </ul>
 
                 </main>
-                <Link href={{
-                    pathname: '/Home',
-                    query: { tag: tag_id },
-                }}>
-                    <div className={styles.next}>
-                        <button className={styles.nextt}
-                        // onClick={() => GetPostFromTag()}
-                        >Next</button>
-                    </div></Link>
-
+                {tag_id.length == 0 ?
+                    null
+                    :
+                    <Link href={{
+                        pathname: '/Home',
+                        query: { tag: tag_id },
+                    }}>
+                        <div className={styles.next}>
+                            <button className={styles.nextt}
+                            // onClick={() => GetPostFromTag()}
+                            >Next</button>
+                        </div></Link>
+                }
 
 
             </div>
@@ -226,5 +241,7 @@ export default function Matching() {
 
 
 }
+
+export default Matching
 
 
