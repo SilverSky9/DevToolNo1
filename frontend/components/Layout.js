@@ -1,10 +1,11 @@
 import '../styles/Home.module.css'
+import { Row } from 'react-bootstrap';
 
 const Layout = ({ children }) => {
 
   return (<div className="container-fluid " style={{ backgroundColor: "#fefefe" }} >
 
-    <div className="row">
+    <Row>
       <div className="col-sm-auto p-0 position-fixed h-100 bg-light font">
         <ul
           className="
@@ -35,7 +36,7 @@ const Layout = ({ children }) => {
         {children}
 
       </div>
-    </div>
+    </Row>
   </div>);
 }
 
