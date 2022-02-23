@@ -4,6 +4,7 @@ import home_styles from '../styles/Home.module.css'
 import shopping_cart from '../public/shopping-cart.png'
 import { useState, useEffect } from "react";
 import axios from 'axios'
+import Link from 'next/link'
 
 
 var data1 = [
@@ -192,14 +193,20 @@ export default function Matching() {
                     </hr>
                     <ul>
                         {tag_want.map((tag, i) => (
-                            <button className={styles.button1} key={i}>{tag}</button>
+                            <span className={styles.button1} key={i}>{tag}</span>
                         ))}
                     </ul>
 
                 </main>
-                <div className={styles.next}>
-                    <button className={styles.nextt} onClick={() => GetPostFromTag()}>Next</button>
-                </div>
+                <Link href={{
+                    pathname: '/Home',
+                    query: { tag: tag_want },
+                }}>
+                    <div className={styles.next}>
+                        <button className={styles.nextt}
+                        // onClick={() => GetPostFromTag()}
+                        >Next</button>
+                    </div></Link>
 
 
 

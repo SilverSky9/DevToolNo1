@@ -3,6 +3,7 @@ import styles from '../styles/Home.module.css'
 import shopping_cart from '../public/shopping-cart.png'
 import axios from 'axios'
 import { useEffect, useState } from 'react'
+import { useRouter } from 'next/router'
 
 const tag_want = []
 var data1 = [
@@ -99,6 +100,7 @@ export default function Matching() {
     const [post, setPost] = useState([])
     const [tag, setTag] = useState([])
     const [searchVal, setSearchVal] = useState('')
+    const router = useRouter()
 
     useEffect(() => {
         GetPost()
@@ -141,6 +143,7 @@ export default function Matching() {
     return (
         <div className='row '>
 
+            {console.log(router.query.tag)}
             <div className='col-10 px-5'>
                 <div className='row mt-4'>
                     <div className='col-10 '>
@@ -150,6 +153,7 @@ export default function Matching() {
                         <button className='btn btn-primary mt-2 w-100' onClick={() => GetPostBySearch()}>Search</button>
                     </div>
                 </div>
+                <img src='../public/shopping-cart.png' />
 
 
 
