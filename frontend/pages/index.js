@@ -201,7 +201,7 @@ export default function Matching() {
                 </main>
                 <Link href={{
                     pathname: '/Home',
-                    query: { tag: tag_want },
+                    query: { tag: tag_id },
                 }}>
                     <div className={styles.next}>
                         <button className={styles.nextt}

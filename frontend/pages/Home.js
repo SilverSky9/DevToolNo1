@@ -111,7 +111,7 @@ export default function Matching() {
     }, [])
 
     const GetPost = async () => {
-        await axios.get("http://34.126.190.231:3000/post/all")
+        await axios.get("http://34.126.190.231:3000/post/geybymultitag/" + router.query.tag + ',')
             .then(res => {
 
                 setPost(res.data)
@@ -153,7 +153,6 @@ export default function Matching() {
                         <button className='btn btn-primary mt-2 w-100' onClick={() => GetPostBySearch()}>Search</button>
                     </div>
                 </div>
-                <img src='../public/shopping-cart.png' />
 
 
 
