@@ -1,12 +1,12 @@
 version: "3"
 services:
   web:
-    image: nginx:1.21.6-alpine
+    build: ./frontend
     container_name: nginx_container
     ports:
     - "80:80"
-    volumes:
-    - ./out:/usr/share/nginx/html
+    # volumes:
+    # - ./out:/usr/share/nginx/html
     networks:
       - fullstack
   app:
@@ -40,7 +40,7 @@ services:
     image: dpage/pgadmin4
     container_name: pgadmin_container
     environment:
-      PGADMIN_DEFAULT_EMAIL: nopphadon.phanwong@gmail.com
+      PGADMIN_DEFAULT_EMAIL: admin@gmail.com
       PGADMIN_DEFAULT_PASSWORD: 12345
     depends_on:
       - db
