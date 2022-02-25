@@ -33,3 +33,9 @@ This project is a part of SOFTWARE DEVELOPMENT TOOLS AND ENVIRONMENTS 2/2564
 - docker compose build
 - docker compose up
 ```
+
+## Testing
+Backend
+```
+go test ./... -cover
+```

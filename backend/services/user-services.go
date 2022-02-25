@@ -10,7 +10,6 @@ func CreateUser(user model.User) (int, error) {
 	if err != nil {
 		return -1, err
 	}
-
 	return user_id, nil
 
 }

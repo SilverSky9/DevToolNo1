@@ -32,6 +32,5 @@ func CompareHashedPin(pin string, hashedPin string) bool {
 	if err != nil {
 		return false
 	}
-
 	return true
 }
