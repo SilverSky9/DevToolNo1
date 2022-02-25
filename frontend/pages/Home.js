@@ -1,9 +1,6 @@
-// import Head from 'next/head'
 import styles from '../styles/Home.module.css'
-import shopping_cart from '../public/shopping-cart.png'
 import axios from 'axios'
 import { useEffect, useState } from 'react'
-import { useRouter } from 'next/router'
 
 const tag_want = []
 var data1 = [
@@ -93,52 +90,49 @@ var data2 = [
         tag_name: "ยานยนต์"
     },
 ]
+export const getServerSideProps = async (context) => {
+    const tag = await fetch("http://34.126.190.231:3000/tag/getall")
+    const allTag = await tag.json()
+
+    const url = context.query.tag ||= allTag.map(tag => (tag.tag_id)).toString()
+
+    const selectedTag = await fetch("http://34.126.190.231:3000/post/geybymultitag/" + url + ',')
+    const selectTag = await selectedTag.json()
+
+    return {
+        props: {
+            post: selectTag,
+            tag: allTag
+        }, // will be passed to the page component as props
+    }
+}
 
 
-
-export default function Matching() {
-    const [post, setPost] = useState([])
-    const [tag, setTag] = useState([])
+const Matching = ({ post, tag }) => {
+    const [posted, setPost] = useState([])
+    // const [taged, setTag] = useState([])
     const [searchVal, setSearchVal] = useState('')
-    const router = useRouter()
 
     useEffect(() => {
-        GetPost()
-        GetTag()
+        setPost(post)
         return () => {
 
         }
     }, [])
 
-    const GetPost = async () => {
-        await axios.get("http://34.126.190.231:3000/post/geybymultitag/" + router.query.tag + ',')
-            .then(res => {
-
-                setPost(res.data)
-            })
-    }
-
-    const GetTag = async () => {
-        await axios.get("http://34.126.190.231:3000/tag/getall")
-            .then(res => {
-                setTag(res.data)
-            })
-    }
-
     const GetPostBySearch = async () => {
-        await axios.get("http://34.126.190.231:3000/post/searchbyname/" + searchVal)
-            .then(res => {
+        const res = await fetch("http://34.126.190.231:3000/post/searchbyname/" + searchVal);
+        const newPost = await res.json();
 
-                setPost(res.data)
-            })
-    }
+        return setPost(newPost);
+    };
 
     const GetPostByTag = async (tag_name) => {
-        await axios.get("http://34.126.190.231:3000/post/getbytag/" + tag_name + "/null")
-            .then(res => {
-                setPost(res.data)
-            })
-    }
+        const res = await fetch("http://34.126.190.231:3000/post/getbytag/" + tag_name + "/null");
+        const newPost = await res.json();
+
+        return setPost(newPost);
+    };
 
     return (
         <div className='row '>
@@ -153,34 +147,19 @@ export default function Matching() {
                         <button className='btn btn-primary mt-2 w-100' onClick={() => GetPostBySearch()}>Search</button>
                     </div>
                 </div>
-
-
-
-
-
                 <main className={styles.main}>
-
-
-                    {post.map(content => (
+                    {posted.map(content => (
                         <div key={content.post_id} className={styles.card} >
-
-
-
                             <div style={{ color: '#197DFF', fontSize: '50px', textAlign: 'center' }} >
                                 {/* <div className={styles.logo} > <Image width={171} height={168} src={shopping_cart} alt="shopping_cart" /> {content.product_name}</div> */}
                                 {content.product_name} <br></br>
                             </div>
                             <div >
-
                                 ราคา : {content.price} / ชิ้น <br></br>
                                 จำนวน : {content.amount} ชิ้น
                             </div>
                             {/* <div className={styles.logo} > <Image width={171} height={168} src={shopping_cart} alt="shopping_cart" /> {content.product_name}</div> */}
-
-
                         </div>
-
-
                     ))}
 
                 </main>
@@ -191,8 +170,8 @@ export default function Matching() {
 
                 </div>
             </div>
-            <div className='col-2 bg-light'>
-                <div className='row mt-4'>
+            <div className='col-2 bg-light '>
+                <div className='row mt-4 position-fixed '>
                     <div style={{ color: 'rgb(75, 75, 75)' }}>
                         {tag.map(tag => (
                             <div key={tag.tag_id} className={styles.tag} onClick={() => {
@@ -208,3 +187,5 @@ export default function Matching() {
         </div>
     )
 }
+
+export default Matching

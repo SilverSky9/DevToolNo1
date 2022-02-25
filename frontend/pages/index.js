@@ -56,7 +56,7 @@ export const getStaticProps = async () => {
     const res = await fetch('http://34.126.190.231:3000/tag/getall')
     const tag = await res.json()
 
-    console.log(tag);
+    // console.log(tag);
     return {
         props: { allTag: tag }
     }
@@ -64,12 +64,12 @@ export const getStaticProps = async () => {
 
 
 const Matching = ({ allTag }) => {
-    // console.log(allTag);
     const [tag_want, setTag_want] = useState([]);
     const [tag_id, setTag_id] = useState([]);
     const [tag, setTag] = useState([])
     const [toHome, setToHome] = useState(false)
     const [post, setPost] = useState([{
+
         post_id: 1,
         pin: 123,
         product_name: "cat",
@@ -80,14 +80,6 @@ const Matching = ({ allTag }) => {
         tag_id: 5
     }])
     const [tag_want_filter, set_tag_want_filter] = useState('')
-
-    // useEffect(() => {
-    //     GetTag()
-
-    //     return () => {
-
-    //     }
-    // }, [])
 
     function handleChange(e, id) {
 
@@ -117,32 +109,15 @@ const Matching = ({ allTag }) => {
             temp += x + ','
         })
         set_tag_want_filter(temp)
-        // console.log(tag_want_filter)
     }
 
     // const GetPostFromTag = async () => {
-
-
     //     await axios.get("http://34.126.190.231:3000/post/geybymultitag/" + tag_want_filter)
     //         .then(res => {
     //             setPost(res.data)
     //             setToHome(true)
     //         })
     // }
-
-    // function check() {
-    //     console.log(tag_id)
-    // }
-
-
-    // const GetTag = async () => {
-    //     await axios.get("http://34.126.190.231:3000/tag/getall")
-    //         .then(res => {
-    //             setTag(res.data)
-
-    //         })
-    // }
-
 
 
     const HomeComp = () => {
@@ -211,19 +186,17 @@ const Matching = ({ allTag }) => {
                     </ul>
 
                 </main>
-                {tag_id.length == 0 ?
-                    null
-                    :
-                    <Link href={{
-                        pathname: '/Home',
-                        query: { tag: tag_id },
-                    }}>
-                        <div className={styles.next}>
-                            <button className={styles.nextt}
-                            // onClick={() => GetPostFromTag()}
-                            >Next</button>
-                        </div></Link>
-                }
+
+                <Link href={{
+                    pathname: '/Home',
+                    query: { tag: tag_id },
+                }}>
+                    <div className={styles.next}>
+                        <button className={styles.nextt}
+                        // onClick={() => GetPostFromTag()}
+                        >Next</button>
+                    </div></Link>
+
 
 
             </div>
