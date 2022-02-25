@@ -1,10 +1,7 @@
-import Head from 'next/head'
 import styles from '../styles/Matching.module.css'
 import home_styles from '../styles/Home.module.css'
-import shopping_cart from '../public/shopping-cart.png'
 
 import { useState, useEffect } from "react";
-import axios from 'axios'
 import Link from 'next/link'
 
 
