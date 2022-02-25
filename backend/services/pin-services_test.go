@@ -30,6 +30,8 @@ func TestCompareHashedPin(t *testing.T) {
 }
 
 func TestHashingPin(t *testing.T) {
+	var testCase1_7834 = "7834"
+	var testCase2_8912 = "8912"
 	type args struct {
 		pin string
 	}
@@ -40,16 +42,13 @@ func TestHashingPin(t *testing.T) {
 		wantErr bool
 	}{
 		// TODO: Add test cases.
-		{name: "test-case-hashingPin-4578", args: args{}, want: }
+		{name: "test-case-hashingPin-7834", args: args{"7834"}, want: testCase1_7834, wantErr: false},
+		{name: "test-case-hashingPin-8912", args: args{"8912"}, want: testCase2_8912, wantErr: false},
 	}
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
-			got, err := HashingPin(tt.args.pin)
-			if (err != nil) != tt.wantErr {
-				t.Errorf("HashingPin() error = %v, wantErr %v", err, tt.wantErr)
-				return
-			}
-			if got != tt.want {
+			got, _ := HashingPin(tt.args.pin)
+			if CompareHashedPin(tt.want, got) != true {
 				t.Errorf("HashingPin() = %v, want %v", got, tt.want)
 			}
 		})
