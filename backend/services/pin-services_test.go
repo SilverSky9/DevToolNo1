@@ -41,7 +41,7 @@ func TestHashingPin(t *testing.T) {
 		want    string
 		wantErr bool
 	}{
-		// TODO: Add test cases.
+		//Test-case
 		{name: "test-case-hashingPin-7834", args: args{"7834"}, want: testCase1_7834, wantErr: false},
 		{name: "test-case-hashingPin-8912", args: args{"8912"}, want: testCase2_8912, wantErr: false},
 	}
