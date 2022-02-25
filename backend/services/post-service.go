@@ -109,6 +109,5 @@ func MultiTagToArray(tags string) []int {
 			temp = ""
 		}
 	}
-
 	return list
 }

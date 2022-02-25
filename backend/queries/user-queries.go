@@ -17,7 +17,6 @@ func CreateUserQueries(user model.User) (int, error) {
 	if err != nil {
 		return -1, err
 	}
-
 	fmt.Println("User ID:", user_id)
 	return user_id, nil
 }
