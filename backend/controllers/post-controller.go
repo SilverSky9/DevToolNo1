@@ -3,7 +3,7 @@ package controllers
 import (
 	model "daeng-market/models"
 	"daeng-market/services"
-	"fmt"
+	"net/url"
 
 	"github.com/gofiber/fiber/v2"
 )
@@ -77,9 +77,17 @@ func PostRoute(r fiber.Router) {
 	})
 
 	r.Get("/searchbyname/:name", func(c *fiber.Ctx) error {
+		c.Accepts("text/html") // "text/html"
+		c.Accepts("json", "text")
 		post_name := c.Params("name")
-		fmt.Println(post_name)
-		msg, err := services.GetPostByName(post_name)
+
+		//decode encoded for thai language
+		decode_name, err := url.QueryUnescape(post_name)
+		if err != nil {
+			return c.Status(500).JSON("decode params error")
+		}
+
+		msg, err := services.GetPostByName(decode_name)
 
 		if err != nil {
 			return c.Status(500).JSON(err.Error())
