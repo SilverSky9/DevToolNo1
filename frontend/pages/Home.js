@@ -166,7 +166,7 @@ export default function Matching() {
 
 
 
-                            <div style={{ color: '#197DFF', fontSize: '50px', textAlign: 'center' }} >
+                            <div id="productName" style={{ color: '#197DFF', fontSize: '50px', textAlign: 'center' }} >
                                 {/* <div className={styles.logo} > <Image width={171} height={168} src={shopping_cart} alt="shopping_cart" /> {content.product_name}</div> */}
                                 {content.product_name} <br></br>
                             </div>
