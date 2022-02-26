@@ -39,3 +39,10 @@ Backend
 ```
 go test ./... -cover
 ```
+Frontend
+```
+npx cypress open
+```
+1. เมื่อรันแล้วจะมีหน้า Chrome Pop-up ขึ้นมา
+2. เลือกรันไฟล์ ``home_spec.js`` or ``index_spce.js``
+3. Cypress จะรันตาม Testcase ที่เขียนเอาไว้

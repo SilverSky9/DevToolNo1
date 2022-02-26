@@ -143,13 +143,16 @@ const Matching = ({ post, tag }) => {
                         <input className='w-100 mt-2 p-2 form-control' onChange={e => setSearchVal(e.target.value)}></input>
                     </div>
                     <div className='col-2'>
-                        <button className='btn btn-primary mt-2 w-100' onClick={() => GetPostBySearch()}>Search</button>
+                        <button className='btn btn-primary mt-2 w-100' id="search" onClick={() => GetPostBySearch()}>Search</button>
                     </div>
                 </div>
                 <main className={styles.main}>
                     {posted.map(content => (
                         <div key={content.post_id} className={styles.card} >
-                            <div style={{ color: '#197DFF', fontSize: '50px', textAlign: 'center' }} >
+
+
+
+                            <div id="productName" style={{ color: '#197DFF', fontSize: '50px', textAlign: 'center' }} >
                                 {/* <div className={styles.logo} > <Image width={171} height={168} src={shopping_cart} alt="shopping_cart" /> {content.product_name}</div> */}
                                 {content.product_name} <br></br>
                             </div>
@@ -173,7 +176,7 @@ const Matching = ({ post, tag }) => {
                 <div className='row mt-4 position-fixed '>
                     <div style={{ color: 'rgb(75, 75, 75)' }}>
                         {tag.map(tag => (
-                            <div key={tag.tag_id} className={styles.tag} onClick={() => {
+                            <div key={tag.tag_id} className={styles.tag, "tag"} onClick={() => {
                                 GetPostByTag(tag.tag_id)
                             }}  >
                                 <div > {tag.tag_name}
