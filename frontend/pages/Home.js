@@ -150,7 +150,7 @@ export default function Matching() {
                         <input className='w-100 mt-2 p-2 form-control' onChange={e => setSearchVal(e.target.value)}></input>
                     </div>
                     <div className='col-2'>
-                        <button className='btn btn-primary mt-2 w-100' onClick={() => GetPostBySearch()}>Search</button>
+                        <button className='btn btn-primary mt-2 w-100' id="search" onClick={() => GetPostBySearch()}>Search</button>
                     </div>
                 </div>
 

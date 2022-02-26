@@ -4,7 +4,6 @@ import home_styles from '../styles/Home.module.css'
 import shopping_cart from '../public/shopping-cart.png'
 
 import { useState, useEffect } from "react";
-import axios from 'axios'
 import Link from 'next/link'
 
 
@@ -147,15 +146,9 @@ const Matching = ({ allTag }) => {
 
     const HomeComp = () => {
         return (
-
             <main className={home_styles.main}>
-
-
                 {post.map(content => (
                     <div key={content.post_id} className={home_styles.card} >
-
-
-
                         <div style={{ color: '#197DFF', fontSize: '50px', textAlign: 'center' }} >
                             {/* <div className={styles.logo} > <Image width={171} height={168} src={shopping_cart} alt="shopping_cart" /> {content.product_name}</div> */}
                             {content.product_name} <br></br>
@@ -219,7 +212,7 @@ const Matching = ({ allTag }) => {
                         query: { tag: tag_id },
                     }}>
                         <div className={styles.next}>
-                            <button className={styles.nextt}
+                            <button className={styles.nextt} id="next-button"
                             // onClick={() => GetPostFromTag()}
                             >Next</button>
                         </div></Link>
