@@ -195,7 +195,7 @@ export default function Matching() {
                 <div className='row mt-4'>
                     <div style={{ color: 'rgb(75, 75, 75)' }}>
                         {tag.map(tag => (
-                            <div key={tag.tag_id} className={styles.tag} onClick={() => {
+                            <div key={tag.tag_id} className={styles.tag, "tag"} onClick={() => {
                                 GetPostByTag(tag.tag_id)
                             }}  >
                                 <div > {tag.tag_name}
