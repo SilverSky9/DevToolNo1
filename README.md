@@ -37,6 +37,9 @@ This project is a part of SOFTWARE DEVELOPMENT TOOLS AND ENVIRONMENTS 2/2564
 ## Testing
 Backend
 ```
+$docker compose build
+$docker compose up -d
+$docker exec -it go_container sh
 go test ./... -cover
 ```
 Frontend
