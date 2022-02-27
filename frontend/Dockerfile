@@ -3,12 +3,13 @@ FROM node:16.14.0-alpine3.14 as Build
 WORKDIR /app
 COPY package.json /app/
 RUN ["npm", "install", "-g", "npm@8.5.1"]
-RUN ["npm", "install"]
-COPY . /app/
-RUN ["npm", "run", "build"]
-RUN ["npm", "run", "export"]
+RUN ["npm", "install", "--production"]
+COPY . .
+RUN npm run build
+# RUN ["npm", "run", "build"]
+# RUN ["npm", "run", "export"]
 # Deploy
 FROM nginx:1.21.6-alpine
-COPY --from=Build /app/out /usr/share/nginx/html
-
+COPY --from=Build /app/build/ /usr/share/nginx/html
+COPY --from=Build /app/nginx/nginx.conf /etc/nginx/conf.d/default.conf
 
