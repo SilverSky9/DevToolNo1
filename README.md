@@ -44,6 +44,8 @@ go test ./... -cover
 ```
 Frontend
 ```
+cd frontend
+npm run dev
 npx cypress open
 ```
 1. เมื่อรันแล้วจะมีหน้า Chrome Pop-up ขึ้นมา
