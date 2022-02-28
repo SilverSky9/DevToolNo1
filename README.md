@@ -61,9 +61,9 @@ This project is a part of SOFTWARE DEVELOPMENT TOOLS AND ENVIRONMENTS 2/2564
 ## Testing
 Backend
 ```
-$docker compose build
-$docker compose up -d
-$docker exec -it go_container sh
+docker compose build
+docker compose up -d
+docker exec -it go_container sh
 go test ./... -cover
 ```
 Frontend
@@ -73,5 +73,5 @@ npm run dev
 npx cypress open
 ```
 1. เมื่อรันแล้วจะมีหน้า Chrome Pop-up ขึ้นมา
-2. เลือกรันไฟล์ ``home_spec.js`` or ``index_spce.js``
+2. เลือกรันไฟล์ ``home_spec.js`` , ``index_spce.js``, ``End-to-end_spce.js``
 3. Cypress จะรันตาม Testcase ที่เขียนเอาไว้
