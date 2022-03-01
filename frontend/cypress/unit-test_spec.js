@@ -1,5 +1,4 @@
 
-
 describe('Select com tag', () =>{
     before(() => {
         cy.visit("http://localhost:8080").wait(1000)
@@ -48,9 +47,3 @@ describe('Select com tag and undo click tag and select food tag', ()=>{
         cy.get('#next-button').click().wait(1000)
     })
 })
-
-
-
-
-
-
