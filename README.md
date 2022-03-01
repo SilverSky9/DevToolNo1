@@ -8,8 +8,6 @@ This project is a part of SOFTWARE DEVELOPMENT TOOLS AND ENVIRONMENTS 2/2564
 - Sinlapawit
 - Warangkhana
 - Sipang
-
-
 ## รูปแบบของ commit message
 |commit message|ความหมาย|
 |:------------:|--------|
@@ -24,8 +22,6 @@ This project is a part of SOFTWARE DEVELOPMENT TOOLS AND ENVIRONMENTS 2/2564
 |``test``      |การทดสอบ หรือการแก้ไขการทดสอบที่มีอยู่|
 |``add``       |เป็นการเพิ่มหรือสร้างไฟล์ในโปรเจค
 
-Reference : [commit message](https://github.com/angular/angular/blob/22b96b9/CONTRIBUTING.md#type)
-
 ## Branch strategy
 #### Git Flow Branch Strategy
 |Branch name |   วิธีใช้        |
@@ -37,12 +33,45 @@ Reference : [commit message](https://github.com/angular/angular/blob/22b96b9/CON
 | ``Test``          | เป็น Branch ที่ใช้สำหรับการทำ Testing ต่างๆ
 |``Hotfix``        |เป็น Branch ไว้สำหรับการแก้ไขปัญหาที่เร่งด่วน จำเป็นต้องแก้ไขทันที|
 
+## Development
 
-## หลักการทำงานร่วมกันในทีมของเรา
-ทีมของพวกเราเลือกใช้ Pull Request ในการ Merge Branch เข้าด้วยกัน<Br/>
-โดยหลักการ Pull Request ของทีมเราคือ
-- ทำการเปิด PR ทุกครั้งที่ต้องการ Merge Branch ใดๆ
-- การเปิด PR ให้เพิ่ม Reviewer **ที่มีส่วนเกี่ยวข้องกับการ Code ส่วนนั้น**ให้มา Approve PR ให้ **อย่างน้อย 1 คน**
-- ผู้ที่เป็น Reviewer ต้องตรวจสอบ Source Code ให้คำแนะนำ หรือ จุดต้องปรับแก้ ให้แก่ผู้ที่ต้องการ PR
-- เมื่อผู้ที่เป็น Reviewer ตรวจสอบเสร็จแล้ว ต้องอนุมัติให้ผู้ขอ PR สามารถ Merge เข้าสู่ Branch ได้
-- Branch ``Main`` ได้มีการปกป้อง เพื่อไม่ให้มีการเผลอ Merge ได้ มีกฎจำเป็นต้องมี Reviewer **ตั้งแต่ 2 คนขึ้นไป**
+### Front end
+```
+1. cd frontend
+2. npm install
+3. npm run dev
+```
+
+### Back end
+**เลือกวิธีไหนก็ได้**
+1. Run ด้วย Go
+```
+- cd backend
+- go run main.go
+```
+
+2. Run ด้วย Docker <Br/>
+- ติดตั้ง Docker Desktop สำหรับเอาไว้ Run Docker ดูวิธีติดตั้งและตั้งค่าได้ที่นี่ [สำหรับ Window](https://blog.codedsir.com/how-to-install-docker-desktop-on-windows/) และ [สำหรับ OSX](https://medium.com/@thep_p/%E0%B8%95%E0%B8%B4%E0%B8%94%E0%B8%95%E0%B8%B1%E0%B9%89%E0%B8%87-docker-%E0%B8%89%E0%B8%9A%E0%B8%B1%E0%B8%9A%E0%B9%82%E0%B8%AB%E0%B8%A5%E0%B8%94%E0%B8%9B%E0%B8%B1%E0%B9%8A%E0%B8%9B%E0%B9%80%E0%B8%9B%E0%B8%B4%E0%B8%94%E0%B8%9B%E0%B8%B8%E0%B9%8A%E0%B8%9B-8bace185d36b) <Br/>
+
+```
+- docker compose build
+- docker compose up
+```
+
+## Testing
+Backend
+```
+docker compose build
+docker compose up -d
+docker exec -it go_container sh
+go test ./... -cover
+```
+Frontend
+```
+cd frontend
+npm run dev
+npx cypress open
+```
+1. เมื่อรันแล้วจะมีหน้า Chrome Pop-up ขึ้นมา
+2. เลือกรันไฟล์ ``home_spec.js`` , ``index_spce.js``, ``End-to-end_spce.js``
+3. Cypress จะรันตาม Testcase ที่เขียนเอาไว้
