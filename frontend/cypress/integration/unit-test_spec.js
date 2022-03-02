@@ -42,8 +42,9 @@ describe('Select com tag and undo click tag and select food tag', ()=>{
     })
     it('should undo com tag and select food tag', () =>{
         cy.get('button').contains('com').click().wait(1000)
-        cy.get('button').contains('com').click().wait(1000)
+        cy.get('button').contains('it').click().wait(1000)
         cy.get('button').contains('food').click().wait(1000)
+        cy.get('button').contains('com').click().wait(1000)
         cy.get('#next-button').click().wait(1000)
     })
 })
