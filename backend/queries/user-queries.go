@@ -21,6 +21,7 @@ func CreateUserQueries(user model.User) (int, error) {
 	return user_id, nil
 }
 
+
 func GetAllUserQueries() ([]model.User, error) {
 	sqlStatement := "SELECT * FROM users;"
 	//Query all rows in table users
