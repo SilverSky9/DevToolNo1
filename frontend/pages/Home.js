@@ -1,6 +1,6 @@
 import styles from '../styles/Home.module.css'
 import { useEffect, useState } from 'react'
-
+import { useRouter } from 'next/router'
 const tag_want = []
 var data1 = [
     {
@@ -89,18 +89,19 @@ var data2 = [
         tag_name: "ยานยนต์"
     },
 ]
-export const getServerSideProps = async (context) => {
+export async function getStaticProps() {
+    // const router = useRouter()
     const tag = await fetch("http://34.126.190.231:3000/tag/getall")
     const allTag = await tag.json()
 
-    const url = context.query.tag ||= allTag.map(tag => (tag.tag_id)).toString()
+    // const url = context.query.tag ||= allTag.map(tag => (tag.tag_id)).toString()
 
-    const selectedTag = await fetch("http://34.126.190.231:3000/post/geybymultitag/" + url + ',')
-    const selectTag = await selectedTag.json()
+    // const selectedTag = await fetch("http://34.126.190.231:3000/post/geybymultitag/" + url + ',')
+    // const selectTag = await selectedTag.json()
 
     return {
         props: {
-            post: selectTag,
+            // post: selectTag,
             tag: allTag
         }, // will be passed to the page component as props
     }
@@ -111,12 +112,18 @@ const Matching = ({ post, tag }) => {
     const [posted, setPost] = useState([])
     // const [taged, setTag] = useState([])
     const [searchVal, setSearchVal] = useState('')
-
+    const router = useRouter()
     useEffect(() => {
-        setPost(post)
-        return () => {
+        const url = router.query.tag ||= tag.map(tag => (tag.tag_id)).toString()
 
+        async function getPost() {
+            let response = await fetch("http://34.126.190.231:3000/post/geybymultitag/" + url + ',')
+            response = await response.json()
+            console.log(response);
+            setPost(response)
         }
+
+        getPost()
     }, [])
 
     const GetPostBySearch = async () => {
@@ -176,7 +183,7 @@ const Matching = ({ post, tag }) => {
                 <div className='row mt-4 position-fixed '>
                     <div style={{ color: 'rgb(75, 75, 75)' }}>
                         {tag.map(tag => (
-                            <div key={tag.tag_id} className={styles.tag, "tag"} onClick={() => {
+                            <div key={tag.tag_id} className={styles.tag} onClick={() => {
                                 GetPostByTag(tag.tag_id)
                             }}  >
                                 <div > {tag.tag_name}
