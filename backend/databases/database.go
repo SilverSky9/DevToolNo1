@@ -4,6 +4,7 @@ import (
 	"context"
 	model "daeng-market/models"
 	"database/sql"
+	"errors"
 	"fmt"
 	"os"
 
@@ -41,15 +42,20 @@ func Connect_DB() *sql.DB {
 	// db, err := sql.Open("postgres", "postgres:magical@tcp(127.0.0.1:5432)/Market?parseTime=true")
 	// ^ This is request db.env to assign value
 	if err != nil {
-		panic(err)
+		// panic(err)
+		fmt.Println(NotConnectDatabaseWarning())
 	}
 	err = db.Ping()
 	if err != nil {
-		panic(err)
+		// panic(err)
+		fmt.Println(NotConnectDatabaseWarning())
 	}
 	return db
 }
 
 func GetDB() *sql.DB {
 	return db
+}
+func NotConnectDatabaseWarning() error {
+	return errors.New("Go Service isn't connect database, But if you want to test unitest is normal")
 }
