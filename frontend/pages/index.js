@@ -63,19 +63,7 @@ export const getStaticProps = async () => {
 const Matching = ({ allTag = [] }) => {
     const [tag_want, setTag_want] = useState([]);
     const [tag_id, setTag_id] = useState([]);
-    const [tag, setTag] = useState([])
-    const [toHome, setToHome] = useState(false)
-    const [post, setPost] = useState([{
 
-        post_id: 1,
-        pin: 123,
-        product_name: "cat",
-        post_date: "12-3-63",
-        product_option: "buy",
-        price: 520,
-        amount: 5,
-        tag_id: 5
-    }])
     const [tag_want_filter, set_tag_want_filter] = useState('')
 
     function handleChange(e, id) {
@@ -125,13 +113,12 @@ const Matching = ({ allTag = [] }) => {
                 <h1 className={styles.title}>
                     <a style={{ color: '#197DFF' }}>What</a> do you <a style={{ color: '#F49A35' }}>want</a> <a style={{ color: '#197DFF' }}>?</a>
                 </h1>
-                {/* <h1>IN this What do you want ?</h1> */}
             </div>
             <main className={styles.main}>
 
                 <ul>
-                    {allTag.map(tag => (
-                        <button key={tag.tag_id} onClick={() => handleChange(tag.tag_name, tag.tag_id)} className={styles.button}>{tag.tag_name}</button>
+                    {allTag.map((tag, index) => (
+                        <button key={index} id={`button ${'button' + index}`} onClick={() => handleChange(tag.tag_name, tag.tag_id)} className={styles.button}>{tag.tag_name}</button>
 
                     ))}
                 </ul>
