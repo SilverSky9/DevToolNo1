@@ -182,11 +182,11 @@ const Matching = ({ post, tag }) => {
             <div className='col-2 bg-light '>
                 <div className='row mt-4 position-fixed '>
                     <div style={{ color: 'rgb(75, 75, 75)' }}>
-                        {tag.map(tag => (
-                            <div key={tag.tag_id} className={styles.tag} onClick={() => {
-                                GetPostByTag(tag.tag_id)
+                        {tag.map(item => (
+                            <div key={item.tag_id} className={`tag ${styles.tag}`} onClick={() => {
+                                GetPostByTag(item.tag_id)
                             }}  >
-                                <div > {tag.tag_name}
+                                <div > {item.tag_name}
                                 </div>
                             </div>
                         ))}
