@@ -60,7 +60,7 @@ export const getStaticProps = async () => {
 }
 
 
-const Matching = ({ allTag }) => {
+const Matching = ({ allTag = [] }) => {
     const [tag_want, setTag_want] = useState([]);
     const [tag_id, setTag_id] = useState([]);
     const [tag, setTag] = useState([])
@@ -116,93 +116,56 @@ const Matching = ({ allTag }) => {
     //         })
     // }
 
+    return (
 
-    const HomeComp = () => {
-        return (
-            <main className={home_styles.main}>
-                {post.map(content => (
-                    <div key={content.post_id} className={home_styles.card} >
-                        <div style={{ color: '#197DFF', fontSize: '50px', textAlign: 'center' }} >
-                            {/* <div className={styles.logo} > <Image width={171} height={168} src={shopping_cart} alt="shopping_cart" /> {content.product_name}</div> */}
-                            {content.product_name} <br></br>
-                        </div>
-                        <div >
+        <div className={styles.container}>
 
-                            ราคา : {content.price} / ชิ้น <br></br>
-                            จำนวน : {content.amount} ชิ้น
-                        </div>
-                        {/* <div className={styles.logo} > <Image width={171} height={168} src={shopping_cart} alt="shopping_cart" /> {content.product_name}</div> */}
+            <div data-testid="custom-element">
+                <h1 className={styles.title}><a style={{ color: '#F49A35' }}>IN</a> <a style={{ color: '#197DFF' }}>this</a></h1>
+                <h1 className={styles.title}>
+                    <a style={{ color: '#197DFF' }}>What</a> do you <a style={{ color: '#F49A35' }}>want</a> <a style={{ color: '#197DFF' }}>?</a>
+                </h1>
+                {/* <h1>IN this What do you want ?</h1> */}
+            </div>
+            <main className={styles.main}>
 
+                <ul>
+                    {allTag.map(tag => (
+                        <button key={tag.tag_id} onClick={() => handleChange(tag.tag_name, tag.tag_id)} className={styles.button}>{tag.tag_name}</button>
 
-                    </div>
+                    ))}
+                </ul>
 
+                <hr>
 
-                ))}
+                </hr>
+                <ul>
+                    {tag_want.map((tag, i) => (
+                        <span className={styles.button1} key={i}>{tag} </span>
+                    ))}
+                </ul>
 
             </main>
+            {tag_id.length == 0 ?
+                null
+                :
+                <Link href={{
+                    pathname: '/Home',
+                    query: { tag: tag_id },
+                }}>
+                    <div className={styles.next}>
+                        <button className={styles.nextt} id="next-button"
+                        // onClick={() => GetPostFromTag()}
+                        >Next</button>
+                    </div></Link>
+            }
 
 
-
-        )
-    }
-
-    const MatchingComp = () => {
-        return (
-
-            <div className={styles.container}>
-
-                <div>
-                    <h1 className={styles.title}><a style={{ color: '#F49A35' }}>IN</a> <a style={{ color: '#197DFF' }}>this</a></h1>
-                    <h1 className={styles.title}>
-                        <a style={{ color: '#197DFF' }}>What</a> do you <a style={{ color: '#F49A35' }}>want</a> <a style={{ color: '#197DFF' }}>?</a>
-                    </h1>
-                </div>
-                <main className={styles.main}>
-
-                    <ul>
-                        {/* {console.log(allTag)} */}
-                        {allTag.map(tag => (
-                            <button key={tag.tag_id} onClick={() => handleChange(tag.tag_name, tag.tag_id)} className={styles.button}>{tag.tag_name}</button>
-
-                        ))}
-                    </ul>
-
-                    <hr>
-
-                    </hr>
-                    <ul>
-                        {tag_want.map((tag, i) => (
-                            <span className={styles.button1} key={i}>{tag} </span>
-                        ))}
-                    </ul>
-
-                </main>
-                {tag_id.length == 0 ?
-                    null
-                    :
-                    <Link href={{
-                        pathname: '/Home',
-                        query: { tag: tag_id },
-                    }}>
-                        <div className={styles.next}>
-                            <button className={styles.nextt} id="next-button"
-                            // onClick={() => GetPostFromTag()}
-                            >Next</button>
-                        </div></Link>
-                }
+        </div>
 
 
-            </div>
+    )
 
-
-        )
-    }
-    if (toHome) {
-        return HomeComp()
-    }
-    else {
-        return MatchingComp()
-    }
 
 
 
