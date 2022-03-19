@@ -21,13 +21,11 @@ describe("HomePage", () => {
     shallow(<Index />);
   });
 
-  it("render three tag", () => {
+  it("render all tag", () => {
     expect(wrapper.find('ul').children().length).toBe(3)
   });
 
-  it("should render tag that you selected", () => {
-    const wrapper = mount(<Index allTag={tag} />);
-
+  it("should call function handleChange", () => {
     console.log(wrapper.find("#button"));
     expect(wrapper.getByTestId("#button0").value)
   });
