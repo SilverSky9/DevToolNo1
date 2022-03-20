@@ -32,7 +32,6 @@ describe("IndexPage", () => {
       <Index allTag={tag} onClick={mockFn} />,
     );
     fireEvent.click(queryByTestId('button0'));
-
     expect(queryByTestId('tagWant').childNodes.length).toBe(1);
 
   });

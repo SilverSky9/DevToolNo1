@@ -142,7 +142,6 @@ const Matching = ({ tag }) => {
 
     return (
         <div className='row '>
-
             {/* {router.query.tag.map(tag => <h1>{tag}<h1 /> )} */}
             <div className='col-10 px-5'>
                 <div className='row mt-4'>
@@ -154,11 +153,9 @@ const Matching = ({ tag }) => {
                     </div>
                 </div>
                 <main className={styles.main}>
+                    <ul>
                     {posted.map(content => (
                         <div key={content.post_id} className={styles.card} >
-
-
-
                             <div id="productName" style={{ color: '#197DFF', fontSize: '50px', textAlign: 'center' }} >
                                 {/* <div className={styles.logo} > <Image width={171} height={168} src={shopping_cart} alt="shopping_cart" /> {content.product_name}</div> */}
                                 {content.product_name} <br></br>
@@ -170,7 +167,7 @@ const Matching = ({ tag }) => {
                             {/* <div className={styles.logo} > <Image width={171} height={168} src={shopping_cart} alt="shopping_cart" /> {content.product_name}</div> */}
                         </div>
                     ))}
-
+                    </ul>
                 </main>
                 <div className=''>
 
@@ -182,6 +179,7 @@ const Matching = ({ tag }) => {
             <div className='col-2 bg-light '>
                 <div className='row mt-4 position-fixed '>
                     <div style={{ color: 'rgb(75, 75, 75)' }}>
+                        <ul>
                         {tag.map((item, i) => (
                             <div key={i} className={`tag ${styles.tag}`} onClick={() => {
                                 GetPostByTag(item.tag_id)
@@ -190,6 +188,7 @@ const Matching = ({ tag }) => {
                                 </div>
                             </div>
                         ))}
+                        </ul>
                     </div>
                 </div>
             </div>
