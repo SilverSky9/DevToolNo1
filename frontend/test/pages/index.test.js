@@ -1,7 +1,7 @@
 import React from "react";
 // Using render and screen from test-utils.js instead of
 // @testing-library/react
-import { screen, fireEvent, render } from '@testing-library/react';
+import { fireEvent, render } from '@testing-library/react';
 import Enzyme, { shallow, mount } from "enzyme";
 import Adapter from '@wojtekmaj/enzyme-adapter-react-17';
 import Index from "../../pages/index";
@@ -14,7 +14,7 @@ const tag = [
   'it',
 ];
 
-describe("HomePage", () => {
+describe("IndexPage", () => {
 
   it("should render Index", () => {
     shallow(<Index />);

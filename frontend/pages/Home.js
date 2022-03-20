@@ -108,7 +108,7 @@ export async function getStaticProps() {
 }
 
 
-const Matching = ({ post, tag }) => {
+const Matching = ({ tag }) => {
     const [posted, setPost] = useState([])
     // const [taged, setTag] = useState([])
     const [searchVal, setSearchVal] = useState('')
@@ -182,8 +182,8 @@ const Matching = ({ post, tag }) => {
             <div className='col-2 bg-light '>
                 <div className='row mt-4 position-fixed '>
                     <div style={{ color: 'rgb(75, 75, 75)' }}>
-                        {tag.map(item => (
-                            <div key={item.tag_id} className={`tag ${styles.tag}`} onClick={() => {
+                        {tag.map((item, i) => (
+                            <div key={i} className={`tag ${styles.tag}`} onClick={() => {
                                 GetPostByTag(item.tag_id)
                             }}  >
                                 <div > {item.tag_name}
