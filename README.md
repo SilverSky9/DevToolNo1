@@ -67,6 +67,13 @@ docker exec -it go_container sh
 go test ./... -cover
 ```
 Frontend
+Unit testing
+```
+cd frontend
+npm run test
+```
+
+Component & E2E Testing
 ```
 cd frontend
 npm run dev
