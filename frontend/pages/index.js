@@ -3,7 +3,7 @@ import home_styles from '../styles/Home.module.css'
 
 import { useState, useEffect } from "react";
 import Link from 'next/link'
-import { Button} from 'react-bootstrap';
+import { Button } from 'react-bootstrap';
 
 
 
@@ -87,7 +87,7 @@ const Matching = ({ allTag = [] }) => {
                 ))
         }
         FilterTagWantToAxios()
-      
+
 
     }
 
@@ -129,9 +129,9 @@ const Matching = ({ allTag = [] }) => {
                 <hr>
 
                 </hr>
-                <ul>
+                <ul data-testid={'tagWant'}>
                     {tag_want.map((tag, i) => (
-                        <span className={styles.button1} key={i}>{tag} </span>
+                        <span className={styles.button1} data-testid={`${'span' + i}`} key={i}>{tag} </span>
                     ))}
                 </ul>
 

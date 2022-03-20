@@ -1,8 +1,8 @@
 import React from "react";
 // Using render and screen from test-utils.js instead of
 // @testing-library/react
-import { render, screen } from '@testing-library/react';
-import Enzyme, { shallow, mount, to, have } from "enzyme";
+import { screen, fireEvent, render } from '@testing-library/react';
+import Enzyme, { shallow, mount } from "enzyme";
 import Adapter from '@wojtekmaj/enzyme-adapter-react-17';
 import Index from "../../pages/index";
 
@@ -15,19 +15,26 @@ const tag = [
 ];
 
 describe("HomePage", () => {
-  const wrapper = mount(<Index allTag={tag} />);
 
   it("should render Index", () => {
     shallow(<Index />);
   });
 
   it("render all tag", () => {
+    const wrapper = mount(<Index allTag={tag} />);
+
     expect(wrapper.find('ul').children().length).toBe(3)
   });
 
-  it("should call function handleChange", () => {
-    console.log(wrapper.find("#button"));
-    expect(wrapper.getByTestId("#button0").value)
+  it("should add data to tag want", () => {
+    const mockFn = jest.fn()
+    const { queryByTestId } = render(
+      <Index allTag={tag} onClick={mockFn} />,
+    );
+    fireEvent.click(queryByTestId('button0'));
+
+    expect(queryByTestId('tagWant').childNodes.length).toBe(1);
+
   });
 
 });
