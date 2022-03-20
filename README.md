@@ -67,11 +67,18 @@ docker exec -it go_container sh
 go test ./... -cover
 ```
 Frontend
+Unit testing
+```
+cd frontend
+npm run test
+```
+
+Component & E2E Testing
 ```
 cd frontend
 npm run dev
 npx cypress open
 ```
 1. เมื่อรันแล้วจะมีหน้า Chrome Pop-up ขึ้นมา
-2. เลือกรันไฟล์ ``home_spec.js`` , ``index_spce.js``, ``End-to-end_spce.js``
+2. เลือกรันไฟล์ ``unit-test_spec.js`` , ``component-test_spec.js``, ``End-to-end_spce.js``
 3. Cypress จะรันตาม Testcase ที่เขียนเอาไว้

@@ -3,6 +3,8 @@ import home_styles from '../styles/Home.module.css'
 
 import { useState, useEffect } from "react";
 import Link from 'next/link'
+import { Button } from 'react-bootstrap';
+
 
 
 var data1 = [
@@ -60,22 +62,10 @@ export const getStaticProps = async () => {
 }
 
 
-const Matching = ({ allTag }) => {
+const Matching = ({ allTag = [] }) => {
     const [tag_want, setTag_want] = useState([]);
     const [tag_id, setTag_id] = useState([]);
-    const [tag, setTag] = useState([])
-    const [toHome, setToHome] = useState(false)
-    const [post, setPost] = useState([{
 
-        post_id: 1,
-        pin: 123,
-        product_name: "cat",
-        post_date: "12-3-63",
-        product_option: "buy",
-        price: 520,
-        amount: 5,
-        tag_id: 5
-    }])
     const [tag_want_filter, set_tag_want_filter] = useState('')
 
     function handleChange(e, id) {
@@ -98,6 +88,7 @@ const Matching = ({ allTag }) => {
         }
         FilterTagWantToAxios()
 
+
     }
 
     const FilterTagWantToAxios = async () => {
@@ -116,93 +107,55 @@ const Matching = ({ allTag }) => {
     //         })
     // }
 
+    return (
 
-    const HomeComp = () => {
-        return (
-            <main className={home_styles.main}>
-                {post.map(content => (
-                    <div key={content.post_id} className={home_styles.card} >
-                        <div style={{ color: '#197DFF', fontSize: '50px', textAlign: 'center' }} >
-                            {/* <div className={styles.logo} > <Image width={171} height={168} src={shopping_cart} alt="shopping_cart" /> {content.product_name}</div> */}
-                            {content.product_name} <br></br>
-                        </div>
-                        <div >
+        <div className={styles.container}>
 
-                            ราคา : {content.price} / ชิ้น <br></br>
-                            จำนวน : {content.amount} ชิ้น
-                        </div>
-                        {/* <div className={styles.logo} > <Image width={171} height={168} src={shopping_cart} alt="shopping_cart" /> {content.product_name}</div> */}
+            <div data-testid="custom-element">
+                <h1 className={styles.title}><a style={{ color: '#F49A35' }}>IN</a> <a style={{ color: '#197DFF' }}>this</a></h1>
+                <h1 className={styles.title}>
+                    <a style={{ color: '#197DFF' }}>What</a> do you <a style={{ color: '#F49A35' }}>want</a> <a style={{ color: '#197DFF' }}>?</a>
+                </h1>
+            </div>
+            <main className={styles.main}>
 
+                <ul>
+                    {allTag.map((tag, index) => (
+                        <Button key={index} id={`button `} data-testid={`${'button' + index}`} onClick={() => handleChange(tag.tag_name, tag.tag_id)} className={styles.button}>{tag.tag_name}</Button>
 
-                    </div>
+                    ))}
+                </ul>
 
+                <hr>
 
-                ))}
+                </hr>
+                <ul data-testid={'tagWant'}>
+                    {tag_want.map((tag, i) => (
+                        <span className={styles.button1} data-testid={`${'span' + i}`} key={i}>{tag} </span>
+                    ))}
+                </ul>
 
             </main>
+            {tag_id.length == 0 ?
+                null
+                :
+                <Link href={{
+                    pathname: '/Home',
+                    query: { tag: tag_id },
+                }}>
+                    <div className={styles.next}>
+                        <button className={styles.nextt} id="next-button"
+                        // onClick={() => GetPostFromTag()}
+                        >Next</button>
+                    </div></Link>
+            }
 
 
-
-        )
-    }
-
-    const MatchingComp = () => {
-        return (
-
-            <div className={styles.container}>
-
-                <div>
-                    <h1 className={styles.title}><a style={{ color: '#F49A35' }}>IN</a> <a style={{ color: '#197DFF' }}>this</a></h1>
-                    <h1 className={styles.title}>
-                        <a style={{ color: '#197DFF' }}>What</a> do you <a style={{ color: '#F49A35' }}>want</a> <a style={{ color: '#197DFF' }}>?</a>
-                    </h1>
-                </div>
-                <main className={styles.main}>
-
-                    <ul>
-                        {/* {console.log(allTag)} */}
-                        {allTag.map(tag => (
-                            <button key={tag.tag_id} onClick={() => handleChange(tag.tag_name, tag.tag_id)} className={styles.button}>{tag.tag_name}</button>
-
-                        ))}
-                    </ul>
-
-                    <hr>
-
-                    </hr>
-                    <ul>
-                        {tag_want.map((tag, i) => (
-                            <span className={styles.button1} key={i}>{tag} </span>
-                        ))}
-                    </ul>
-
-                </main>
-                {tag_id.length == 0 ?
-                    null
-                    :
-                    <Link href={{
-                        pathname: '/Home',
-                        query: { tag: tag_id },
-                    }}>
-                        <div className={styles.next}>
-                            <button className={styles.nextt} id="next-button"
-                            // onClick={() => GetPostFromTag()}
-                            >Next</button>
-                        </div></Link>
-                }
+        </div>
 
 
-            </div>
+    )
 
-
-        )
-    }
-    if (toHome) {
-        return HomeComp()
-    }
-    else {
-        return MatchingComp()
-    }
 
 
 

@@ -2,5 +2,8 @@
   "extends": [
     "next/babel",
     "next/core-web-vitals"
-  ]
+  ],
+  "env": {
+    "jest": true
+  }
 }
