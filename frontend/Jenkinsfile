@@ -1,0 +1,44 @@
+pipeline {
+    agent any
+    stages {
+        stage('Pull code') {
+            steps {
+               git branch: 'dev', url: 'https://github.com/SilverSky9/DevToolNo1.git'
+            }
+        }
+         stage('Download dependencies') {
+            steps {
+                dir("frontend") {
+                sh "pwd"
+                sh 'ls'
+                sh 'npm install'
+                }
+            }
+        }
+        stage('Unit test'){
+            steps{
+                dir("frontend"){
+                    sh 'npm run test'
+                }
+            }
+        }
+        // stage('Component test') {
+        //     steps {
+        //         echo 'Skip'
+        //         // sh 'cd frontend'
+        //         //  sh 'pwd'
+        //         // sh 'cd /var/lib/jenkins/workspace/team-10-frontend/frontend'
+        //         // sh 'ls'
+        //         // sh 'apt-get install xvfb'
+        //          dir("frontend") {
+        //         sh 'npx cypress run --record --spec cypress/integration/component-test_spec.js'
+        //          }
+        //     }
+        // }
+        stage('Deploy') {
+            steps {
+                echo 'Test'
+            }
+        }
+    }
+}
