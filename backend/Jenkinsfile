@@ -1,0 +1,53 @@
+pipeline {
+    agent any
+    tools {
+        go 'Go 1.18'
+        dockerTool 'Docker-compose-for-all-student-from-team10'
+    }
+    environment {
+        GO114MODULE = 'on'
+        CGO_ENABLED = 0 
+        GOPATH = "${JENKINS_HOME}/jobs/${JOB_NAME}/builds/${BUILD_ID}"
+        COMPOSE_FILE = "docker-compose.yml"
+    }
+    stages {
+        stage('Pull code') {
+            steps {
+               git branch: 'dev', url: 'https://github.com/SilverSky9/DevToolNo1.git'
+            }
+        }
+        stage('Download dependencies') {
+            steps {
+               dir("backend"){
+                   sh 'pwd'
+                   sh 'go mod tidy'
+               }
+            }
+        }
+        stage('Unitest'){
+            steps{
+                dir("backend"){
+                    dir("services"){
+                        sh 'go test pin-services.go pin-services_test.go -cover'
+                    }
+                }
+            }
+        }
+         stage('Deployment'){
+            steps{
+                echo 'Now we skip deployment becuase we can\'t run docker '
+            }
+        }
+        stage('E2E Testing'){
+            steps{
+                echo 'Now we skip E2E because we can\'t run docker'
+            }
+        }
+        stage('Noti'){
+            steps{
+                emailext body: 'Please check job Team-10-Backend ', subject: 'Team-10-Backend successful to CI/CD', to: '62070101@it.kmitl.ac.th'
+            }
+        }
+        
+    }
+}
