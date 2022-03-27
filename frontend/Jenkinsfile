@@ -15,7 +15,7 @@ pipeline {
                 }
             }
         }
-        stage('Unit test'){
+        stage('Unit test and Component test'){
             steps{
                 dir("frontend"){
                     sh 'npm run test'
