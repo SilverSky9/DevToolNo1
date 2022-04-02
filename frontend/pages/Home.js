@@ -89,9 +89,9 @@ var data2 = [
         tag_name: "ยานยนต์"
     },
 ]
-export async function getStaticProps() {
+export async function getInitialProps() {
     // const router = useRouter()
-    const tag = await fetch("http://34.126.190.231:3000/tag/getall")
+    const tag = await fetch("http://localhost:3000/tag/getall")
     const allTag = await tag.json()
 
     // const url = context.query.tag ||= allTag.map(tag => (tag.tag_id)).toString()
@@ -117,7 +117,7 @@ const Matching = ({ tag }) => {
         const url = router.query.tag ||= tag.map(tag => (tag.tag_id)).toString()
 
         async function getPost() {
-            let response = await fetch("http://34.126.190.231:3000/post/geybymultitag/" + url + ',')
+            let response = await fetch("http://localhost:3000/post/geybymultitag/" + url + ',')
             response = await response.json()
             console.log(response);
             setPost(response)
@@ -127,14 +127,14 @@ const Matching = ({ tag }) => {
     }, [])
 
     const GetPostBySearch = async () => {
-        const res = await fetch("http://34.126.190.231:3000/post/searchbyname/" + searchVal);
+        const res = await fetch("http://localhost:3000/post/searchbyname/" + searchVal);
         const newPost = await res.json();
 
         return setPost(newPost);
     };
 
     const GetPostByTag = async (tag_name) => {
-        const res = await fetch("http://34.126.190.231:3000/post/getbytag/" + tag_name + "/null");
+        const res = await fetch("http://localhost:3000/post/getbytag/" + tag_name + "/null");
         const newPost = await res.json();
 
         return setPost(newPost);
@@ -154,19 +154,19 @@ const Matching = ({ tag }) => {
                 </div>
                 <main className={styles.main}>
                     <ul>
-                    {posted.map(content => (
-                        <div key={content.post_id} className={styles.card} >
-                            <div id="productName" style={{ color: '#197DFF', fontSize: '50px', textAlign: 'center' }} >
+                        {posted?.map(content => (
+                            <div key={content.post_id} className={styles.card} >
+                                <div id="productName" style={{ color: '#197DFF', fontSize: '50px', textAlign: 'center' }} >
+                                    {/* <div className={styles.logo} > <Image width={171} height={168} src={shopping_cart} alt="shopping_cart" /> {content.product_name}</div> */}
+                                    {content.product_name} <br></br>
+                                </div>
+                                <div >
+                                    ราคา : {content.price} / ชิ้น <br></br>
+                                    จำนวน : {content.amount} ชิ้น
+                                </div>
                                 {/* <div className={styles.logo} > <Image width={171} height={168} src={shopping_cart} alt="shopping_cart" /> {content.product_name}</div> */}
-                                {content.product_name} <br></br>
                             </div>
-                            <div >
-                                ราคา : {content.price} / ชิ้น <br></br>
-                                จำนวน : {content.amount} ชิ้น
-                            </div>
-                            {/* <div className={styles.logo} > <Image width={171} height={168} src={shopping_cart} alt="shopping_cart" /> {content.product_name}</div> */}
-                        </div>
-                    ))}
+                        ))}
                     </ul>
                 </main>
                 <div className=''>
@@ -180,14 +180,14 @@ const Matching = ({ tag }) => {
                 <div className='row mt-4 position-fixed '>
                     <div style={{ color: 'rgb(75, 75, 75)' }}>
                         <ul>
-                        {tag.map((item, i) => (
-                            <div key={i} className={`tag ${styles.tag}`} onClick={() => {
-                                GetPostByTag(item.tag_id)
-                            }}  >
-                                <div > {item.tag_name}
+                            {tag?.map((item, i) => (
+                                <div key={i} className={`tag ${styles.tag}`} onClick={() => {
+                                    GetPostByTag(item.tag_id)
+                                }}  >
+                                    <div > {item.tag_name}
+                                    </div>
                                 </div>
-                            </div>
-                        ))}
+                            ))}
                         </ul>
                     </div>
                 </div>
