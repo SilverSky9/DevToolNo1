@@ -15,20 +15,7 @@ pipeline {
                 }
             }
         }
-        stage('Unit test'){
-            steps{
-                dir("frontend"){
-                      script {
-                        if (!fileExists('reports')) {
-                            sh 'mkdir reports'
-                        }
-                    }
-                        sh "'No unit test' > unit.txt"
-                        publishHTML([allowMissing: false, alwaysLinkToLastBuild: false, keepAll: true, reportDir: 'reports', reportFiles: 'unit.txt', reportName: 'Unit Test Report', reportTitles: 'Unit Test Report'])
-                  
-                }
-            }
-        }
+       
         stage('Component test'){
             steps{
                 dir("frontend"){
