@@ -28,7 +28,7 @@ pipeline {
             steps{
                 dir("backend"){
                     dir("services"){
-                        sh 'go test pin-services.go pin-services_test.go -cover 2> reports/unit.txt'
+                        sh 'go test pin-services.go pin-services_test.go -cover > reports/unit.txt'
                         publishHTML([allowMissing: false, alwaysLinkToLastBuild: false, keepAll: true, reportDir: 'reports', reportFiles: 'unit.txt', reportName: 'Unit Test Report', reportTitles: 'Unit Test Report'])
                     }
                     }
