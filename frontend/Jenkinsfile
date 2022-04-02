@@ -18,7 +18,15 @@ pipeline {
         stage('Unit test and Component test'){
             steps{
                 dir("frontend"){
-                    sh 'npm run test'
+                    sh ''
+                      script {
+                        if (!fileExists('reports')) {
+                            sh 'mkdir reports'
+                        }
+                    }
+                        sh 'npm run test 2> reports/unit.txt'
+                        publishHTML([allowMissing: false, alwaysLinkToLastBuild: false, keepAll: true, reportDir: 'reports', reportFiles: 'unit.txt', reportName: 'Unit Test Report', reportTitles: 'Unit Test Report'])
+                  
                 }
             }
         }
