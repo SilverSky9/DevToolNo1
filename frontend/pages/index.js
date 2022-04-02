@@ -52,7 +52,7 @@ var data1 = [
 ]
 
 export const getStaticProps = async () => {
-    const res = await fetch('http://34.126.190.231:3000/tag/getall')
+    const res = await fetch('http://localhost:3000/tag/getall')
     const tag = await res.json()
 
     // console.log(tag);
