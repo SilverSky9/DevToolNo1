@@ -51,7 +51,7 @@ var data1 = [
     },
 ]
 
-export const getStaticProps = async () => {
+export const getInitialProps = async () => {
     const res = await fetch('http://localhost:3000/tag/getall')
     const tag = await res.json()
 
@@ -120,7 +120,7 @@ const Matching = ({ allTag = [] }) => {
             <main className={styles.main}>
 
                 <ul>
-                    {allTag.map((tag, index) => (
+                    {allTag?.map((tag, index) => (
                         <Button key={index} id={`button `} data-testid={`${'button' + index}`} onClick={() => handleChange(tag.tag_name, tag.tag_id)} className={styles.button}>{tag.tag_name}</Button>
 
                     ))}
@@ -130,7 +130,7 @@ const Matching = ({ allTag = [] }) => {
 
                 </hr>
                 <ul data-testid={'tagWant'}>
-                    {tag_want.map((tag, i) => (
+                    {tag_want?.map((tag, i) => (
                         <span className={styles.button1} data-testid={`${'span' + i}`} key={i}>{tag} </span>
                     ))}
                 </ul>

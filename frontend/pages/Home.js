@@ -89,9 +89,9 @@ var data2 = [
         tag_name: "ยานยนต์"
     },
 ]
-export async function getStaticProps() {
+export async function getInitialProps() {
     // const router = useRouter()
-    const tag = await fetch("http://34.126.190.231:3000/tag/getall")
+    const tag = await fetch("http://localhost:3000/tag/getall")
     const allTag = await tag.json()
 
     // const url = context.query.tag ||= allTag.map(tag => (tag.tag_id)).toString()
@@ -154,7 +154,7 @@ const Matching = ({ tag }) => {
                 </div>
                 <main className={styles.main}>
                     <ul>
-                        {posted.map(content => (
+                        {posted?.map(content => (
                             <div key={content.post_id} className={styles.card} >
                                 <div id="productName" style={{ color: '#197DFF', fontSize: '50px', textAlign: 'center' }} >
                                     {/* <div className={styles.logo} > <Image width={171} height={168} src={shopping_cart} alt="shopping_cart" /> {content.product_name}</div> */}
@@ -180,7 +180,7 @@ const Matching = ({ tag }) => {
                 <div className='row mt-4 position-fixed '>
                     <div style={{ color: 'rgb(75, 75, 75)' }}>
                         <ul>
-                            {tag.map((item, i) => (
+                            {tag?.map((item, i) => (
                                 <div key={i} className={`tag ${styles.tag}`} onClick={() => {
                                     GetPostByTag(item.tag_id)
                                 }}  >
