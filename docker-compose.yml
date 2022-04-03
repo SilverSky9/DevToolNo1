@@ -1,5 +1,14 @@
 version: "3"
 services:
+  web:
+    build: ./frontend
+    container_name: nginx_container
+    ports:
+    - "80:80"
+    # volumes:
+    # - ./out:/usr/share/nginx/html
+    networks:
+      - fullstack
   app:
     build: ./backend
     container_name: go_container
@@ -40,18 +49,6 @@ services:
     networks:
       - fullstack
     restart: unless-stopped
-  web:
-    build: ./frontend
-    image: silversky9/team-10-frontend:1.0
-    container_name: nginx_container
-    ports:
-      - "80:80"
-    depends_on:
-      - app
-    # volumes:
-    # - ./out:/usr/share/nginx/html
-    networks:
-      - fullstack
 
 networks:
   fullstack:
