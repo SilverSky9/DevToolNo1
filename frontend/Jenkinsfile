@@ -24,7 +24,10 @@ pipeline {
                             sh 'mkdir reports'
                         }
                     }
-                        sh 'npm run test 2> reports/covecomponent.txt'
+                        sh 'npm run test 2> reports/component.txt'
+                        publishHTML([allowMissing: false, alwaysLinkToLastBuild: false, keepAll: true, reportDir: 'reports', reportFiles: 'component.txt', reportName: 'Component Test Report', reportTitles: 'Component Test Report'])
+
+                        sh 'npm run test -- --coverage 2> reports/covecomponent.txt'
                         publishHTML([allowMissing: false, alwaysLinkToLastBuild: false, keepAll: true, reportDir: 'reports', reportFiles: 'covecomponent.txt', reportName: 'Coverage Component Test Report', reportTitles: 'Coverage Component Test Report'])
                   
                 }
