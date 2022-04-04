@@ -15,7 +15,11 @@ pipeline {
                 }
             }
         }
-       
+        stage("Build image"){
+            steps{
+                sh "docker compose -f docker-compose-build.yml build web"
+            }
+        }
         stage('Component test'){
             steps{
                 dir("frontend"){

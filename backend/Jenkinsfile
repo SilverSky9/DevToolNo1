@@ -24,6 +24,11 @@ pipeline {
                }
             }
         }
+        stage("Build image"){
+            steps{
+                sh "docker compose -f docker-compose-build.yml build app"
+            }
+        }
         stage('Unitest'){
             steps{
                 dir("backend"){
