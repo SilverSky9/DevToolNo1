@@ -1,0 +1,10 @@
+version: "3"
+services:
+  app:
+    image: silversky9/team-10-backend:1.1
+    build: ./backend
+    container_name: go_container
+  web:
+    build: ./frontend
+    image: silversky9/team-10-frontend:1.1
+    container_name: nginx_container
