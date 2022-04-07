@@ -15,10 +15,25 @@ pipeline {
                 }
             }
         }
-        stage('Unit test and Component test'){
+        // stage("Build image"){
+        //     steps{
+        //         sh "docker compose -f docker-compose-build.yml build web"
+        //     }
+        // }
+        stage('Component test'){
             steps{
                 dir("frontend"){
-                    sh 'npm run test'
+                      script {
+                        if (!fileExists('reports')) {
+                            sh 'mkdir reports'
+                        }
+                    }
+                        sh 'npm run test 2> reports/component.txt'
+                        publishHTML([allowMissing: false, alwaysLinkToLastBuild: false, keepAll: true, reportDir: 'reports', reportFiles: 'component.txt', reportName: 'Component Test Report', reportTitles: 'Component Test Report'])
+
+                        sh 'npm run test -- --coverage > reports/covecomponent.txt'
+                        publishHTML([allowMissing: false, alwaysLinkToLastBuild: false, keepAll: true, reportDir: 'reports', reportFiles: 'covecomponent.txt', reportName: 'Coverage Component Test Report', reportTitles: 'Coverage Component Test Report'])
+                  
                 }
             }
         }
