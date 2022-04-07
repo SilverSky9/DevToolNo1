@@ -43,6 +43,7 @@ pipeline {
 
                         sh 'go test pin-services.go pin-services_test.go -cover > reports/coveunit.txt'
                         publishHTML([allowMissing: false, alwaysLinkToLastBuild: false, keepAll: true, reportDir: 'reports', reportFiles: 'coveunit.txt', reportName: 'Coverage Unit Test Report', reportTitles: 'Coverage Unit Test Report'])
+
                     }
                 }
             }
