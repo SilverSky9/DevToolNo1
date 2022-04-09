@@ -55,19 +55,22 @@ pipeline {
         }
         stage("Build image"){
             steps{
+                // dir("backend"){
+                //     sh 'docker build -t silversky9/team-10-backend:1.' + BUILD_NUMBER + ' .'
+                //     sh 'docker images'
+                // }
+                sh 'Need docker for build'
+            }
+        }
+        stage("Push image"){
+            steps{
                 dir("backend"){
-                    sh 'docker build -t silversky9/team-10-backend:1.' +(BUILD_NUMBER - 242) + ' .'
-                    sh 'docker images'
+                    // sh 'docker image push silversky9/team-10-backend:1.' + BUILD_NUMBER
+                    sh 'Need docker for build'
+
                 }
             }
         }
-        // stage("Push image"){
-        //     steps{
-        //         dir("backend"){
-        //             sh 'docker image push silversky9/team-10-frontend:1.1'
-        //         }
-        //     }
-        // }
         stage('Auto tagging'){
             steps{
                 withCredentials([gitUsernamePassword(credentialsId: '698862fd-b5af-4c2b-920c-42ed9ab6ceef', gitToolName: 'Default')]) {
