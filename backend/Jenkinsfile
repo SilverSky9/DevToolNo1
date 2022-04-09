@@ -26,9 +26,13 @@ pipeline {
         }
         stage('Auto tagging'){
             steps{
-                sh "git tag " + "v1.0." + BUILD_NUMBER
-                sh "git tag"
-                sh "git push origin " + "v1.0." + BUILD_NUMBER
+                withCredentials([gitUsernamePassword(credentialsId: '698862fd-b5af-4c2b-920c-42ed9ab6ceef', gitToolName: 'Default')]) {
+                    sh 'git tag ' + 'v1.0.' + BUILD_NUMBER
+                    sh 'git tag'
+                    sh 'git commit -m "Auto: Build tag"'
+                    sh 'git push origin ' + 'v1.0.' + BUILD_NUMBER
+                }
+               
             }
             
         }
