@@ -1,0 +1,30 @@
+version: "3"
+services:
+  app:
+    build: ./backend
+    container_name: team10_go_container_backend
+    volumes:
+    - './backend:/app'
+    working_dir: /app
+    env_file:
+      - db.env
+    ports:
+    - 3010:3000
+    # command: go run main.go
+    depends_on:
+      - db
+    networks:
+      - fullstack
+  web:
+    build: ./frontend
+    image: silversky9/team-10-frontend:1.0
+    container_name: team10_nginx_container_frontend
+    ports:
+      - "8010:80"
+    depends_on:
+      - app
+    networks:
+      - fullstack
+networks:
+  fullstack:
+    driver: bridge
