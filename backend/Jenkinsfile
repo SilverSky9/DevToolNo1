@@ -56,7 +56,7 @@ pipeline {
         stage("Build image"){
             steps{
                 dir("backend"){
-                    sh 'docker build -t silversky9/team-10-backend:1.' +(BUILD_NUMBER - 242) ' .'
+                    sh 'docker build -t silversky9/team-10-backend:1.' +(BUILD_NUMBER - 242) + ' .'
                     sh 'docker images'
                 }
             }
