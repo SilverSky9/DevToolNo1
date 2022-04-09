@@ -13,7 +13,7 @@ pipeline {
     stages {
         stage('Pull code') {
             steps {
-               git branch: 'dev', url: 'https://github.com/SilverSky9/DevToolNo1.git'
+               git branch: 'dev', url: 'git@github.com:SilverSky9/DevToolNo1.git'
             }
         }
         stage('Download dependencies') {
