@@ -27,6 +27,7 @@ pipeline {
         stage('Auto tagging'){
             steps{
                 echo BUILD_NUMBER
+                sh "git tag" + "v1.0." + BUILD_NUMBER
             }
         }
         // stage("Build image"){
