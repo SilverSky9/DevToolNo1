@@ -28,6 +28,7 @@ pipeline {
             steps{
                 echo BUILD_NUMBER
                 sh "git tag " + "v1.0." + BUILD_NUMBER
+                sh "git tag"
             }
         }
         // stage("Build image"){
