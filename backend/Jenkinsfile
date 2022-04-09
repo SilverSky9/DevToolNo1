@@ -24,11 +24,6 @@ pipeline {
                }
             }
         }
-        // stage("Build image"){
-        //     steps{
-        //         sh "docker compose -f docker-compose-build.yml build app"
-        //     }
-        // }
         stage('Unitest'){
             steps{
                 dir("backend"){
@@ -58,11 +53,21 @@ pipeline {
                 echo 'Now we skip E2E because we can\'t run docker'
             }
         }
-        stage('Noti'){
+        stage("Build image"){
             steps{
-                emailext body: 'Please check job Team-10-Backend ', subject: 'Team-10-Backend successful to CI/CD', to: '62070101@it.kmitl.ac.th'
+                dir("backend"){
+                    sh 'docker build -t silversky9/team-10-backend:1.' +(BUILD_NUMBER - 242) ' .'
+                    sh 'docker images'
+                }
             }
         }
+        // stage("Push image"){
+        //     steps{
+        //         dir("backend"){
+        //             sh 'docker image push silversky9/team-10-frontend:1.1'
+        //         }
+        //     }
+        // }
         stage('Auto tagging'){
             steps{
                 withCredentials([gitUsernamePassword(credentialsId: '698862fd-b5af-4c2b-920c-42ed9ab6ceef', gitToolName: 'Default')]) {
@@ -71,6 +76,11 @@ pipeline {
                     sh 'git push origin ' + 'v1.0.' + BUILD_NUMBER
                 }
                
+            }
+        }
+        stage('Noti'){
+            steps{
+                emailext body: 'Please check job Team-10-Backend ', subject: 'Team-10-Backend successful to CI/CD', to: '62070101@it.kmitl.ac.th'
             }
         }
         
