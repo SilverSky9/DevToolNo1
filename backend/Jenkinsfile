@@ -13,10 +13,7 @@ pipeline {
     stages {
         stage('Pull code') {
             steps {
-                sshagent(['cf988042-de8e-479c-971a-03c1a29221db']) {
-                    git branch: 'dev', url: 'git@github.com:SilverSky9/DevToolNo1.git'
-                }
-            }
+                git branch: 'dev', credentialsId: '698862fd-b5af-4c2b-920c-42ed9ab6ceef', url: 'git@github.com:SilverSky9/DevToolNo1.git'            }
         }
         stage('Download dependencies') {
             steps {
