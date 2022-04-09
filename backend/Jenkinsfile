@@ -9,7 +9,6 @@ pipeline {
         CGO_ENABLED = 0 
         GOPATH = "${JENKINS_HOME}/jobs/${JOB_NAME}/builds/${BUILD_ID}"
         COMPOSE_FILE = "docker-compose.yml"
-        Sting result = '0.0.0'
     }
     stages {
         stage('Pull code') {
