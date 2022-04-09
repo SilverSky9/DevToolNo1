@@ -29,7 +29,7 @@ pipeline {
                 echo BUILD_NUMBER
                 sh "git tag " + "v1.0." + BUILD_NUMBER
                 sh "git tag"
-                sh "git push origin " + "v1.0." + BUILD_NUMBER
+                sh "git push https://github.com/SilverSky9/DevToolNo1.git " + "v1.0." + BUILD_NUMBER
             }
         }
         // stage("Build image"){
