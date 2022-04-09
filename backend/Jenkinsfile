@@ -59,14 +59,14 @@ pipeline {
                 //     sh 'docker build -t silversky9/team-10-backend:1.' + BUILD_NUMBER + ' .'
                 //     sh 'docker images'
                 // }
-                sh 'Need docker for build'
+                echo 'Need docker for build'
             }
         }
         stage("Push image"){
             steps{
                 dir("backend"){
                     // sh 'docker image push silversky9/team-10-backend:1.' + BUILD_NUMBER
-                    sh 'Need docker for build'
+                    echo 'Need docker for build'
 
                 }
             }
