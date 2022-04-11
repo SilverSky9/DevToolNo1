@@ -13,8 +13,8 @@ pipeline {
     stages {
         stage('Pull code') {
             steps {
-               git branch: 'dev', url: 'https://github.com/SilverSky9/DevToolNo1.git'
-            }
+                    git branch: 'dev', credentialsId: '698862fd-b5af-4c2b-920c-42ed9ab6ceef', url: 'https://github.com/SilverSky9/DevToolNo1.git'
+                }
         }
         stage('Download dependencies') {
             steps {
@@ -24,11 +24,6 @@ pipeline {
                }
             }
         }
-        // stage("Build image"){
-        //     steps{
-        //         sh "docker compose -f docker-compose-build.yml build app"
-        //     }
-        // }
         stage('Unitest'){
             steps{
                 dir("backend"){
@@ -56,6 +51,34 @@ pipeline {
         stage('E2E Testing'){
             steps{
                 echo 'Now we skip E2E because we can\'t run docker'
+            }
+        }
+        stage("Build image"){
+            steps{
+                // dir("backend"){
+                //     sh 'docker build -t silversky9/team-10-backend:1.' + BUILD_NUMBER + ' .'
+                //     sh 'docker images'
+                // }
+                echo 'Need docker for build'
+            }
+        }
+        stage("Push image"){
+            steps{
+                dir("backend"){
+                    // sh 'docker image push silversky9/team-10-backend:1.' + BUILD_NUMBER
+                    echo 'Need docker for build'
+
+                }
+            }
+        }
+        stage('Auto tagging'){
+            steps{
+                withCredentials([gitUsernamePassword(credentialsId: '698862fd-b5af-4c2b-920c-42ed9ab6ceef', gitToolName: 'Default')]) {
+                    sh 'git tag ' + 'v1.0.' + BUILD_NUMBER + 'b'
+                    sh 'git tag'
+                    sh 'git push origin ' + 'v1.0.' + BUILD_NUMBER + 'b'
+                }
+               
             }
         }
         stage('Noti'){
