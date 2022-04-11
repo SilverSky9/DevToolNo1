@@ -1,15 +1,15 @@
 pipeline {
     agent any
-    tools {
-        go 'Go 1.18'
-        dockerTool 'Docker-compose-for-all-student-from-team10'
-    }
-    environment {
-        GO114MODULE = 'on'
-        CGO_ENABLED = 0 
-        GOPATH = "${JENKINS_HOME}/jobs/${JOB_NAME}/builds/${BUILD_ID}"
-        COMPOSE_FILE = "docker-compose.yml"
-    }
+    // tools {
+    //     go 'Go 1.18'
+    //     dockerTool 'Docker-compose-for-all-student-from-team10'
+    // }
+    // environment {
+    //     GO114MODULE = 'on'
+    //     CGO_ENABLED = 0 
+    //     GOPATH = "${JENKINS_HOME}/jobs/${JOB_NAME}/builds/${BUILD_ID}"
+    //     COMPOSE_FILE = "docker-compose.yml"
+    // }
     stages {
         stage('Pull code') {
             steps {
