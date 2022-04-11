@@ -2,7 +2,8 @@ version: "3"
 services:
   app:
     build: ./backend
-    container_name: team10_go_container_backend
+    image: silversky9/team-10-backend:1.2.1
+    container_name: team10_go_container
     volumes:
     - './backend:/app'
     working_dir: /app
@@ -17,8 +18,8 @@ services:
       - fullstack
   web:
     build: ./frontend
-    image: silversky9/team-10-frontend:1.0
-    container_name: team10_nginx_container_frontend
+    image: silversky9/team-10-frontend:1.2.1
+    container_name: team10_nginx_container
     ports:
       - "8010:80"
     depends_on:
