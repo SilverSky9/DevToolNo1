@@ -159,11 +159,16 @@
 
 }
 
-.btn:hover,
+.btn:hover,     
 .btn:focus,
 .btn:active {
   color: #0070f3;
   border-color: #0070f3;
+}
+
+.btnRight {
+    float: right;
+    width: 15%;
 }
 
 .item1 {

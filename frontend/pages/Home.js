@@ -164,8 +164,8 @@ const Matching = ({ tag }) => {
                             </div>
                         ))}
                     </Row>
-                    <Button variant="primary" onClick={handleShow}>
-                        Launch static backdrop modal
+                    <Button variant="primary" onClick={handleShow} className={styles.btnRight}>
+                        Create Post
                     </Button>
 
                     <Modal
