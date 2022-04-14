@@ -46,7 +46,7 @@ pipeline {
          stage('Deployment'){
             steps{
                 script{
-                    sh './bash.sh'
+                    sh './backen/bash.sh'
                 }
             }
         }
