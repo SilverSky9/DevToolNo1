@@ -1,7 +1,7 @@
 import styles from '../styles/Home.module.css'
 import { useEffect, useState } from 'react'
 import { useRouter } from 'next/router'
-import { Button, Modal } from 'react-bootstrap';
+import { Button, Modal, Row } from 'react-bootstrap';
 const tag_want = []
 var data1 = [
     {
@@ -94,23 +94,7 @@ var data2 = [
 
 
 
-export async function getInitialProps() {
-    // const router = useRouter()
-    const tag = await fetch("http://localhost:3000/tag/getall")
-    const allTag = await tag.json()
 
-    // const url = context.query.tag ||= allTag.map(tag => (tag.tag_id)).toString()
-
-    // const selectedTag = await fetch("http://34.126.190.231:3000/post/geybymultitag/" + url + ',')
-    // const selectTag = await selectedTag.json()
-
-    return {
-        props: {
-            // post: selectTag,
-            tag: allTag
-        }, // will be passed to the page component as props
-    }
-}
 
 
 
@@ -164,8 +148,8 @@ const Matching = ({ tag }) => {
                         <button className='btn btn-primary mt-2 w-100' id="search" onClick={() => GetPostBySearch()}>Search</button>
                     </div>
                 </div>
-                <main className={styles.main}>
-                    <ul>
+                <main style={{ textAlign: 'center' }}>
+                    <Row style={{ flex: 1, justifyContent: 'center' }}>
                         {posted?.map(content => (
                             <div key={content.post_id} className={styles.card} >
                                 <div id="productName" style={{ color: '#197DFF', fontSize: '50px', textAlign: 'center' }} >
@@ -179,7 +163,34 @@ const Matching = ({ tag }) => {
                                 {/* <div className={styles.logo} > <Image width={171} height={168} src={shopping_cart} alt="shopping_cart" /> {content.product_name}</div> */}
                             </div>
                         ))}
-                    </ul>
+                    </Row>
+                    <Button variant="primary" onClick={handleShow}>
+                        Launch static backdrop modal
+                    </Button>
+
+                    <Modal
+                        show={show}
+                        onHide={handleClose}
+                        backdrop="static"
+                        keyboard={false}
+                        size="lg"
+                        aria-labelledby="contained-modal-title-vcenter"
+                        centered
+                    >
+                        <Modal.Header closeButton>
+                            <Modal.Title >Modal title</Modal.Title>
+                        </Modal.Header>
+                        <Modal.Body>
+                            I will not close if you click outside me. Don't even try to press
+                            escape key.
+                        </Modal.Body>
+                        <Modal.Footer>
+                            <Button variant="secondary" onClick={handleClose}>
+                                Close
+                            </Button>
+                            <Button variant="primary">Understood</Button>
+                        </Modal.Footer>
+                    </Modal>
                 </main>
                 <div className=''>
 
@@ -207,39 +218,31 @@ const Matching = ({ tag }) => {
 
 
 
-          
-            <Button variant="primary" onClick={handleShow}>
-                Launch static backdrop modal
-            </Button>
 
-            <Modal
-                show={show}
-                onHide={handleClose}
-                backdrop="static"
-                keyboard={false}
-                size="lg"
-                aria-labelledby="contained-modal-title-vcenter"
-                centered
-            >
-                <Modal.Header closeButton>
-                <Modal.Title >Modal title</Modal.Title>
-                </Modal.Header>
-                <Modal.Body>
-                I will not close if you click outside me. Don't even try to press
-                escape key.
-                </Modal.Body>
-                <Modal.Footer>
-                <Button variant="secondary" onClick={handleClose}>
-                    Close
-                </Button>
-                <Button variant="primary">Understood</Button>
-                </Modal.Footer>
-            </Modal>
-          
+
+
         </div>
 
-        
+
     )
+}
+
+Matching.getInitialProps = async (ctx) => {
+    // const router = useRouter()
+    const tag = await fetch("http://localhost:3000/tag/getall")
+    const allTag = await tag.json()
+
+    // const url = context.query.tag ||= allTag.map(tag => (tag.tag_id)).toString()
+
+    // const selectedTag = await fetch("http://34.126.190.231:3000/post/geybymultitag/" + url + ',')
+    // const selectTag = await selectedTag.json()
+
+    return {
+
+        // post: selectTag,
+        tag: allTag
+        // will be passed to the page component as props
+    }
 }
 
 export default Matching

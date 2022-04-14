@@ -24,18 +24,10 @@ var data1 = [
         tag_id: 4,
         tag_name: "food"
     },
-   
+
 ]
 
-export const getInitialProps = async () => {
-    const res = await fetch('http://localhost:3000/tag/getall')
-    const tag = await res.json()
 
-    console.log(tag);
-    return {
-        props: { allTag: tag }
-    }
-}
 
 
 const Matching = ({ allTag = [] }) => {
@@ -84,10 +76,10 @@ const Matching = ({ allTag = [] }) => {
     // }
 
     return (
-     
+
 
         <div className={styles.container}>
-   {/* {console.log(allTag)} */}
+            {/* {console.log(allTag)} */}
             <div data-testid="custom-element">
                 <h1 className={styles.title}><a style={{ color: '#F49A35' }}>IN</a> <a style={{ color: '#197DFF' }}>this</a></h1>
                 <h1 className={styles.title}>
@@ -97,7 +89,7 @@ const Matching = ({ allTag = [] }) => {
             <main className={styles.main}>
 
                 <ul>
-                    {data1?.map((tag, index) => (
+                    {allTag.map((tag, index) => (
                         <Button key={index} id={`button `} data-testid={`${'button' + index}`} onClick={() => handleChange(tag.tag_name, tag.tag_id)} className={styles.button}>{tag.tag_name}</Button>
 
                     ))}
@@ -132,10 +124,13 @@ const Matching = ({ allTag = [] }) => {
 
 
     )
+}
+Matching.getInitialProps = async (ctx) => {
+    const res = await fetch('http://localhost:3000/tag/getall')
+    const tag = await res.json()
 
-
-
-
+    console.log(tag);
+    return { allTag: tag }
 }
 
 export default Matching
