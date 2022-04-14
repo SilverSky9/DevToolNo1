@@ -10,52 +10,28 @@ import { Button } from 'react-bootstrap';
 var data1 = [
     {
         tag_id: 1,
-        tag_name: "เครื่องใช้"
+        tag_name: "animal"
     },
     {
         tag_id: 2,
-        tag_name: "เครื่องเขียน"
+        tag_name: "com"
     },
     {
         tag_id: 3,
-        tag_name: "เครื่องดนตรี"
+        tag_name: "it"
     },
     {
         tag_id: 4,
-        tag_name: "เครื่องดื่ม"
+        tag_name: "food"
     },
-    {
-        tag_id: 5,
-        tag_name: "วิศวกรรมศาสตร์"
-    },
-    {
-        tag_id: 6,
-        tag_name: "IT"
-    },
-    {
-        tag_id: 7,
-        tag_name: "วิทยาศาสตร์"
-    },
-    {
-        tag_id: 8,
-        tag_name: "สัตว์เลี้ยง"
-    }, {
-        tag_id: 9,
-        tag_name: "งานอดิเรก"
-    }, {
-        tag_id: 10,
-        tag_name: "เครื่องนอน"
-    }, {
-        tag_id: 11,
-        tag_name: "ยานยนต์"
-    },
+   
 ]
 
 export const getInitialProps = async () => {
     const res = await fetch('http://localhost:3000/tag/getall')
     const tag = await res.json()
 
-    // console.log(tag);
+    console.log(tag);
     return {
         props: { allTag: tag }
     }
@@ -108,9 +84,10 @@ const Matching = ({ allTag = [] }) => {
     // }
 
     return (
+     
 
         <div className={styles.container}>
-
+   {/* {console.log(allTag)} */}
             <div data-testid="custom-element">
                 <h1 className={styles.title}><a style={{ color: '#F49A35' }}>IN</a> <a style={{ color: '#197DFF' }}>this</a></h1>
                 <h1 className={styles.title}>
@@ -120,7 +97,7 @@ const Matching = ({ allTag = [] }) => {
             <main className={styles.main}>
 
                 <ul>
-                    {allTag?.map((tag, index) => (
+                    {data1?.map((tag, index) => (
                         <Button key={index} id={`button `} data-testid={`${'button' + index}`} onClick={() => handleChange(tag.tag_name, tag.tag_id)} className={styles.button}>{tag.tag_name}</Button>
 
                     ))}

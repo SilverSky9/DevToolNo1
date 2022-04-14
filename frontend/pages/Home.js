@@ -1,6 +1,7 @@
 import styles from '../styles/Home.module.css'
 import { useEffect, useState } from 'react'
 import { useRouter } from 'next/router'
+import { Button, Modal } from 'react-bootstrap';
 const tag_want = []
 var data1 = [
     {
@@ -89,6 +90,10 @@ var data2 = [
         tag_name: "ยานยนต์"
     },
 ]
+
+
+
+
 export async function getInitialProps() {
     // const router = useRouter()
     const tag = await fetch("http://localhost:3000/tag/getall")
@@ -108,7 +113,14 @@ export async function getInitialProps() {
 }
 
 
+
 const Matching = ({ tag }) => {
+    const [show, setShow] = useState(false);
+
+    const handleClose = () => setShow(false);
+    const handleShow = () => setShow(true);
+
+
     const [posted, setPost] = useState([])
     // const [taged, setTag] = useState([])
     const [searchVal, setSearchVal] = useState('')
@@ -171,7 +183,7 @@ const Matching = ({ tag }) => {
                 </main>
                 <div className=''>
 
-                    <button className='btn btn-primary'>Next</button>
+                    {/* <button className='btn btn-primary'>create post</button> */}
                     {/* <Image src="../public/next_icon.svg" alt="Vercel Logo" width={62} height={16} /> */}
 
                 </div>
@@ -192,7 +204,41 @@ const Matching = ({ tag }) => {
                     </div>
                 </div>
             </div>
+
+
+
+          
+            <Button variant="primary" onClick={handleShow}>
+                Launch static backdrop modal
+            </Button>
+
+            <Modal
+                show={show}
+                onHide={handleClose}
+                backdrop="static"
+                keyboard={false}
+                size="lg"
+                aria-labelledby="contained-modal-title-vcenter"
+                centered
+            >
+                <Modal.Header closeButton>
+                <Modal.Title >Modal title</Modal.Title>
+                </Modal.Header>
+                <Modal.Body>
+                I will not close if you click outside me. Don't even try to press
+                escape key.
+                </Modal.Body>
+                <Modal.Footer>
+                <Button variant="secondary" onClick={handleClose}>
+                    Close
+                </Button>
+                <Button variant="primary">Understood</Button>
+                </Modal.Footer>
+            </Modal>
+          
         </div>
+
+        
     )
 }
 
