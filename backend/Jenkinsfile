@@ -46,7 +46,7 @@ pipeline {
          stage('Deployment'){
             steps{
                 dir("backend"){
-                    sh './bash.sh'
+                    sh ./bash.sh
                 }
             }
         }
