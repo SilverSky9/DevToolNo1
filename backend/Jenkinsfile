@@ -45,7 +45,9 @@ pipeline {
         }
          stage('Deployment'){
             steps{
-                sh './backend/bash.sh'
+                dir("backend"){
+                    sh 'bash.sh'
+                }
             }
         }
         stage('E2E Testing'){
