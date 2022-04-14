@@ -45,7 +45,9 @@ pipeline {
         }
          stage('Deployment'){
             steps{
-                echo 'Now we skip deployment becuase we can\'t run docker '
+                script{
+                    sh 'bash.sh'
+                }
             }
         }
         stage('E2E Testing'){
