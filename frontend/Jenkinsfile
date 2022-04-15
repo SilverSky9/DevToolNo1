@@ -91,13 +91,13 @@ pipeline {
      post{
         success{
             withCredentials([string(credentialsId: 'Line-noti-team10', variable: 'token')]) {
-                sh "curl https://notify-api.line.me/api/notify -H 'Authorization: Bearer ${token}' -F 'message=Frontend success 🎉'"
+                sh "curl https://notify-api.line.me/api/notify -H 'Authorization: Bearer ${token}' -F 'message=Frontend #${BUILD_NUMBER} success🎉'"
 
             }
             }
         failure{
             withCredentials([string(credentialsId: 'Line-noti-team10', variable: 'token')]) {
-                sh "curl https://notify-api.line.me/api/notify -H 'Authorization: Bearer ${token}' -F 'message=Frontend Fail ❗️'"
+                sh "curl https://notify-api.line.me/api/notify -H 'Authorization: Bearer ${token}' -F 'message=Frontend #${BUILD_NUMBER} Fail❗️'"
 
             }
             }
