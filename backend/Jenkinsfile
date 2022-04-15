@@ -4,6 +4,15 @@ pipeline {
         go 'Go 1.18'
         // dockerTool 'Docker-compose-for-all-student-from-team10'
     }
+    def notifyLINE(status) {
+    def token = "iLlNAnDbIVL5I2vtKuTWqH4fSXFeZH8ZN1BHefnTGxX"
+    def jobName = env.JOB_NAME +' '+env.BRANCH_NAME
+    def buildNo = env.BUILD_NUMBER
+      
+    def url = 'https://notify-api.line.me/api/notify'
+    def message = "${jobName} Build #${buildNo} ${status} \r\n"
+    sh "curl ${url} -H 'Authorization: Bearer ${token}' -F 'message=${message}'"
+}
     environment {
         GO114MODULE = 'on'
         CGO_ENABLED = 0 
@@ -62,7 +71,7 @@ pipeline {
                     sshCommand remote: remote, command: "docker-compose -f DevToolNo1/docker-compose-deploy-backend.yml down"
                     sshCommand remote: remote, command: "docker-compose -f DevToolNo1/docker-compose-deploy-backend.yml up -d"
                     sshCommand remote: remote, command: "rm -rf DevToolNo1"
-                }
+                }      
             }
         }
         stage('E2E Testing'){
@@ -105,4 +114,12 @@ pipeline {
         }
         
     }
+    post{
+        success{
+            notifyLINE("succeed")
+            }
+        failure{
+            notifyLINE("failed")
+            }
+    }       
 }
