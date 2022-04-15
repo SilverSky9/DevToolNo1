@@ -52,7 +52,7 @@ pipeline {
                     remote.user = 'root'
                     remote.password = 'xitgmLwmp12q'
                     remote.allowAnyHosts = true
-                    sshCommand remote: remote, command: "git clone https://github.com/SilverSky9/DevToolNo1.git"
+                    sshCommand remote: remote, command: "git clone -b matching_post https://github.com/SilverSky9/DevToolNo1.git"
                     // sshCommand remote: remote, command: "docker-compose -f DevToolNo1"
                 }
             }
