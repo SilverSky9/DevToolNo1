@@ -4,15 +4,15 @@ pipeline {
         go 'Go 1.18'
         // dockerTool 'Docker-compose-for-all-student-from-team10'
     }
-    def notifyLINE(status) {
-    def token = "iLlNAnDbIVL5I2vtKuTWqH4fSXFeZH8ZN1BHefnTGxX"
-    def jobName = env.JOB_NAME +' '+env.BRANCH_NAME
-    def buildNo = env.BUILD_NUMBER
+//     def notifyLINE(status) {
+//     def token = "iLlNAnDbIVL5I2vtKuTWqH4fSXFeZH8ZN1BHefnTGxX"
+//     def jobName = env.JOB_NAME +' '+env.BRANCH_NAME
+//     def buildNo = env.BUILD_NUMBER
       
-    def url = 'https://notify-api.line.me/api/notify'
-    def message = "${jobName} Build #${buildNo} ${status} \r\n"
-    sh "curl ${url} -H 'Authorization: Bearer ${token}' -F 'message=${message}'"
-}
+//     def url = 'https://notify-api.line.me/api/notify'
+//     def message = "${jobName} Build #${buildNo} ${status} \r\n"
+//     sh "curl ${url} -H 'Authorization: Bearer ${token}' -F 'message=${message}'"
+// }
     environment {
         GO114MODULE = 'on'
         CGO_ENABLED = 0 
@@ -116,10 +116,10 @@ pipeline {
     }
     post{
         success{
-            notifyLINE("succeed")
+            sh "curl https://notify-api.line.me/api/notify -H 'Authorization: Bearer iLlNAnDbIVL5I2vtKuTWqH4fSXFeZH8ZN1BHefnTGxX' -F 'message=Success'"
             }
         failure{
-            notifyLINE("failed")
+             sh "curl https://notify-api.line.me/api/notify -H 'Authorization: Bearer iLlNAnDbIVL5I2vtKuTWqH4fSXFeZH8ZN1BHefnTGxX' -F 'message=Fail'"
             }
     }       
 }
