@@ -1,0 +1,6 @@
+version: "3"
+services:
+  app:
+    image: silversky9/team-10-backend:1.0.251
+    build: ./backend
+    container_name: team10_go_container
