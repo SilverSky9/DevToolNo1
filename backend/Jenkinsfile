@@ -120,14 +120,12 @@ pipeline {
                 sh "curl https://notify-api.line.me/api/notify -H 'Authorization: Bearer ${token}' -F 'message=Backend success 🎉'"
 
             }
-            // sh "curl https://notify-api.line.me/api/notify -H 'Authorization: Bearer iLlNAnDbIVL5I2vtKuTWqH4fSXFeZH8ZN1BHefnTGxX' -F 'message=Success'"
             }
         failure{
             withCredentials([string(credentialsId: 'Line-noti-team10', variable: 'token')]) {
                 sh "curl https://notify-api.line.me/api/notify -H 'Authorization: Bearer ${token}' -F 'message=Backend Fail ❗️'"
 
             }
-            //  sh "curl https://notify-api.line.me/api/notify -H 'Authorization: Bearer iLlNAnDbIVL5I2vtKuTWqH4fSXFeZH8ZN1BHefnTGxX' -F 'message=Fail'"
             }
     }       
 }
