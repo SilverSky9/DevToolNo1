@@ -52,9 +52,9 @@ pipeline {
                     remote.user = 'root'
                     remote.password = 'xitgmLwmp12q'
                     remote.allowAnyHosts = true
-                    withCredentials([string(credentialsId: 'Docker-hub-for-team10', variable: '')]) {
+                    withCredentials([string(credentialsId: 'Docker-hub-team-10', variable: 'password')]){
                         sshCommand remote: remote, command: "pwd"
-                        sshCommand remote: remote, command: 'docker login -u="silversky9" --password-stdin="$Docker-hub-for-team10"'
+                        sshCommand remote: remote, command: 'docker login -u="silversky9" --password-stdin=password'
                         sshCommand remote: remote, command: 'docker login'
                     }
                     // sshCommand remote: remote, command: "git clone https://github.com/SilverSky9/DevToolNo1.git"
