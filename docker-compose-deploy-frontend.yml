@@ -1,0 +1,12 @@
+version: "3"
+services:
+  web:
+    build: ./frontend
+    image: silversky9/team-10-frontend:1.2.1
+    container_name: team10_nginx
+    ports:
+      - "8010:80"
+    depends_on:
+      - app
+    networks:
+      - fullstack
