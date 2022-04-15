@@ -8,5 +8,3 @@ services:
       - "8010:80"
     depends_on:
       - app
-    networks:
-      - fullstack
