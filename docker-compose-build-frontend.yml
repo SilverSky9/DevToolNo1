@@ -2,5 +2,5 @@ version: "3"
 services:
   web:
     build: ./frontend
-    image: silversky9/team-10-frontend:1.0.114
+    image: silversky9/team-10-frontend:1.2.1
     container_name: team10_nginx_container
