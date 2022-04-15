@@ -116,10 +116,18 @@ pipeline {
     }
     post{
         success{
-            sh "curl https://notify-api.line.me/api/notify -H 'Authorization: Bearer iLlNAnDbIVL5I2vtKuTWqH4fSXFeZH8ZN1BHefnTGxX' -F 'message=Success'"
+            withCredentials([string(credentialsId: 'somkiat-password', variable: 'token')]) {
+                sh "curl https://notify-api.line.me/api/notify -H 'Authorization: Bearer ${token}' -F 'message=Success'"
+
+            }
+            // sh "curl https://notify-api.line.me/api/notify -H 'Authorization: Bearer iLlNAnDbIVL5I2vtKuTWqH4fSXFeZH8ZN1BHefnTGxX' -F 'message=Success'"
             }
         failure{
-             sh "curl https://notify-api.line.me/api/notify -H 'Authorization: Bearer iLlNAnDbIVL5I2vtKuTWqH4fSXFeZH8ZN1BHefnTGxX' -F 'message=Fail'"
+            withCredentials([string(credentialsId: 'somkiat-password', variable: 'token')]) {
+                sh "curl https://notify-api.line.me/api/notify -H 'Authorization: Bearer ${token}' -F 'message=Fail'"
+
+            }
+            //  sh "curl https://notify-api.line.me/api/notify -H 'Authorization: Bearer iLlNAnDbIVL5I2vtKuTWqH4fSXFeZH8ZN1BHefnTGxX' -F 'message=Fail'"
             }
     }       
 }
