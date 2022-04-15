@@ -54,7 +54,7 @@ pipeline {
                     remote.allowAnyHosts = true
                     withCredentials([usernamePassword(credentialsId: 'docker-hub-team10', passwordVariable: 'pass', usernameVariable: 'user')]) {
                         sshCommand remote: remote, command: "pwd"
-                        sshCommand remote: remote, command: 'docker login -u user -p pass'
+                        sshCommand remote: remote, command: 'docker login -u ${user} -p ${pass}'
                         sshCommand remote: remote, command: 'docker login'
                     }
                     // sshCommand remote: remote, command: "git clone https://github.com/SilverSky9/DevToolNo1.git"
