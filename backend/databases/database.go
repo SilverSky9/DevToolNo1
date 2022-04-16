@@ -15,8 +15,8 @@ func TestDB() {
 }
 
 const (
-	// host = "db"
-	host = "localhost"
+	host = "128.199.128.171"
+	// host = "localhost"
 	port = 5432
 )
 
