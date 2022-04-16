@@ -1,7 +1,8 @@
 import styles from '../styles/Home.module.css'
 import { useEffect, useState } from 'react'
 import { useRouter } from 'next/router'
-import { Button, Modal, Row } from 'react-bootstrap';
+import { Button, Modal, Row, Form, Container, Col, InputGroup, FormControl , ButtonGroup, ToggleButton ,radioValue } from 'react-bootstrap';
+import axios from 'axios';
 const tag_want = []
 var data1 = [
     {
@@ -90,6 +91,21 @@ var data2 = [
         tag_name: "ยานยนต์"
     },
 ]
+var locations = [
+    {
+        location_id: 1,
+        location_name: "RNP"
+    },
+    {
+        location_id: 2,
+        location_name: "Jinda"
+    },
+    {
+        location_id: 3,
+        location_name: "V Condo"
+    }]
+
+
 
 
 
@@ -99,10 +115,26 @@ var data2 = [
 
 
 const Matching = ({ tag }) => {
-    const [show, setShow] = useState(false);
 
+    const radios = [
+        { name: 'Buyer', value: 'buy' },
+        { name: 'Seller', value: 'sell' },
+     
+    ];
+    
+    const [show, setShow] = useState(false);
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
+
+
+    const [productName, setProductName] = useState('');
+    const [detail, setDetail] = useState('');
+    const [phone, setPhone] = useState('');
+    const [radioValue, setRadioValue] = useState("buy");
+    const [location, setLocation] = useState('');
+    const [category, setCategory] = useState('');
+    const [price, setPrice] = useState();
+    const [amount, setAmount] = useState();
 
 
     const [posted, setPost] = useState([])
@@ -115,7 +147,7 @@ const Matching = ({ tag }) => {
         async function getPost() {
             let response = await fetch("http://localhost:3000/post/geybymultitag/" + url + ',')
             response = await response.json()
-            console.log(response);
+            // console.log(response);
             setPost(response)
         }
 
@@ -135,6 +167,30 @@ const Matching = ({ tag }) => {
 
         return setPost(newPost);
     };
+
+    const addPost = async () => {
+        var data = {
+            product_name: productName,
+            product_option: radioValue,
+            location: location,
+            phone_number: phone,
+            price: parseInt(price),
+            amount: parseInt(amount),
+            tag_name: category
+            // product_name: productName,
+            // product_option: radioValue,
+            // price: price 
+        }
+        await axios.post('http://localhost:3000/post/create', data)
+            .then(response  => {
+                console.log("add post success")
+                console.log(response);
+              
+            })
+
+            setTimeout('alert("sucess");', 1000);
+            setShow(false)
+    }
 
     return (
         <div className='row '>
@@ -177,18 +233,120 @@ const Matching = ({ tag }) => {
                         aria-labelledby="contained-modal-title-vcenter"
                         centered
                     >
-                        <Modal.Header closeButton>
+                        {/* <Modal.Header closeButton>
                             <Modal.Title >Modal title</Modal.Title>
-                        </Modal.Header>
+                        </Modal.Header> */}
                         <Modal.Body>
-                            I will not close if you click outside me. Don't even try to press
-                            escape key.
+                            <Container>
+                                <Row>
+                                    <Col>
+                                    {/* {productName} */}
+                                        <InputGroup className="mb-3 mt-4">
+                                            <InputGroup.Text id="inputGroup-sizing-default">Product Name</InputGroup.Text>
+                                            <FormControl
+                                                aria-label="Default"
+                                                aria-describedby="inputGroup-sizing-default"
+                                                value={productName}
+                                                onChange={(e) => setProductName(e.target.value)}
+                                            />
+                                        </InputGroup>
+                                        {/* {detail} */}
+                                        <InputGroup className="mb-3">
+                                            <InputGroup.Text id="inputGroup-sizing-default">Detail</InputGroup.Text>
+                                            <FormControl
+                                                aria-label="Default"
+                                                aria-describedby="inputGroup-sizing-default"
+                                                value={detail}
+                                                onChange={(e) => setDetail(e.target.value)}
+                                            />
+                                        </InputGroup>
+
+                                        {/* {phone} */}
+                                        <InputGroup className="mb-3">
+                                            <InputGroup.Text id="inputGroup-sizing-default">Phone</InputGroup.Text>
+                                            <FormControl
+                                                aria-label="Default"
+                                                aria-describedby="inputGroup-sizing-default"
+                                                value={phone}
+                                                onChange={(e) => setPhone(e.target.value)}
+                                            />
+                                        </InputGroup>
+
+                                        {/* {location} */}
+                                        <Form.Select aria-label="Default select example" className="mb-3" onChange={(e) => setLocation(e.currentTarget.value)}>
+                                            <option value="" selected disabled>Location</option>
+                                            {locations?.map((item, i) => (
+                                                <option value={item.location_id}>{item.location_name}</option>
+                                            ))}
+                                        </Form.Select>
+
+                                    </Col>
+
+
+                                    <Col  className="justify-content-md-center">
+                                    {/* {radioValue} */}
+                                    <ButtonGroup style={{width: '100%' }} className="mb-3 mt-4">
+                                            {radios.map((radio, idx) => (
+                                                <ToggleButton
+                                                    key={idx}
+                                                    id={`radio-${idx}`}
+                                                    type="radio"
+                                                    variant={idx % 2 ? 'outline-success' : 'outline-danger'}
+                                                    name="radio"
+                                                    value={radio.value}
+                                                    checked={radioValue === radio.value}
+                                                    onChange={(e) => setRadioValue(e.currentTarget.value)}
+                                                >
+                                                    {radio.name}
+                                                </ToggleButton>
+                                            ))}
+                                        </ButtonGroup>
+                                        
+                                        {/* {price} */}
+                                        <InputGroup className="mb-3">
+                                            <InputGroup.Text id="inputGroup-sizing-default">Price</InputGroup.Text>
+                                            <FormControl
+                                                aria-label="Default"
+                                                aria-describedby="inputGroup-sizing-default"
+                                                value={price}
+                                                onChange={(e) => setPrice(e.target.value)}
+                                            />
+                                        </InputGroup>
+
+                                        {/* {amount} */}
+                                        <InputGroup className="mb-3">
+                                            <InputGroup.Text id="inputGroup-sizing-default">Amount</InputGroup.Text>
+                                            <FormControl
+                                                aria-label="Default"
+                                                aria-describedby="inputGroup-sizing-default"
+                                                value={amount}
+                                                onChange={(e) => setAmount(e.target.value)}
+                                            />
+                                        </InputGroup>
+                                       
+                                        {/* {category} */}
+                                        <Form.Select aria-label="Default select example" className="mb-3" onChange={(e) => setCategory(e.currentTarget.value)}>
+                                            <option value="" selected disabled>Product Category</option>
+                                            {tag?.map((item, i) => (
+                                                <option value={item.tag_name}>{item.tag_name}</option>
+                                            ))}
+                                        </Form.Select>
+
+                                       
+                                    </Col>
+                                </Row>
+
+                            </Container>
                         </Modal.Body>
-                        <Modal.Footer>
-                            <Button variant="secondary" onClick={handleClose}>
-                                Close
+
+                        <Modal.Footer style={{justifyContent: 'center'}}>
+                            <Button style={{width: '30%' }}  variant="secondary" onClick={handleClose}>
+                                Cancel
                             </Button>
-                            <Button variant="primary">Understood</Button>
+
+                            <Button variant="primary" style={{width: '30%' }} onClick={addPost}>
+                                Post
+                            </Button>
                         </Modal.Footer>
                     </Modal>
                 </main>

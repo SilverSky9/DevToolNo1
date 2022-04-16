@@ -44,8 +44,9 @@ func PostRoute(r fiber.Router) {
 		if err != nil {
 			return c.Status(500).JSON(err)
 		}
-
+			
 		return c.Status(201).JSON("Create post success!")
+		
 	})
 
 	r.Get("/getbyid/:id", func(c *fiber.Ctx) error {
