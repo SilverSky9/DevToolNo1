@@ -66,7 +66,7 @@ pipeline {
                     // }
                     sshCommand remote: remote, command: "git clone -b dev https://github.com/SilverSky9/DevToolNo1.git"
                     // sshCommand remote: remote, command: "docker-compose -f DevToolNo1/docker-compose-build-frontend.yml build"
-                    sshCommand remote: remote, command: "docker stop team10_go"
+                    sshCommand remote: remote, command: "docker stop team10_nginx"
                     sshCommand remote: remote, command: "docker-compose -f DevToolNo1/frontend/docker-compose-deploy-frontend.yml up -d"
                     sshCommand remote: remote, command: "rm -rf DevToolNo1"
                 }
