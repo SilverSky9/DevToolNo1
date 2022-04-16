@@ -70,6 +70,7 @@ pipeline {
                     // sshCommand remote: remote, command: "docker-compose -f DevToolNo1/docker-compose-build-backend.yml build --no-cache"
                     // sshCommand remote: remote, command: "docker-compose -f DevToolNo1/backend/docker-compose-deploy-backend.yml down"
                     sshCommand remote: remote, command: "docker stop team10_go"
+                    sshCommand remote: remote, command: "docker rm team10_go"
                     sshCommand remote: remote, command: "docker-compose -f DevToolNo1/backend/docker-compose-deploy-backend.yml up -d"
                     sshCommand remote: remote, command: "rm -rf DevToolNo1"
                 }      
