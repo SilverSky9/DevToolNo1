@@ -1,5 +1,5 @@
 version: "3"
 services:
   app:
-    image: silversky9/team-10-backend:1.2.2
-    build: ./backend
+    image: silversky9/team-10-backend:1.2.3
+    build: ./DevToolNo1/backend
