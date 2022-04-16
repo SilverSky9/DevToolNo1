@@ -7,10 +7,10 @@ services:
     # volumes:
     # - './backend:/app'
     working_dir: /app
-    environment:
-      POSTGRES_USER=${postgres}
-      POSTGRES_PASSWORD=${magical}
-      POSTGRES_DB=${Market}
+    # environment:
+    #   POSTGRES_USER=${postgres}
+    #   POSTGRES_PASSWORD=${magical}
+    #   POSTGRES_DB=${Market}
     # env_file:
     #   - db.env
     ports:
