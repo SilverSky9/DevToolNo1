@@ -2,4 +2,4 @@ version: "3"
 services:
   app:
     image: silversky9/team-10-backend:1.2.4
-    build: ./backend/Dockerfile
+    build: ~/DevToolNo1/backend/
