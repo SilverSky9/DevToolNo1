@@ -4,8 +4,8 @@ services:
     # build: ./backend
     image: silversky9/team-10-backend:1.2.4
     container_name: team10_go
-    volumes:
-    - './backend:/app'
+    # volumes:
+    # - './backend:/app'
     working_dir: /app
     env_file:
       - db.env

@@ -70,9 +70,9 @@ pipeline {
                     sshCommand remote: remote, command: "pwd"
                     sshCommand remote: remote, command: "cd ~/DevToolNo1/"
                     sshCommand remote: remote, command: "pwd"
-                    sshCommand remote: remote, command: "docker-compose -f docker-compose-build-backend.yml build"
-                    sshCommand remote: remote, command: "docker-compose -f docker-compose-deploy-backend.yml down"
-                    sshCommand remote: remote, command: "docker-compose -f docker-compose-deploy-backend.yml up -d"
+                    sshCommand remote: remote, command: "docker-compose -f DevToolNo1/docker-compose-build-backend.yml build"
+                    sshCommand remote: remote, command: "docker-compose -f DevToolNo1/docker-compose-deploy-backend.yml down"
+                    sshCommand remote: remote, command: "docker-compose -f DevToolNo1/ocker-compose-deploy-backend.yml up -d"
                     sshCommand remote: remote, command: "rm -rf DevToolNo1"
                 }      
             }
