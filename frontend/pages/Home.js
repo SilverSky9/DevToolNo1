@@ -1,7 +1,7 @@
 import styles from '../styles/Home.module.css'
 import { useEffect, useState } from 'react'
 import { useRouter } from 'next/router'
-import { Button, Modal, Row, Form, Container, Col, InputGroup, FormControl , ButtonGroup, ToggleButton ,radioValue } from 'react-bootstrap';
+import { Button, Modal, Row, Form, Container, Col, InputGroup, FormControl, ButtonGroup, ToggleButton, radioValue, FloatingLabel } from 'react-bootstrap';
 import axios from 'axios';
 const tag_want = []
 var data1 = [
@@ -111,11 +111,24 @@ const Matching = ({ tag }) => {
     const radios = [
         { name: 'Buyer', value: 'buy' },
         { name: 'Seller', value: 'sell' },
-     
+
     ];
 
     const [show, setShow] = useState(false);
-    const handleClose = () => setShow(false);
+    const handleClose = () => {
+        setShow(false)
+        setProductName('')
+        setDetail('')
+        setPhone('')
+        setRadioValue("buy")
+        setLocation('')
+        setCategory('')
+        setPrice('')
+        setAmount('')
+        setValidated(false)
+
+    
+    };
     const handleShow = () => setShow(true);
 
 
@@ -128,9 +141,11 @@ const Matching = ({ tag }) => {
     const [price, setPrice] = useState();
     const [amount, setAmount] = useState();
 
+    const [validated, setValidated] = useState(false);
 
 
-    
+
+
     const [posted, setPost] = useState([])
     // const [taged, setTag] = useState([])
     const [searchVal, setSearchVal] = useState('')
@@ -173,7 +188,7 @@ const Matching = ({ tag }) => {
             price: 2543,
             amount: 33,
             tag_name: "Beauty"
-            
+
             // product_name: productName,
             // product_option: radioValue,
             // location: location,
@@ -187,204 +202,250 @@ const Matching = ({ tag }) => {
             // price: price 
         }
         await axios.post('http://localhost:3000/post/create', data)
-            .then(response  => {
+            .then(response => {
                 console.log("add post success")
                 console.log(response);
-              
+
             })
 
-            setTimeout('alert("sucess");', 1000);
-            setShow(false)
+        setTimeout('alert("sucess");', 1000);
+        setShow(false)
     }
+
+    const handleSubmit = (event) => {
+        const form = event.currentTarget;
+        if (form.checkValidity() === false) {
+            event.preventDefault();
+            event.stopPropagation();
+        }
+
+        setValidated(true);
+    };
+
 
     return (
         <div className='row '>
-        {/* {router.query.tag.map(tag => <h1>{tag}<h1 /> )} */}
-        <div className='col-10 px-5'>
-            <div className='row mt-4'>
-                <div className='col-10 '>
-                    <input className='w-100 mt-2 p-2 form-control' onChange={e => setSearchVal(e.target.value)}></input>
+            {/* {router.query.tag.map(tag => <h1>{tag}<h1 /> )} */}
+            <div className='col-10 px-5'>
+                <div className='row mt-4'>
+                    <div className='col-10 '>
+                        <input className='w-100 mt-2 p-2 form-control' onChange={e => setSearchVal(e.target.value)}></input>
+                    </div>
+                    <div className='col-2'>
+                        <button className='btn btn-primary mt-2 w-100' id="search" onClick={() => GetPostBySearch()}>Search</button>
+                    </div>
                 </div>
-                <div className='col-2'>
-                    <button className='btn btn-primary mt-2 w-100' id="search" onClick={() => GetPostBySearch()}>Search</button>
-                </div>
-            </div>
-            <main style={{ textAlign: 'center' }}>
-                <Row style={{ flex: 1, justifyContent: 'center' }}>
-                    {posted?.map(content => (
-                        <div key={content.post_id} className={styles.card} >
-                            <div id="productName" style={{ color: '#197DFF', fontSize: '50px', textAlign: 'center' }} >
-                                {/* <div className={styles.logo} > <Image width={171} height={168} src={shopping_cart} alt="shopping_cart" /> {content.product_name}</div> */}
-                                {content.product_name} <br></br>
-                            </div>
-                            <div >
-                                ราคา : {content.price} / ชิ้น <br></br>
-                                จำนวน : {content.amount} ชิ้น
-                            </div>
-                            {/* <div className={styles.logo} > <Image width={171} height={168} src={shopping_cart} alt="shopping_cart" /> {content.product_name}</div> */}
-                        </div>
-                    ))}
-                </Row>
-                <Button variant="primary" onClick={handleShow} className={styles.btnRight}>
-                    Create Post
-                </Button>
-
-                <Modal
-                    show={show}
-                    onHide={handleClose}
-                    backdrop="static"
-                    keyboard={false}
-                    size="lg"
-                    aria-labelledby="contained-modal-title-vcenter"
-                    centered
-                >
-                    {/* <Modal.Header closeButton>
-                        <Modal.Title >Modal title</Modal.Title>
-                    </Modal.Header> */}
-                    <Modal.Body>
-                        <Container>
-                            <Row>
-                                <Col>
-                                {/* {productName} */}
-                                    <InputGroup className="mb-3 mt-4">
-                                        <InputGroup.Text id="inputGroup-sizing-default">Product Name</InputGroup.Text>
-                                        <FormControl
-                                            aria-label="Default"
-                                            aria-describedby="inputGroup-sizing-default"
-                                            value={productName}
-                                            onChange={(e) => setProductName(e.target.value)}
-                                        />
-                                    </InputGroup>
-                                    {/* {detail} */}
-                                    <InputGroup className="mb-3">
-                                        <InputGroup.Text id="inputGroup-sizing-default">Detail</InputGroup.Text>
-                                        <FormControl
-                                            aria-label="Default"
-                                            aria-describedby="inputGroup-sizing-default"
-                                            value={detail}
-                                            onChange={(e) => setDetail(e.target.value)}
-                                        />
-                                    </InputGroup>
-
-                                    {/* {phone} */}
-                                    <InputGroup className="mb-3">
-                                        <InputGroup.Text id="inputGroup-sizing-default">Phone</InputGroup.Text>
-                                        <FormControl
-                                            aria-label="Default"
-                                            aria-describedby="inputGroup-sizing-default"
-                                            value={phone}
-                                            onChange={(e) => setPhone(e.target.value)}
-                                        />
-                                    </InputGroup>
-
-                                    {/* {location} */}
-                                    <Form.Select aria-label="Default select example" className="mb-3" onChange={(e) => setLocation(e.currentTarget.value)}>
-                                        <option value="" selected disabled>Location</option>
-                                        {locations?.map((item, i) => (
-                                            <option value={item.location_id}>{item.location_name}</option>
-                                        ))}
-                                    </Form.Select>
-
-                                </Col>
-
-
-                                <Col  className="justify-content-md-center">
-                                {/* {radioValue} */}
-                                <ButtonGroup style={{width: '100%' }} className="mb-3 mt-4">
-                                        {radios.map((radio, idx) => (
-                                            <ToggleButton
-                                                key={idx}
-                                                id={`radio-${idx}`}
-                                                type="radio"
-                                                variant={idx % 2 ? 'outline-success' : 'outline-danger'}
-                                                name="radio"
-                                                value={radio.value}
-                                                checked={radioValue === radio.value}
-                                                onChange={(e) => setRadioValue(e.currentTarget.value)}
-                                            >
-                                                {radio.name}
-                                            </ToggleButton>
-                                        ))}
-                                    </ButtonGroup>
-                                    
-                                    {/* {price} */}
-                                    <InputGroup className="mb-3">
-                                        <InputGroup.Text id="inputGroup-sizing-default">Price</InputGroup.Text>
-                                        <FormControl
-                                            aria-label="Default"
-                                            aria-describedby="inputGroup-sizing-default"
-                                            value={price}
-                                            onChange={(e) => setPrice(e.target.value)}
-                                        />
-                                    </InputGroup>
-
-                                    {/* {amount} */}
-                                    <InputGroup className="mb-3">
-                                        <InputGroup.Text id="inputGroup-sizing-default">Amount</InputGroup.Text>
-                                        <FormControl
-                                            aria-label="Default"
-                                            aria-describedby="inputGroup-sizing-default"
-                                            value={amount}
-                                            onChange={(e) => setAmount(e.target.value)}
-                                        />
-                                    </InputGroup>
-                                   
-                                    {/* {category} */}
-                                    <Form.Select aria-label="Default select example" className="mb-3" onChange={(e) => setCategory(e.currentTarget.value)}>
-                                        <option value="" selected disabled>Product Category</option>
-                                        {tag?.map((item, i) => (
-                                            <option value={item.tag_name}>{item.tag_name}</option>
-                                        ))}
-                                    </Form.Select>
-
-                                   
-                                </Col>
-                            </Row>
-
-                        </Container>
-                    </Modal.Body>
-
-                    <Modal.Footer style={{justifyContent: 'center'}}>
-                        <Button style={{width: '30%' }}  variant="secondary" onClick={handleClose}>
-                            Cancel
-                        </Button>
-
-                        <Button variant="primary" style={{width: '30%' }} onClick={addPost}>
-                            Post
-                        </Button>
-                    </Modal.Footer>
-                </Modal>
-            </main>
-            <div className=''>
-
-                {/* <button className='btn btn-primary'>create post</button> */}
-                {/* <Image src="../public/next_icon.svg" alt="Vercel Logo" width={62} height={16} /> */}
-
-            </div>
-        </div>
-        <div className='col-2 bg-light '>
-            <div className='row mt-4 position-fixed '>
-                <div style={{ color: 'rgb(75, 75, 75)' }}>
-                    <ul>
-                        {tag?.map((item, i) => (
-                            <div key={i} className={`tag ${styles.tag}`} onClick={() => {
-                                GetPostByTag(item.tag_id)
-                            }}  >
-                                <div > {item.tag_name}
+                <main style={{ textAlign: 'center' }}>
+                    <Row style={{ flex: 1, justifyContent: 'center' }}>
+                        {posted?.map(content => (
+                            <div key={content.post_id} className={styles.card} >
+                                <div id="productName" style={{ color: '#197DFF', fontSize: '50px', textAlign: 'center' }} >
+                                    {/* <div className={styles.logo} > <Image width={171} height={168} src={shopping_cart} alt="shopping_cart" /> {content.product_name}</div> */}
+                                    {content.product_name} <br></br>
                                 </div>
+                                <div >
+                                    ราคา : {content.price} / ชิ้น <br></br>
+                                    จำนวน : {content.amount} ชิ้น
+                                </div>
+                                {/* <div className={styles.logo} > <Image width={171} height={168} src={shopping_cart} alt="shopping_cart" /> {content.product_name}</div> */}
                             </div>
                         ))}
-                    </ul>
+                    </Row>
+                    <Button variant="primary" onClick={handleShow} className={styles.btnRight}>
+                        Create Post
+                    </Button>
+
+                    <Modal
+                        show={show}
+                        onHide={handleClose}
+                        backdrop="static"
+                        keyboard={false}
+                        size="lg"
+                        aria-labelledby="contained-modal-title-vcenter"
+                        centered
+                    >
+                        {/* <Modal.Header closeButton>
+                        <Modal.Title >Modal title</Modal.Title>
+                    </Modal.Header> */}
+                        <Modal.Body>
+                            <Container>
+                                <Form noValidate validated={validated} onSubmit={handleSubmit}>
+                                    <Row>
+                                        <Col>
+
+                                            {/* {productName} */}
+                                            <Form.Group md="4" controlId="validationCustom01" className="mb-3 mt-4">
+                                                {/* <Form.Label>Product Name</Form.Label> */}
+
+                                                <FloatingLabel controlId="floatingInputGrid" label="Product Name">
+                                                    <Form.Control
+                                                        required
+                                                        type="text"
+                                                        placeholder="Product Name"
+                                                        defaultValue={productName}
+                                                        onChange={(e) => setProductName(e.target.value)} />
+                                                </FloatingLabel>
+                                                <Form.Control.Feedback>Looks good!</Form.Control.Feedback>
+                                            </Form.Group>
+
+                                            {/* {detail} */}
+                                            {/* <InputGroup className="mb-3">
+                                                <InputGroup.Text id="inputGroup-sizing-default">Detail</InputGroup.Text>
+                                                <FormControl
+                                                    aria-label="Default"
+                                                    aria-describedby="inputGroup-sizing-default"
+                                                    value={detail}
+                                                    onChange={(e) => setDetail(e.target.value)}
+                                                />
+                                            </InputGroup> */}
+                                            <Form.Group md="4" controlId="validationCustom01" className="mb-3 mt-4">
+                                                <FloatingLabel controlId="floatingInputGrid" label="Detail">
+                                                    <Form.Control
+                                                        required
+                                                        type="text"
+                                                        placeholder="Detail"
+                                                        defaultValue={detail}
+                                                        onChange={(e) => setDetail(e.target.value)} />
+                                                </FloatingLabel>
+                                                <Form.Control.Feedback>Looks good!</Form.Control.Feedback>
+                                            </Form.Group>
+
+                                        
+                                            {/* {phone} */}
+                                          
+                                            <Form.Group md="4" controlId="validationCustom01" className="mb-3 mt-4">
+                                                <FloatingLabel controlId="floatingInputGrid" label="Phone">
+                                                    <Form.Control
+                                                        required
+                                                        type="number"
+                                                        placeholder="Phone"
+                                                        defaultValue={phone}
+                                                        onChange={(e) => setPhone(e.target.value)} />
+                                                </FloatingLabel>
+                                                <Form.Control.Feedback>Looks good!</Form.Control.Feedback>
+                                            </Form.Group>
+
+
+                                            {/* {location} */}
+                                            <Form.Select aria-label="Default select example" className="mb-3" onChange={(e) => setLocation(e.currentTarget.value)} required>
+                                                <option value="" selected disabled>Location</option>
+                                                {locations?.map((item, i) => (
+                                                    <option value={item.location_id}>{item.location_name}</option>
+                                                ))}
+                                            </Form.Select>
+
+                                        </Col>
+
+
+                                        <Col className="justify-content-md-center">
+                                            {/* {radioValue} */}
+                                            <ButtonGroup style={{ width: '100%' }} className="mb-3 mt-4">
+                                                {radios.map((radio, idx) => (
+                                                    <ToggleButton
+                                                        key={idx}
+                                                        id={`radio-${idx}`}
+                                                        type="radio"
+                                                        variant={idx % 2 ? 'outline-success' : 'outline-danger'}
+                                                        name="radio"
+                                                        value={radio.value}
+                                                        checked={radioValue === radio.value}
+                                                        onChange={(e) => setRadioValue(e.currentTarget.value)}
+                                                    >
+                                                        {radio.name}
+                                                    </ToggleButton>
+                                                ))}
+                                            </ButtonGroup>
+
+                                            {/* {price} */}
+                                            <Form.Group md="4" controlId="validationCustom01" className="mb-3 mt-4">
+                                                <FloatingLabel controlId="floatingInputGrid" label="Price">
+                                                    <Form.Control
+                                                        required
+                                                        type="number"
+                                                        placeholder="Price"
+                                                        defaultValue={price}
+                                                        onChange={(e) => setPrice(e.target.value)} />
+                                                </FloatingLabel>
+                                                <Form.Control.Feedback>Looks good!</Form.Control.Feedback>
+                                            </Form.Group>
+
+                                            {/* {amount} */}
+                                            <Form.Group md="4" controlId="validationCustom01" className="mb-3 mt-4">
+                                                <FloatingLabel controlId="floatingInputGrid" label="Amount">
+                                                    <Form.Control
+                                                        required
+                                                        type="number"
+                                                        placeholder="Amount"
+                                                        defaultValue={amount}
+                                                        onChange={(e) => setAmount(e.target.value)} />
+                                                </FloatingLabel>
+                                                <Form.Control.Feedback>Looks good!</Form.Control.Feedback>
+                                            </Form.Group>
+
+                                            {/* {category} */}
+                                            <Form.Select aria-label="Default select example" className="mb-3" onChange={(e) => setCategory(e.currentTarget.value)} required>
+                                                <option value="" selected disabled>Product Category</option>
+                                                {tag?.map((item, i) => (
+                                                    <option value={item.tag_name}>{item.tag_name}</option>
+                                                ))}
+                                            </Form.Select>
+
+
+                                        </Col>
+                                    </Row>
+                                    <Row style={{ justifyContent: 'center' }}>
+                                        <Button className="mx-3" type="submit" variant="primary" style={{ width: '30%' }}
+                                        // onClick={addPost}
+                                        >
+                                            Post
+                                        </Button>
+
+
+                                        <Button className="mx-3" style={{ width: '30%' }} variant="secondary" onClick={handleClose}>
+                                            Cancel
+                                        </Button>
+                                    </Row>
+                                </Form>
+                            </Container>
+                        </Modal.Body>
+
+                        <Modal.Footer style={{ justifyContent: 'center' }}>
+
+
+
+                        </Modal.Footer>
+                    </Modal>
+                </main>
+                <div className=''>
+
+                    {/* <button className='btn btn-primary'>create post</button> */}
+                    {/* <Image src="../public/next_icon.svg" alt="Vercel Logo" width={62} height={16} /> */}
+
                 </div>
             </div>
+            <div className='col-2 bg-light '>
+                <div className='row mt-4 position-fixed '>
+                    <div style={{ color: 'rgb(75, 75, 75)' }}>
+                        <ul>
+                            {tag?.map((item, i) => (
+                                <div key={i} className={`tag ${styles.tag}`} onClick={() => {
+                                    GetPostByTag(item.tag_id)
+                                }}  >
+                                    <div > {item.tag_name}
+                                    </div>
+                                </div>
+                            ))}
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+
+
+
+
+
         </div>
-
-
-
-
-
-
-    </div>
     )
 }
 Matching.getInitialProps = async () => {
@@ -398,9 +459,9 @@ Matching.getInitialProps = async () => {
     // const selectTag = await selectedTag.json()
 
     return {
-        
-            // post: selectTag,
-            tag: allTag
+
+        // post: selectTag,
+        tag: allTag
         // will be passed to the page component as props
     }
 }
