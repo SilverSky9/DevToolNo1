@@ -89,23 +89,7 @@ var data2 = [
         tag_name: "ยานยนต์"
     },
 ]
-export async function getInitialProps() {
-    // const router = useRouter()
-    const tag = await fetch("http://localhost:3000/tag/getall")
-    const allTag = await tag.json()
 
-    // const url = context.query.tag ||= allTag.map(tag => (tag.tag_id)).toString()
-
-    // const selectedTag = await fetch("http://34.126.190.231:3000/post/geybymultitag/" + url + ',')
-    // const selectTag = await selectedTag.json()
-
-    return {
-        props: {
-            // post: selectTag,
-            tag: allTag
-        }, // will be passed to the page component as props
-    }
-}
 
 
 const Matching = ({ tag }) => {
@@ -195,5 +179,21 @@ const Matching = ({ tag }) => {
         </div>
     )
 }
+Matching.getInitialProps = async () => {
+    // const router = useRouter()
+    const tag = await fetch("http://localhost:3000/tag/getall")
+    const allTag = await tag.json()
 
+    // const url = context.query.tag ||= allTag.map(tag => (tag.tag_id)).toString()
+
+    // const selectedTag = await fetch("http://34.126.190.231:3000/post/geybymultitag/" + url + ',')
+    // const selectTag = await selectedTag.json()
+
+    return {
+        
+            // post: selectTag,
+            tag: allTag
+        // will be passed to the page component as props
+    }
+}
 export default Matching
