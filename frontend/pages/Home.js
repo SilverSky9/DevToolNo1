@@ -178,6 +178,7 @@ const Matching = ({ tag }) => {
     };
 
     const addPost = async () => {
+     
         var data = {
             product_name: productName,
             product_option: radioValue,
@@ -187,17 +188,17 @@ const Matching = ({ tag }) => {
             amount: parseInt(amount),
             tag_name: category
 
-           
         }
         await axios.post('http://159.223.45.216:3010/post/create', data)
             .then(response => {
                 console.log("add post success")
                 console.log(response);
-
+            
             })
-
-        setTimeout('alert("sucess");', 1000);
+            handleClose()
+            setTimeout('alert("sucess");', 500);
         setShow(false)
+    
 
     }
 
@@ -207,7 +208,10 @@ const Matching = ({ tag }) => {
           event.preventDefault();
           event.stopPropagation();
         }
-        else { addPost()}
+        else { 
+            addPost()
+            event.preventDefault();
+        }
     
         setValidated(true);
       };
