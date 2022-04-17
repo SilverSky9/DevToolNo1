@@ -6,3 +6,9 @@ services:
     container_name: team10_nginx
     ports:
       - "8010:80"
+    networks:
+      - fullstack
+
+networks:
+  fullstack:
+    driver: bridge

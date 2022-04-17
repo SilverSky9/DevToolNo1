@@ -15,3 +15,9 @@ services:
     #   - db.env
     ports:
     - 3010:3000
+    networks:
+      - fullstack
+
+networks:
+  fullstack:
+    driver: bridge
