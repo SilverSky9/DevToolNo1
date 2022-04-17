@@ -1,7 +1,7 @@
 import styles from '../styles/Home.module.css'
 import { useEffect, useState } from 'react'
 import { useRouter } from 'next/router'
-import { Button, Modal, Row, Form, Container, Col, InputGroup, FormControl, ButtonGroup, ToggleButton, radioValue, FloatingLabel } from 'react-bootstrap';
+import { Button, Modal, Row, Form, Container, Col, InputGroup, FormControl, ButtonGroup, ToggleButton, radioValue, FloatingLabel, Card } from 'react-bootstrap';
 import axios from 'axios';
 const tag_want = []
 var data1 = [
@@ -127,7 +127,7 @@ const Matching = ({ tag }) => {
         setAmount('')
         setValidated(false)
 
-    
+
     };
     const handleShow = () => setShow(true);
 
@@ -179,27 +179,15 @@ const Matching = ({ tag }) => {
 
     const addPost = async () => {
         var data = {
+            product_name: productName,
+            product_option: radioValue,
+            location: location,
+            phone_number: phone,
+            price: parseInt(price),
+            amount: parseInt(amount),
+            tag_name: category
 
-
-            product_name: "Gucci Belt",
-            product_option: "buy",
-            location: "RNP",
-            phone_number: "0812345678",
-            price: 2543,
-            amount: 33,
-            tag_name: "Beauty"
-
-            // product_name: productName,
-            // product_option: radioValue,
-            // location: location,
-            // phone_number: phone,
-            // price: parseInt(price),
-            // amount: parseInt(amount),
-            // tag_name: category
-
-            // product_name: productName,
-            // product_option: radioValue,
-            // price: price 
+           
         }
         await axios.post('http://localhost:3000/post/create', data)
             .then(response => {
@@ -210,17 +198,19 @@ const Matching = ({ tag }) => {
 
         setTimeout('alert("sucess");', 1000);
         setShow(false)
+
     }
 
     const handleSubmit = (event) => {
         const form = event.currentTarget;
         if (form.checkValidity() === false) {
-            event.preventDefault();
-            event.stopPropagation();
+          event.preventDefault();
+          event.stopPropagation();
         }
-
+        else { addPost()}
+    
         setValidated(true);
-    };
+      };
 
 
     return (
@@ -238,23 +228,31 @@ const Matching = ({ tag }) => {
                 <main style={{ textAlign: 'center' }}>
                     <Row style={{ flex: 1, justifyContent: 'center' }}>
                         {posted?.map(content => (
-                            <div key={content.post_id} className={styles.card} >
-                                <div id="productName" style={{ color: '#197DFF', fontSize: '50px', textAlign: 'center' }} >
-                                    {/* <div className={styles.logo} > <Image width={171} height={168} src={shopping_cart} alt="shopping_cart" /> {content.product_name}</div> */}
-                                    {content.product_name} <br></br>
-                                </div>
-                                <div >
-                                    ราคา : {content.price} / ชิ้น <br></br>
-                                    จำนวน : {content.amount} ชิ้น
-                                </div>
-                                {/* <div className={styles.logo} > <Image width={171} height={168} src={shopping_cart} alt="shopping_cart" /> {content.product_name}</div> */}
+                            // <div key={content.post_id} className={styles.card} >
+                            <div key={content.post_id}>
+                                <Card className={styles.card}  >
+                                    <Card.Header id="productName" className="h2 text-center">{content.product_name}</Card.Header>
+                                    <Card.Body>
+                                        {/* <Card.Title>{content.product_name}</Card.Title> */}
+                                        <Card.Text>
+                                            ราคา : {content.price} / ชิ้น <br></br>
+                                            จำนวน : {content.amount} ชิ้น
+                                        </Card.Text>
+                                    </Card.Body>
+                                    <Card.Footer className="text-muted " style={{ textAlign: 'right' }} >{content.post_date.slice(0, 10)}</Card.Footer>
+                                </Card>
                             </div>
                         ))}
                     </Row>
-                    <Button variant="primary" onClick={handleShow} className={styles.btnRight}>
-                        Create Post
+
+
+                    <Row>
+                        <Button variant="primary" onClick={handleShow} className={styles.btnRight}>
+                        +
                     </Button>
 
+                    </Row>
+                    
                     <Modal
                         show={show}
                         onHide={handleClose}
@@ -275,8 +273,6 @@ const Matching = ({ tag }) => {
 
                                             {/* {productName} */}
                                             <Form.Group md="4" controlId="validationCustom01" className="mb-3 mt-4">
-                                                {/* <Form.Label>Product Name</Form.Label> */}
-
                                                 <FloatingLabel controlId="floatingInputGrid" label="Product Name">
                                                     <Form.Control
                                                         required
@@ -286,7 +282,7 @@ const Matching = ({ tag }) => {
                                                         onChange={(e) => setProductName(e.target.value)}
                                                         data-testid="product_name"
                                                         name='productName'
-                                                        />
+                                                    />
                                                 </FloatingLabel>
                                                 <Form.Control.Feedback>Looks good!</Form.Control.Feedback>
                                             </Form.Group>
@@ -301,25 +297,25 @@ const Matching = ({ tag }) => {
                                                     onChange={(e) => setDetail(e.target.value)}
                                                 />
                                             </InputGroup> */}
-                                            <Form.Group md="4" controlId="validationCustom01" className="mb-3 mt-4">
+                                            <Form.Group md="4" controlId="validationCustom02" className="mb-3 mt-4">
                                                 <FloatingLabel controlId="floatingInputGrid" label="Detail">
                                                     <Form.Control
                                                         required
                                                         type="text"
                                                         placeholder="Detail"
                                                         defaultValue={detail}
-                                                        onChange={(e) => setDetail(e.target.value)} 
+                                                        onChange={(e) => setDetail(e.target.value)}
                                                         data-testid="product_detail"
                                                         name='productDetail'
-                                                        />
+                                                    />
                                                 </FloatingLabel>
                                                 <Form.Control.Feedback>Looks good!</Form.Control.Feedback>
                                             </Form.Group>
 
-                                        
+
                                             {/* {phone} */}
-                                          
-                                            <Form.Group md="4" controlId="validationCustom01" className="mb-3 mt-4">
+
+                                            <Form.Group md="4" controlId="validationCustom03" className="mb-3 mt-4">
                                                 <FloatingLabel controlId="floatingInputGrid" label="Phone">
                                                     <Form.Control
                                                         required
@@ -329,7 +325,7 @@ const Matching = ({ tag }) => {
                                                         onChange={(e) => setPhone(e.target.value)}
                                                         data-testid="phone"
                                                         name="phone"
-                                                        />
+                                                    />
                                                 </FloatingLabel>
                                                 <Form.Control.Feedback>Looks good!</Form.Control.Feedback>
                                             </Form.Group>
@@ -367,7 +363,7 @@ const Matching = ({ tag }) => {
                                             </ButtonGroup>
 
                                             {/* {price} */}
-                                            <Form.Group md="4" controlId="validationCustom01" className="mb-3 mt-4">
+                                            <Form.Group md="4" controlId="validationCustom04" className="mb-3 mt-4">
                                                 <FloatingLabel controlId="floatingInputGrid" label="Price">
                                                     <Form.Control
                                                         required
@@ -377,13 +373,13 @@ const Matching = ({ tag }) => {
                                                         onChange={(e) => setPrice(e.target.value)}
                                                         data-testid="price"
                                                         name='price'
-                                                        />
+                                                    />
                                                 </FloatingLabel>
                                                 <Form.Control.Feedback>Looks good!</Form.Control.Feedback>
                                             </Form.Group>
 
                                             {/* {amount} */}
-                                            <Form.Group md="4" controlId="validationCustom01" className="mb-3 mt-4">
+                                            <Form.Group md="4" controlId="validationCustom05" className="mb-3 mt-4">
                                                 <FloatingLabel controlId="floatingInputGrid" label="Amount">
                                                     <Form.Control
                                                         required
@@ -393,7 +389,7 @@ const Matching = ({ tag }) => {
                                                         onChange={(e) => setAmount(e.target.value)}
                                                         data-testid="amount"
                                                         name="amount"
-                                                        />
+                                                    />
                                                 </FloatingLabel>
                                                 <Form.Control.Feedback>Looks good!</Form.Control.Feedback>
                                             </Form.Group>
@@ -411,11 +407,11 @@ const Matching = ({ tag }) => {
                                     </Row>
                                     <Row style={{ justifyContent: 'center' }}>
                                         <Button className="mx-3" type="submit" variant="primary" style={{ width: '30%' }}
-                                        // onClick={addPost}
-                                        data-testid="post_button"
+                                            data-testid="post_button"
                                         >
                                             Post
                                         </Button>
+
 
 
                                         <Button className="mx-3" style={{ width: '30%' }} variant="secondary" onClick={handleClose}>
@@ -441,14 +437,14 @@ const Matching = ({ tag }) => {
                 </div>
             </div>
             <div className='col-2 bg-light '>
-                <div className='row mt-4 position-fixed '>
+                <div className='row mt-4 position-fixed'>
                     <div style={{ color: 'rgb(75, 75, 75)' }}>
                         <ul>
                             {tag?.map((item, i) => (
-                                <div key={i} className={`tag ${styles.tag}`} onClick={() => {
+                                <div key={i} className={`tag ${styles.tag}  bg-dark text-light`} onClick={() => {
                                     GetPostByTag(item.tag_id)
                                 }}  >
-                                    <div > {item.tag_name}
+                                    <div > {item.tag_name} 
                                     </div>
                                 </div>
                             ))}
