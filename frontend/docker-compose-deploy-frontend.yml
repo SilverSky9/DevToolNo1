@@ -1,0 +1,14 @@
+version: "3"
+services:
+  web:
+    build: .
+    image: silversky9/team-10-frontend:1.2.1
+    container_name: team10_nginx
+    ports:
+      - "8010:80"
+    networks:
+      - fullstack
+
+networks:
+  fullstack:
+    driver: bridge

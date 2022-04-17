@@ -2,8 +2,17 @@ pipeline {
     agent any
     tools {
         go 'Go 1.18'
-        dockerTool 'Docker-compose-for-all-student-from-team10'
+        // dockerTool 'Docker-compose-for-all-student-from-team10'
     }
+//     def notifyLINE(status) {
+//     def token = "iLlNAnDbIVL5I2vtKuTWqH4fSXFeZH8ZN1BHefnTGxX"
+//     def jobName = env.JOB_NAME +' '+env.BRANCH_NAME
+//     def buildNo = env.BUILD_NUMBER
+      
+//     def url = 'https://notify-api.line.me/api/notify'
+//     def message = "${jobName} Build #${buildNo} ${status} \r\n"
+//     sh "curl ${url} -H 'Authorization: Bearer ${token}' -F 'message=${message}'"
+// }
     environment {
         GO114MODULE = 'on'
         CGO_ENABLED = 0 
@@ -43,9 +52,26 @@ pipeline {
                 }
             }
         }
-         stage('Deployment'){
+        stage('Deployment'){
             steps{
-                echo 'Now we skip deployment becuase we can\'t run docker '
+                script{
+                    def remote = [:]
+                    remote.name = "root"
+                    remote.host = '159.223.45.216'
+                    remote.user = 'root'
+                    remote.password = 'xitgmLwmp12q'
+                    remote.allowAnyHosts = true
+                    // withCredentials([usernamePassword(credentialsId: 'docker-hub-team10', passwordVariable: 'pass', usernameVariable: 'user')]) {
+                    //     sshCommand remote: remote, command: "pwd"
+                    //     sshCommand remote: remote, command: 'docker login -u $user -p ${pass}'
+                    //     sshCommand remote: remote, command: 'docker login'
+                    // }
+                    sshCommand remote: remote, command: "git clone -b dev https://github.com/SilverSky9/DevToolNo1.git"
+                    sshCommand remote: remote, command: "docker-compose -f DevToolNo1/backend/docker-compose-build-backend.yml build --no-cache"
+                    sshCommand remote: remote, command: "docker-compose -f DevToolNo1/backend/docker-compose-deploy-backend.yml down --remove-orphans"
+                    sshCommand remote: remote, command: "docker-compose -f DevToolNo1/backend/docker-compose-deploy-backend.yml up -d"
+                    sshCommand remote: remote, command: "rm -rf DevToolNo1"
+                }      
             }
         }
         stage('E2E Testing'){
@@ -88,4 +114,18 @@ pipeline {
         }
         
     }
+    post{
+        success{
+            withCredentials([string(credentialsId: 'Line-noti-team10', variable: 'token')]) {
+                sh "curl https://notify-api.line.me/api/notify -H 'Authorization: Bearer ${token}' -F 'message=Backend #${BUILD_NUMBER} success🎉'"
+
+            }
+            }
+        failure{
+            withCredentials([string(credentialsId: 'Line-noti-team10', variable: 'token')]) {
+                sh "curl https://notify-api.line.me/api/notify -H 'Authorization: Bearer ${token}' -F 'message=Backend #${BUILD_NUMBER} Fail❗️'"
+
+            }
+            }
+    }       
 }

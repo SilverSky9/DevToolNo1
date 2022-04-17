@@ -1,0 +1,23 @@
+version: "3"
+services:
+  app_go:
+    # build: .
+    image: silversky9/team-10-backend:1.2.5
+    container_name: team10_go
+    # volumes:
+    # - './backend:/app'
+    # working_dir: /app
+    # environment:
+    #   POSTGRES_USER=${postgres}
+    #   POSTGRES_PASSWORD=${magical}
+    #   POSTGRES_DB=${Market}
+    # env_file:
+    #   - db.env
+    ports:
+    - 3010:3000
+    networks:
+      - fullstack
+
+networks:
+  fullstack:
+    driver: bridge

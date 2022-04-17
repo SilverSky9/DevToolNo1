@@ -51,15 +51,7 @@ var data1 = [
     },
 ]
 
-export const getInitialProps = async () => {
-    const res = await fetch('http://localhost:3000/tag/getall')
-    const tag = await res.json()
 
-    // console.log(tag);
-    return {
-        props: { allTag: tag }
-    }
-}
 
 
 const Matching = ({ allTag = [] }) => {
@@ -160,7 +152,15 @@ const Matching = ({ allTag = [] }) => {
 
 
 }
+Matching.getInitialProps = async () => {
+    const res = await fetch('http://159.223.45.216:3010/tag/getall')
+    const tag = await res.json()
 
+    // console.log(tag);
+    return {
+        allTag: tag 
+    }
+}
 export default Matching
 
 
