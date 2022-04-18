@@ -60,7 +60,7 @@ pipeline {
                     remote.name = "root"
                     remote.host = '159.223.45.216'
                     remote.user = 'root'
-                    remote.password = ${password}
+                    remote.password = ${password} + ''
                     remote.allowAnyHosts = true
                     // withCredentials([usernamePassword(credentialsId: 'docker-hub-team10', passwordVariable: 'pass', usernameVariable: 'user')]) {
                     //     sshCommand remote: remote, command: "pwd"
