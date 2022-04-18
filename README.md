@@ -1,5 +1,6 @@
 # DevToolNo1
 This project is a part of SOFTWARE DEVELOPMENT TOOLS AND ENVIRONMENTS 2/2564
+เว็บแอปพลิเคชั่นสร้างขึ้นเพื่อแก้ไขปัญหาในการซื้อขายของกันภายในมหาวิทยาลัย
 
 ## Members
 
