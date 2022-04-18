@@ -5,12 +5,12 @@ This project is a part of SOFTWARE DEVELOPMENT TOOLS AND ENVIRONMENTS 2/2564
 
 |Name|
 |:-:|
-|- Nutchayaporn|
-|- Pawaris|
-|- Nopphadon|
-|- Sinlapawit|
-|- Warangkhana|
-|- Sipang|
+|Nutchayaporn|
+|Pawaris|
+|Nopphadon|
+|Sinlapawit|
+|Warangkhana|
+|Sipang|
 
 ## รูปแบบของ commit message
 |commit message|ความหมาย|
