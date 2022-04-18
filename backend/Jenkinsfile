@@ -54,13 +54,12 @@ pipeline {
         }
         stage('Deployment'){
             steps{
-                withCredentials([string(credentialsId: 'Password-root-server-team10', variable: 'password')]) {
-                    script{
+                script{
                     def remote = [:]
                     remote.name = "root"
                     remote.host = '159.223.45.216'
                     remote.user = 'root'
-                    remote.password = ${password} + ''
+                    remote.password = 'xitgmLwmp12q'
                     remote.allowAnyHosts = true
                     // withCredentials([usernamePassword(credentialsId: 'docker-hub-team10', passwordVariable: 'pass', usernameVariable: 'user')]) {
                     //     sshCommand remote: remote, command: "pwd"
@@ -72,9 +71,7 @@ pipeline {
                     sshCommand remote: remote, command: "docker-compose -f DevToolNo1/backend/docker-compose-deploy-backend.yml down --remove-orphans"
                     sshCommand remote: remote, command: "docker-compose -f DevToolNo1/backend/docker-compose-deploy-backend.yml up -d"
                     sshCommand remote: remote, command: "rm -rf DevToolNo1"
-                }  
-                }
-                    
+                }      
             }
         }
         stage('E2E Testing'){
