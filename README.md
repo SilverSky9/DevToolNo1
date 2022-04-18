@@ -3,14 +3,14 @@ This project is a part of SOFTWARE DEVELOPMENT TOOLS AND ENVIRONMENTS 2/2564
 
 ## Members
 
-|Name|
-|:-:|
-|Nutchayaporn|
-|Pawaris|
-|Nopphadon|
-|Sinlapawit|
-|Warangkhana|
-|Sipang|
+|Name|Student ID|
+|:--:|-----------|
+|Nutchayaporn||
+|Pawaris||
+|Nopphadon||
+|Sinlapawit||
+|Warangkhana|62070166|
+|Sipang||
 
 ## รูปแบบของ commit message
 |commit message|ความหมาย|
