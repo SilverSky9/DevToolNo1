@@ -1,13 +1,20 @@
 # DevToolNo1
 This project is a part of SOFTWARE DEVELOPMENT TOOLS AND ENVIRONMENTS 2/2564
 
+เว็บแอปพลิเคชั่นสร้างขึ้นเพื่อแก้ไขปัญหาในการซื้อขายของกันภายในมหาวิทยาลัย
+
 ## Members
-- Nutchayaporn
-- Pawaris
-- Nopphadon
-- Sinlapawit
-- Warangkhana
-- Sipang
+
+|Name|Student ID|
+|:--:|-----------|
+|NUTCHAYAPORN SIANGKHIO|62070059|
+|PAWARIS WONGSAIED|62070116|
+|NOPPHADON PHANWONG|62070101|
+|SINLAPAWIT RITNAMKHAM|62070178|
+|WARANGKHANA SUKPARTCHAROEN|62070166|
+|SIPANG KLINHOM|62070196|
+
+
 ## รูปแบบของ commit message
 |commit message|ความหมาย|
 |:------------:|--------|
