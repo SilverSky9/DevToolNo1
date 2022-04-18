@@ -1,9 +1,12 @@
-FROM golang:1.17-alpine
-ENV CGO_ENABLED 0
-# RUN go test
-COPY . /go/bin/app
-WORKDIR /go/bin/app
+#Build stage 
+FROM golang:1.17-alpine AS Build
+# RUN apk add build-base git breezy mercurial gcc
 RUN ["go", "get", "github.com/rs/cors"]
-RUN ["go", "get", "-v", "github.com/cosmtrek/air"]
-CMD ["go", "mod", "tidy"]
-ENTRYPOINT ["air"]
+COPY . /src
+RUN cd /src && go build -o goapp
+
+#Final stage
+FROM alpine:3.15.4
+WORKDIR /app
+COPY --from=Build /src/goapp /app/
+ENTRYPOINT [ "./goapp" ]
