@@ -105,4 +105,12 @@ func PostRoute(r fiber.Router) {
 		return c.Status(200).JSON(resp)
 	})
 
+	// r.Post("/getitruser", func(c *fiber.Ctx) error {
+	// 	var pin model.Pin
+
+	// 	// resp, err := services
+
+	// 	return c.Status(200).JSON()
+	// })
+
 }

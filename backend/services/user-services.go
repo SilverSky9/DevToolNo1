@@ -21,3 +21,12 @@ func GetAllUser() ([]model.User, error) {
 
 	return resp, nil
 }
+
+func GetUserByPostId(post_id string) ([]model.User, error) {
+
+	resp, err := queries.GetUserByPostIdQueries(post_id)
+	if err != nil {
+		return []model.User{}, err
+	}
+	return resp, nil
+}
