@@ -163,16 +163,3 @@ func GetPostByMultiTagQueries(tags []int) ([]model.Post, error) {
 
 	return list, nil
 }
-
-func GetPinIdByPostIdQueries(post_id int) (model.Post, error) {
-	sqlStatement := `SELECT pin_id FROM post WHERE post_id = $1`
-	var post model.Post
-	//Query one row from dbasd
-	row := db.QueryRow(sqlStatement, post_id)
-	err := row.Scan(&post.PinId)
-	if err != nil {
-		return model.Post{}, err
-	}
-
-	return post, nil
-}

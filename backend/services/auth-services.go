@@ -2,7 +2,6 @@ package services
 
 import (
 	"errors"
-	"fmt"
 	"strconv"
 	"time"
 
@@ -24,9 +23,8 @@ func RegisterNewToken(pin string, post_id int, c *fiber.Ctx) (int, error) {
 	//compare pin btw input and db
 	validate_pin := CompareHashedPin(pin, hashed_pin)
 	if !validate_pin {
-		return 400, errors.New("eiei")
+		return 400, errors.New("")
 	}
-	fmt.Println(validate_pin, pin)
 
 	token, err := generateJwtToken(post_id)
 

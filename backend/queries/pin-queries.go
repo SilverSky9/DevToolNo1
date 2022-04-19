@@ -34,3 +34,16 @@ func GetPinByIdQueries(pin_id int) (string, error) {
 	return pin.Pin, nil
 
 }
+
+func GetPinIdByPostIdQueries(post_id int) (model.Post, error) {
+	sqlStatement := `SELECT pin_id FROM post WHERE post_id = $1`
+	var post model.Post
+
+	row := db.QueryRow(sqlStatement, post_id)
+	err := row.Scan(&post.PinId)
+	if err != nil {
+		return model.Post{}, err
+	}
+
+	return post, nil
+}

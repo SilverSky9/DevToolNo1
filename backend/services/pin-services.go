@@ -49,5 +49,7 @@ func GetPinByPostId(post_id int) (int, error) {
 	if err != nil {
 		return -1, err
 	}
-	return resp.PinId, nil
+	pin_id := resp.PinId
+
+	return pin_id, nil
 }

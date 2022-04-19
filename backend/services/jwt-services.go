@@ -15,7 +15,7 @@ func generateJwtToken(post_id int) (string, error) {
 	token := jwt.New(jwt.SigningMethodHS256)
 	claims := token.Claims.(jwt.MapClaims)
 	claims["sub"] = strconv.Itoa(post_id)
-	claims["exp"] = time.Now().Add(time.Second * 24).Unix()
+	claims["exp"] = time.Now().Add(time.Hour * 24).Unix()
 	t, err := token.SignedString([]byte(secretKey))
 
 	if err != nil {
