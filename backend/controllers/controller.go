@@ -7,7 +7,6 @@ import (
 	"github.com/gofiber/fiber/v2"
 )
 
-
 // Users collection
 type PostList []model.Post
 
@@ -33,5 +32,9 @@ func Route(app *fiber.App) {
 	//make tag entry point
 	tag_entry_point := app.Group("/tag")
 	TagRoute(tag_entry_point)
+
+	//make auth entry point
+	auth_entry_point := app.Group("/auth")
+	AuthRoute(auth_entry_point)
 
 }
