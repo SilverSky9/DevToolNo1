@@ -34,3 +34,22 @@ func CompareHashedPin(pin string, hashedPin string) bool {
 	}
 	return true
 }
+
+func GetPinById(pin_id int) (string, error) {
+	pin, err := queries.GetPinByIdQueries(pin_id)
+	if err != nil {
+		return "", err
+	}
+
+	return pin, nil
+}
+
+func GetPinByPostId(post_id int) (int, error) {
+	resp, err := queries.GetPinIdByPostIdQueries(post_id)
+	if err != nil {
+		return -1, err
+	}
+	pin_id := resp.PinId
+
+	return pin_id, nil
+}
