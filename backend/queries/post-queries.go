@@ -135,7 +135,6 @@ func GetPostByNameQueries(post_name string) ([]model.Post, error) {
 }
 
 func GetPostByMultiTagQueries(tags []int) ([]model.Post, error) {
-
 	var post_list []model.Post
 
 	sqlStatement := `SELECT * FROM post WHERE tag_id = any ($1)`
@@ -161,21 +160,4 @@ func GetPostByMultiTagQueries(tags []int) ([]model.Post, error) {
 	}
 
 	return post_list, nil
-}
-
-func GetPostByMultiTagQueriess(tags []int) ([]model.Post, error) {
-
-	var post model.Post
-
-	sqlStatement := `SELECT * FROM post WHERE tag_id IN (46,47)`
-	rows := db.QueryRow(sqlStatement)
-	err := rows.Scan(&post.PostId, &post.PinId, &post.ProductName, &post.PostDate,
-		&post.ProductOption, &post.Price, &post.Amount, &post.TagId)
-	if err != nil {
-		return []model.Post{}, err
-	}
-
-	var arr_post []model.Post
-	arr_post = append(arr_post, post)
-	return arr_post, nil
 }
