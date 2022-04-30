@@ -6,6 +6,8 @@ import (
 	"fmt"
 	"strconv"
 	"time"
+
+	"github.com/lib/pq"
 )
 
 var dbasd = database.GetDB()
@@ -133,33 +135,29 @@ func GetPostByNameQueries(post_name string) ([]model.Post, error) {
 }
 
 func GetPostByMultiTagQueries(tags []int) ([]model.Post, error) {
+	var post_list []model.Post
 
-	list := make([]model.Post, 0)
+	sqlStatement := `SELECT * FROM post WHERE tag_id = any ($1)`
+	rows, err := db.Query(sqlStatement, pq.Array(tags))
+	if err != nil {
+		return []model.Post{}, err
+	}
 
-	for i := 0; i < len(tags); i++ {
-		sqlStatement := `SELECT * FROM post WHERE tag_id = $1`
-		rows, err := db.Query(sqlStatement, tags[i])
+	defer rows.Close()
+
+	for rows.Next() {
+		var onePost model.Post
+		err := rows.Scan(&onePost.PostId, &onePost.PinId, &onePost.ProductName, &onePost.PostDate,
+			&onePost.ProductOption, &onePost.Price, &onePost.Amount, &onePost.TagId)
 		if err != nil {
 			return []model.Post{}, err
 		}
 
-		defer rows.Close()
-
-		for rows.Next() {
-			var onePost model.Post
-			err := rows.Scan(&onePost.PostId, &onePost.PinId, &onePost.ProductName, &onePost.PostDate,
-				&onePost.ProductOption, &onePost.Price, &onePost.Amount, &onePost.TagId)
-			if err != nil {
-				return []model.Post{}, err
-			}
-
-			list = append(list, onePost)
-		}
-		if err = rows.Err(); err != nil {
-			return []model.Post{}, err
-		}
-
+		post_list = append(post_list, onePost)
+	}
+	if err = rows.Err(); err != nil {
+		return []model.Post{}, err
 	}
 
-	return list, nil
+	return post_list, nil
 }
