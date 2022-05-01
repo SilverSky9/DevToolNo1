@@ -15,6 +15,7 @@ import {
   radioValue,
   FloatingLabel,
   Card,
+  Dropdown
 } from "react-bootstrap";
 import axios from "axios";
 const tag_want = [];
@@ -297,7 +298,45 @@ const Matching = ({ tag }) => {
                     <Modal.Title>{posttype}</Modal.Title>
                 </Modal.Header>
                 <div className={styles.postModalTittle}>{postname}</div>
-                <Modal.Body className={styles.postModaldetail}>ราคา: {postprice} จำนวน: {postper}</Modal.Body>
+
+                <Modal.Body className={styles.postModaldetail}>
+                    ราคา: {postprice} จำนวน: {postper}
+                
+                <p></p>
+                    <Form>
+                        <Form.Group className="mb-3" controlId="formBasicEmail">
+                            <Form.Label>Name</Form.Label>
+                            <Form.Control type="text" placeholder="Name" />
+                        </Form.Group>
+
+                        <Form.Group className="mb-3" controlId="formBasicPassword">
+                            <Form.Label>Contact</Form.Label>
+                            <Form.Control type="text" placeholder="Contact" />
+                        </Form.Group>
+
+                        <p></p>
+                        <Dropdown>
+                        <Dropdown.Toggle variant="Secondary" id="dropdown-basic">
+                            สถานที่รับ
+                        </Dropdown.Toggle>
+
+                        <Dropdown.Menu>
+                            <Dropdown.Item href="#/action-1">RNP</Dropdown.Item>
+                            <Dropdown.Item href="#/action-2">Jinda</Dropdown.Item>
+                            <Dropdown.Item href="#/action-3">Nikom</Dropdown.Item>
+                            <Dropdown.Item href="#/action-4">College Town</Dropdown.Item>
+                            <Dropdown.Item href="#/action-5">Billian</Dropdown.Item>
+                        </Dropdown.Menu>
+                        </Dropdown>
+                        <p></p>
+
+                        <Form.Group className="mb-3" controlId="formBasicCheckbox">
+                        <Form.Check type="checkbox" label="ยืนยันว่าเป็นข้อมูลจริง" />
+                        </Form.Group>
+                   </Form>
+
+                </Modal.Body>
+
                 <Modal.Footer>
 
                 <Button variant="secondary" onClick={handleClose_b1} >
