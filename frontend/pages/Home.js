@@ -175,6 +175,9 @@ const Matching = ({ tag }) => {
   const handleShow_b1 = () => setShow_b1(true);
 
   const [postname, setpostname] = useState(false);
+  const [postprice, setpostprice] = useState(false);
+  const [postper, setpostper] = useState(false);
+  const [posttype, setposttype] = useState(false);
 
   const [validated, setValidated] = useState(false);
 
@@ -291,9 +294,10 @@ const Matching = ({ tag }) => {
             aria-labelledby="contained-modal-title-vcenter"
             centered>
                 <Modal.Header closeButton>
-                    <Modal.Title>{postname}</Modal.Title>
+                    <Modal.Title>{posttype}</Modal.Title>
                 </Modal.Header>
-                <Modal.Body>ราคา: จำนวน:</Modal.Body>
+                <div className={styles.postModalTittle}>{postname}</div>
+                <Modal.Body className={styles.postModaldetail}>ราคา: {postprice} จำนวน: {postper}</Modal.Body>
                 <Modal.Footer>
 
                 <Button variant="secondary" onClick={handleClose_b1} >
@@ -314,7 +318,10 @@ const Matching = ({ tag }) => {
             {posted?.map((content) => (
               // <div key={content.post_id} className={styles.card} >
               <div key={content.post_id}>
-                <Card className={styles.card} onClick={() => {handleShow_b1(); setpostname(content.product_name)}}>
+                <Card className={styles.card} onClick={() => 
+                    {handleShow_b1(); setpostname(content.product_name); 
+                    setpostprice(content.price); setpostper(content.amount); 
+                    setposttype(content.product_option);}}>
                   <Row>
                     <Card.Header id="productName" className="h2 text-center">
                       {content.product_name}

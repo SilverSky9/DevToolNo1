@@ -208,10 +208,29 @@
 
 .main {
   /* min-height: 100vh; */
-  padding: 5.5rem 0;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  font-size: 2rem;
+  font-size: 2.5rem;
+}
+
+
+
+.postModalTittle{
+  padding-top: 1rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  font-size: 1.5rem;
+}
+
+.postModaldetail{
+  padding-top: 1rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  font-size: 1rem;
 }
