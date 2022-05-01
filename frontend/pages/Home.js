@@ -175,10 +175,12 @@ const Matching = ({ tag }) => {
   const handleClose_b1 = () => setShow_b1(false);
   const handleShow_b1 = () => setShow_b1(true);
 
+//  view post modal
   const [postname, setpostname] = useState(false);
   const [postprice, setpostprice] = useState(false);
   const [postper, setpostper] = useState(false);
   const [posttype, setposttype] = useState(false);
+//  view post modal
 
   const [validated, setValidated] = useState(false);
 
@@ -316,7 +318,7 @@ const Matching = ({ tag }) => {
 
                         <p></p>
                         <Dropdown>
-                        <Dropdown.Toggle variant="Secondary" id="dropdown-basic">
+                        <Dropdown.Toggle variant="Secondary" id="dropdown-place">
                             สถานที่รับ
                         </Dropdown.Toggle>
 
@@ -413,7 +415,9 @@ const Matching = ({ tag }) => {
           </Row>
           {/* create post are */}
           
+          
 
+          {/* create post modal are */}
           <Modal
             show={show}
             onHide={handleClose}
@@ -664,6 +668,9 @@ const Matching = ({ tag }) => {
             </Modal.Body>
             <Modal.Footer style={{ justifyContent: "center" }}></Modal.Footer>
           </Modal>
+          {/* create post modal are */}
+
+
 
           <Modal
             show={show2}
