@@ -126,10 +126,25 @@ const Matching = ({ tag }) => {
         setPrice('')
         setAmount('')
         setValidated(false)
-
-
     };
     const handleShow = () => setShow(true);
+
+    const [show2, setShow2] = useState(false);
+    const handleClose2 = () => {
+        setShow2(false)
+        setPin('')
+        setProductName('')
+        setDetail('')
+        setPhone('')
+        setRadioValue("buy")
+        setLocation('')
+        setCategory('')
+        setPrice('')
+        setAmount('')
+        setValidated(false)
+    };
+    const handleShow2 = () => setShow2(true);
+
 
 
     const [productName, setProductName] = useState('');
@@ -140,6 +155,7 @@ const Matching = ({ tag }) => {
     const [category, setCategory] = useState('');
     const [price, setPrice] = useState();
     const [amount, setAmount] = useState();
+    const [pin, setPin] = useState('');
 
     const [validated, setValidated] = useState(false);
 
@@ -154,7 +170,7 @@ const Matching = ({ tag }) => {
         const url = router.query.tag ||= tag.map(tag => (tag.tag_id)).toString()
 
         async function getPost() {
-            let response = await fetch("http://159.223.45.216:3010/post/geybymultitag/" + url + ',')
+            let response = await fetch("http://localhost:3000/post/geybymultitag/" + url + ',')
             response = await response.json()
             console.log(response);
             setPost(response)
@@ -164,21 +180,23 @@ const Matching = ({ tag }) => {
     }, [])
 
     const GetPostBySearch = async () => {
-        const res = await fetch("http://159.223.45.216:3010/post/searchbyname/" + searchVal);
+        const res = await fetch("http://localhost:3000/post/searchbyname/" + searchVal);
         const newPost = await res.json();
 
         return setPost(newPost);
     };
 
     const GetPostByTag = async (tag_name) => {
-        const res = await fetch("http://159.223.45.216:3010/post/getbytag/" + tag_name + "/null");
+        const res = await fetch("http://localhost:3000/post/getbytag/" + tag_name + "/null");
         const newPost = await res.json();
 
         return setPost(newPost);
     };
 
+   
+
     const addPost = async () => {
-     
+
         var data = {
             product_name: productName,
             product_option: radioValue,
@@ -186,39 +204,55 @@ const Matching = ({ tag }) => {
             phone_number: phone,
             price: parseInt(price),
             amount: parseInt(amount),
-            tag_name: category
+            tag_name: category,
+            pin: pin
 
         }
-        await axios.post('http://159.223.45.216:3010/post/create', data)
+
+        
+
+        await axios.post('http://localhost:3000/post/create', data)
             .then(response => {
                 console.log("add post success")
                 console.log(response);
-            
             })
-            handleClose()
-            setTimeout('alert("sucess");', 500);
-        setShow(false)
-    
 
+       
+
+        handleClose()
+        setShow2(false)
+        setTimeout('alert("sucess");', 500);
+
+        // console.log(GetAll())
+        // console.log
+        // setShow2(true)
     }
+
+
 
     const handleSubmit = (event) => {
         const form = event.currentTarget;
         if (form.checkValidity() === false) {
-          event.preventDefault();
-          event.stopPropagation();
-        }
-        else { 
-            addPost()
             event.preventDefault();
+            event.stopPropagation();
         }
-    
+        else {
+
+            handleShow2()
+            event.preventDefault();
+            setShow(false)
+            // addPost()
+
+        }
+
         setValidated(true);
-      };
+    };
 
 
     return (
+
         <div className='row '>
+            {console.log(posted)}
             {/* {router.query.tag.map(tag => <h1>{tag}<h1 /> )} */}
             <div className='col-10 px-5'>
                 <div className='row mt-4'>
@@ -235,7 +269,9 @@ const Matching = ({ tag }) => {
                             // <div key={content.post_id} className={styles.card} >
                             <div key={content.post_id}>
                                 <Card className={styles.card}  >
+                                    <Row>
                                     <Card.Header id="productName" className="h2 text-center">{content.product_name}</Card.Header>
+                                    </Row>
                                     <Card.Body>
                                         {/* <Card.Title>{content.product_name}</Card.Title> */}
                                         <Card.Text>
@@ -243,7 +279,7 @@ const Matching = ({ tag }) => {
                                             จำนวน : {content.amount} ชิ้น
                                         </Card.Text>
                                     </Card.Body>
-                                    <Card.Footer className="text-muted " style={{ textAlign: 'right' }} >{content.post_date.slice(0, 10)}</Card.Footer>
+                                    <Card.Footer className="text-muted " style={{ textAlign: 'right' }} >{content.post_date.slice(0, 10)}<strong> <span style={{  color: content.product_option == 'buy' ? '#06c618' : '#c63306 ' }}>  {content.product_option}</span></strong>      </Card.Footer>
                                 </Card>
                             </div>
                         ))}
@@ -252,11 +288,11 @@ const Matching = ({ tag }) => {
 
                     <Row>
                         <Button variant="primary" onClick={handleShow} className={styles.btnRight}>
-                        +
-                    </Button>
+                            +
+                        </Button>
 
                     </Row>
-                    
+
                     <Modal
                         show={show}
                         onHide={handleClose}
@@ -415,28 +451,99 @@ const Matching = ({ tag }) => {
                                         </Col>
                                     </Row>
                                     <Row style={{ justifyContent: 'center' }}>
-                                        <Button className="mx-3" type="submit" variant="primary" style={{ width: '30%' }}
-                                            data-testid="post_button"
-                                        >
-                                            Post
-                                        </Button>
-
-
 
                                         <Button className="mx-3" style={{ width: '30%' }} variant="secondary" onClick={handleClose}>
                                             Cancel
+                                        </Button>
+                                        <Button className="mx-3" type="submit" variant="primary" style={{ width: '30%' }}
+                                            data-testid="post_button"
+                                        >
+                                            OK
                                         </Button>
                                     </Row>
                                 </Form>
                             </Container>
                         </Modal.Body>
-
                         <Modal.Footer style={{ justifyContent: 'center' }}>
-
-
-
                         </Modal.Footer>
                     </Modal>
+
+
+
+
+                    <Modal show={show2} onHide={handleClose2} aria-labelledby="contained-modal-title-vcenter"
+                        centered>
+                        <Modal.Header closeButton>
+                            <Modal.Title >Create your PIN</Modal.Title>
+                        </Modal.Header>
+                        {pin}
+                        <Modal.Body>
+                            <Form>
+                                <Form.Group md="4" className="mb-3 mt-4">
+                                    <FloatingLabel label="Please type your post's pin">
+                                        <Form.Control
+                                            type="text"
+                                            placeholder="Please type your post's pin"
+                                            defaultValue={pin}
+                                            onChange={(e) => setPin(e.target.value)}
+                                            data-testid="pin"
+                                            name="pin"
+                                            id='pin'
+                                        />
+                                    </FloatingLabel>
+                                    <Form.Control.Feedback>Looks good!</Form.Control.Feedback>
+                                </Form.Group>
+                            </Form>
+
+                        </Modal.Body>
+                        <Modal.Footer>
+                            <Button variant="secondary" onClick={handleClose2}>
+                                Close
+                            </Button>
+                            <Button variant="primary" onClick={addPost}>
+                                Post Now
+                            </Button>
+                        </Modal.Footer>
+                    </Modal>
+
+
+
+
+                    <Modal show={show2} onHide={handleClose2} aria-labelledby="contained-modal-title-vcenter"
+                        centered>
+                        <Modal.Header closeButton>
+                            <Modal.Title >Create your PIN</Modal.Title>
+                        </Modal.Header>
+                        {pin}
+                        <Modal.Body>
+                            <Form>
+                                <Form.Group md="4" className="mb-3 mt-4">
+                                    <FloatingLabel label="Please type your post's pin">
+                                        <Form.Control
+                                            type="text"
+                                            placeholder="Please type your post's pin"
+                                            defaultValue={pin}
+                                            onChange={(e) => setPin(e.target.value)}
+                                            data-testid="pin"
+                                            name="pin"
+                                            id='pin'
+                                        />
+                                    </FloatingLabel>
+                                    <Form.Control.Feedback>Looks good!</Form.Control.Feedback>
+                                </Form.Group>
+                            </Form>
+
+                        </Modal.Body>
+                        <Modal.Footer>
+                            <Button variant="secondary" onClick={handleClose2}>
+                                Close
+                            </Button>
+                            <Button variant="primary" onClick={addPost}>
+                                Post Now
+                            </Button>
+                        </Modal.Footer>
+                    </Modal>
+
                 </main>
                 <div className=''>
 
@@ -453,7 +560,7 @@ const Matching = ({ tag }) => {
                                 <div key={i} className={`tag ${styles.tag}  bg-dark text-light`} onClick={() => {
                                     GetPostByTag(item.tag_id)
                                 }}  >
-                                    <div > {item.tag_name} 
+                                    <div > {item.tag_name}
                                     </div>
                                 </div>
                             ))}
@@ -472,8 +579,8 @@ const Matching = ({ tag }) => {
 }
 Matching.getInitialProps = async () => {
     // const router = useRouter()
- 
-    const tag = await fetch("http://159.223.45.216:3010/tag/getall")
+
+    const tag = await fetch("http://localhost:3000/tag/getall")
     const allTag = await tag.json()
 
     // const url = context.query.tag ||= allTag.map(tag => (tag.tag_id)).toString()
