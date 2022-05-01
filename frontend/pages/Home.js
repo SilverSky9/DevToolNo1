@@ -304,12 +304,12 @@ const Matching = ({ tag }) => {
                 
                 <p></p>
                     <Form>
-                        <Form.Group className="mb-3" controlId="formBasicEmail">
+                        <Form.Group className="mb-3" controlId="formName">
                             <Form.Label>Name</Form.Label>
                             <Form.Control type="text" placeholder="Name" />
                         </Form.Group>
 
-                        <Form.Group className="mb-3" controlId="formBasicPassword">
+                        <Form.Group className="mb-3" controlId="formContact">
                             <Form.Label>Contact</Form.Label>
                             <Form.Control type="text" placeholder="Contact" />
                         </Form.Group>
@@ -401,6 +401,7 @@ const Matching = ({ tag }) => {
 
 
 
+         {/* create post are */}
           <Row>
             <Button
               variant="primary"
@@ -410,6 +411,8 @@ const Matching = ({ tag }) => {
               +
             </Button>
           </Row>
+          {/* create post are */}
+          
 
           <Modal
             show={show}
@@ -764,6 +767,10 @@ const Matching = ({ tag }) => {
     </div>
   );
 };
+
+
+
+
 Matching.getInitialProps = async () => {
   // const router = useRouter()
 
