@@ -216,16 +216,9 @@ const Matching = ({ tag }) => {
                 console.log("add post success")
                 console.log(response);
             })
-
-       
-
         handleClose()
         setShow2(false)
         setTimeout('alert("sucess");', 500);
-
-        // console.log(GetAll())
-        // console.log
-        // setShow2(true)
     }
 
 
