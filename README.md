@@ -5,14 +5,14 @@ This project is a part of SOFTWARE DEVELOPMENT TOOLS AND ENVIRONMENTS 2/2564
 
 ## Members
 
-|Name|
-|:-:|
-|- Nutchayaporn|
-|- Pawaris|
-|- Nopphadon|
-|- Sinlapawit|
-|- Warangkhana|
-|- Sipang|
+|Name|Student ID|
+|:--:|-----------|
+|NUTCHAYAPORN SIANGKHIO|62070059|
+|PAWARIS WONGSAIED|62070116|
+|NOPPHADON PHANWONG|62070101|
+|SINLAPAWIT RITNAMKHAM|62070178|
+|WARANGKHANA SUKPARTCHAROEN|62070166|
+|SIPANG KLINHOM|62070196|
 
 ## รูปแบบของ commit message
 |commit message|ความหมาย|
