@@ -514,7 +514,6 @@ const Matching = ({ tag }) => {
                         <Modal.Header closeButton>
                             <Modal.Title >Create your PIN</Modal.Title>
                         </Modal.Header>
-                        {pin}
                         <Modal.Body>
                             <Form>
                                 <Form.Group md="4" className="mb-3 mt-4">
@@ -568,12 +567,6 @@ const Matching = ({ tag }) => {
                     </div>
                 </div>
             </div>
-
-
-
-
-
-
         </div>
     )
 }
