@@ -277,7 +277,7 @@ const Matching = ({ tag }) => {
 
                                             {/* {productName} */}
                                             <Form.Group md="4" controlId="validationCustom01" className="mb-3 mt-4">
-                                                <FloatingLabel controlId="floatingInputGrid" label="Product Name">
+                                                <FloatingLabel controlId="floatingInputGrid" label="Product Name" >
                                                     <Form.Control
                                                         required
                                                         type="text"
@@ -286,6 +286,7 @@ const Matching = ({ tag }) => {
                                                         onChange={(e) => setProductName(e.target.value)}
                                                         data-testid="product_name"
                                                         name='productName'
+                                                        id='productNameInput'
                                                     />
                                                 </FloatingLabel>
                                                 <Form.Control.Feedback>Looks good!</Form.Control.Feedback>
@@ -311,6 +312,7 @@ const Matching = ({ tag }) => {
                                                         onChange={(e) => setDetail(e.target.value)}
                                                         data-testid="product_detail"
                                                         name='productDetail'
+                                                        id='productDetail'
                                                     />
                                                 </FloatingLabel>
                                                 <Form.Control.Feedback>Looks good!</Form.Control.Feedback>
@@ -329,6 +331,7 @@ const Matching = ({ tag }) => {
                                                         onChange={(e) => setPhone(e.target.value)}
                                                         data-testid="phone"
                                                         name="phone"
+                                                        id='phone'
                                                     />
                                                 </FloatingLabel>
                                                 <Form.Control.Feedback>Looks good!</Form.Control.Feedback>
@@ -336,7 +339,7 @@ const Matching = ({ tag }) => {
 
 
                                             {/* {location} */}
-                                            <Form.Select aria-label="Default select example" className="mb-3" onChange={(e) => setLocation(e.currentTarget.value)} required data-testid="location" name='location'>
+                                            <Form.Select id='location' aria-label="Default select example" className="mb-3" onChange={(e) => setLocation(e.currentTarget.value)} required data-testid="location" name='location'>
                                                 <option value="" selected disabled>Location</option>
                                                 {locations?.map((item, i) => (
                                                     <option value={item.location_id} key={i}>{item.location_name}</option>
@@ -377,6 +380,7 @@ const Matching = ({ tag }) => {
                                                         onChange={(e) => setPrice(e.target.value)}
                                                         data-testid="price"
                                                         name='price'
+                                                        id='price'
                                                     />
                                                 </FloatingLabel>
                                                 <Form.Control.Feedback>Looks good!</Form.Control.Feedback>
@@ -393,13 +397,14 @@ const Matching = ({ tag }) => {
                                                         onChange={(e) => setAmount(e.target.value)}
                                                         data-testid="amount"
                                                         name="amount"
+                                                        id='amount'
                                                     />
                                                 </FloatingLabel>
                                                 <Form.Control.Feedback>Looks good!</Form.Control.Feedback>
                                             </Form.Group>
 
                                             {/* {category} */}
-                                            <Form.Select aria-label="Default select example" className="mb-3" onChange={(e) => setCategory(e.currentTarget.value)} required data-testid="product_category" name='product_category'>
+                                            <Form.Select id='tagName' aria-label="Default select example" className="mb-3" onChange={(e) => setCategory(e.currentTarget.value)} required data-testid="product_category" name='product_category'>
                                                 <option value="" selected disabled>Product Category</option>
                                                 {tag?.map((item, i) => (
                                                     <option value={item.tag_name} key={i}>{item.tag_name}</option>
@@ -467,6 +472,7 @@ const Matching = ({ tag }) => {
 }
 Matching.getInitialProps = async () => {
     // const router = useRouter()
+ 
     const tag = await fetch("http://159.223.45.216:3010/tag/getall")
     const allTag = await tag.json()
 
