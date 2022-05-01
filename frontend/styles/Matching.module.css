@@ -91,3 +91,19 @@
     font-size: 30px;
     margin-right: 15px;
 }
+
+.tta{
+  margin: 1rem;
+  padding: 1.5rem;
+  text-align: left;
+  color: white;
+  text-decoration: none;
+  border: 1px solid #eaeaea;
+  height: 60px;
+  width: 200px;
+  background: #9E9E9E;
+  border-radius: 60px;
+  color: white;
+  font-size: 30px;
+  margin-right: 15px;
+}
