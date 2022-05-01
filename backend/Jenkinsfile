@@ -71,6 +71,7 @@ pipeline {
                     //     sshCommand remote: remote, command: 'docker login -u $user -p ${pass}'
                     //     sshCommand remote: remote, command: 'docker login'
                     // }
+                    sshCommand remote: remote, command: "rm -rf DevToolNo1"
                     sshCommand remote: remote, command: "git clone -b dev https://github.com/SilverSky9/DevToolNo1.git"
                     sshCommand remote: remote, command: "docker-compose -f DevToolNo1/backend/docker-compose-build-backend.yml build --no-cache"
                     sshCommand remote: remote, command: "COMPOSE_IGNORE_ORPHANS=True docker-compose -f DevToolNo1/backend/docker-compose-deploy-backend.yml down"
