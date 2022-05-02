@@ -107,3 +107,11 @@
   font-size: 30px;
   margin-right: 15px;
 }
+
+.tta2{
+  margin: 1rem;
+  padding: 1.5rem;
+  text-align: left;
+  color: rgb(66, 49, 105);
+  text-decoration: none;
+}
