@@ -680,7 +680,7 @@ const Matching = ({ tag }) => {
 
 
 
-         {/* creat pin modal */}                   
+         {/* create pin modal */}                   
           <Modal
             show={show2}
             onHide={handleClose2}
@@ -718,7 +718,7 @@ const Matching = ({ tag }) => {
               </Button>
             </Modal.Footer>
           </Modal>
-        {/* creat pin modal */}      
+        {/* create pin modal */}      
 
 
 
@@ -727,7 +727,7 @@ const Matching = ({ tag }) => {
 
 
 
-                          
+          {/* pin modal */}              
           <Modal
             show={show2}
             onHide={handleClose2}
@@ -764,6 +764,11 @@ const Matching = ({ tag }) => {
               </Button>
             </Modal.Footer>
           </Modal>
+          {/* pin modal */}
+
+
+
+          
         </main>
         <div className="">
           {/* <button className='btn btn-primary'>create post</button> */}
