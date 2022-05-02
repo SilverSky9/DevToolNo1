@@ -680,7 +680,7 @@ const Matching = ({ tag }) => {
 
 
 
- 
+         {/* creat pin modal */}                   
           <Modal
             show={show2}
             onHide={handleClose2}
@@ -718,6 +718,7 @@ const Matching = ({ tag }) => {
               </Button>
             </Modal.Footer>
           </Modal>
+        {/* creat pin modal */}      
 
 
 
@@ -726,8 +727,7 @@ const Matching = ({ tag }) => {
 
 
 
-
-
+                          
           <Modal
             show={show2}
             onHide={handleClose2}

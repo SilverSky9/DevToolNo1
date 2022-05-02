@@ -163,6 +163,18 @@ Matching.getInitialProps = async () => {
         allTag: tag 
     }
 }
-export default Matching
 
 
+// export default Matching
+
+// Matching.getInitialProps = async () => {
+//         const res = await fetch('http://localhost:3000/tag/getall')
+       
+//     const tag = await res.json()
+
+//     console.log(tag);
+//     return {
+//         allTag: tag 
+//     }
+// }
+// export default Matching
