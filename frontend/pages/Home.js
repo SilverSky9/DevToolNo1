@@ -194,7 +194,8 @@ const Matching = ({ tag }) => {
 
     async function getPost() {
       let response = await fetch(
-        "http://localhost:3000/post/geybymultitag/" + url + ","
+        "http://159.223.45.216:3010/post/geybymultitag/" + url + ","
+        // "http://localhost:3000/post/geybymultitag/" + url + ","
       );
       response = await response.json();
       console.log(response);
@@ -206,7 +207,8 @@ const Matching = ({ tag }) => {
 
   const GetPostBySearch = async () => {
     const res = await fetch(
-      "http://localhost:3000/post/searchbyname/" + searchVal
+      "http://159.223.45.216:3010/post/searchbyname/" + searchVal
+      // "http://localhost:3000/post/searchbyname/" + searchVal
     );
     const newPost = await res.json();
 
@@ -215,7 +217,8 @@ const Matching = ({ tag }) => {
 
   const GetPostByTag = async (tag_name) => {
     const res = await fetch(
-      "http://localhost:3000/post/getbytag/" + tag_name + "/null"
+      "http://159.223.45.216:3010/post/getbytag/" + tag_name + "/null"
+      // "http://localhost:3000/post/getbytag/" + tag_name + "/null"
     );
     const newPost = await res.json();
 
@@ -235,7 +238,8 @@ const Matching = ({ tag }) => {
     };
 
     await axios
-      .post("http://localhost:3000/post/create", data)
+      .post("http://159.223.45.216:3010/post/create", data)
+      // .post("http://localhost:3000/post/create", data)
       .then((response) => {
         console.log("add post success");
         console.log(response);
@@ -804,7 +808,8 @@ const Matching = ({ tag }) => {
 Matching.getInitialProps = async () => {
   // const router = useRouter()
 
-  const tag = await fetch("http://localhost:3000/tag/getall");
+  const tag = await fetch("http://159.223.45.216:3010/tag/getall");
+  // const tag = await fetch("http://localhost:3000/tag/getall");
   const allTag = await tag.json();
 
   // const url = context.query.tag ||= allTag.map(tag => (tag.tag_id)).toString()
