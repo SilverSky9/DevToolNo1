@@ -180,6 +180,7 @@ const Matching = ({ tag }) => {
   const [postprice, setpostprice] = useState(false);
   const [postper, setpostper] = useState(false);
   const [posttype, setposttype] = useState(false);
+  const [postid, setpostid] = useState(false);
 //  view post modal
 
   const [validated, setValidated] = useState(false);
@@ -360,9 +361,13 @@ const Matching = ({ tag }) => {
               // <div key={content.post_id} className={styles.card} >
               <div key={content.post_id}>
                 <Card className={styles.card} onClick={() => 
-                    {handleShow_b1(); setpostname(content.product_name); 
-                    setpostprice(content.price); setpostper(content.amount); 
-                    setposttype(content.product_option);}}>
+                    {handleShow_b1(); 
+                    setpostname(content.product_name); 
+                    setpostprice(content.price); 
+                    setpostper(content.amount); 
+                    setposttype(content.product_option);
+                    setpostid(content.post_id);
+                    }}>
                   <Row>
                     <Card.Header id="productName" className="h2 text-center">
                       {content.product_name}
@@ -403,7 +408,7 @@ const Matching = ({ tag }) => {
 
 
 
-         {/* create post are */}
+         {/* create post area */}
           <Row>
             <Button
               variant="primary"
@@ -413,7 +418,7 @@ const Matching = ({ tag }) => {
               +
             </Button>
           </Row>
-          {/* create post are */}
+          {/* create post area */}
           
           
 
@@ -672,6 +677,10 @@ const Matching = ({ tag }) => {
 
 
 
+
+
+
+ 
           <Modal
             show={show2}
             onHide={handleClose2}
@@ -709,6 +718,15 @@ const Matching = ({ tag }) => {
               </Button>
             </Modal.Footer>
           </Modal>
+
+
+
+
+
+
+
+
+
 
           <Modal
             show={show2}
@@ -796,3 +814,36 @@ Matching.getInitialProps = async () => {
   };
 };
 export default Matching;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
