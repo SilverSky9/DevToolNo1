@@ -91,3 +91,33 @@
     font-size: 30px;
     margin-right: 15px;
 }
+
+.tta{
+  margin: 1rem;
+  padding: 1.5rem;
+  text-align: left;
+  color: rgb(73, 17, 17);
+  text-decoration: none;
+  border: 1px solid #5c4242;
+  height: 60px;
+  width: 200px;
+  background: #9E9E9E;
+  border-radius: 60px;
+  color: white;
+  font-size: 30px;
+  margin-right: 15px;
+}
+
+.tta2{
+  margin: 1rem;
+  padding: 1.5rem;
+  text-align: left;
+  color: rgb(66, 49, 105);
+  text-decoration: none;
+}
+
+.tta3{
+  margin: 0;
+  line-height: 1.15;
+  font-size: 2.5rem;
+}
